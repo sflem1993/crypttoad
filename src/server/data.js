@@ -28,3 +28,24 @@ export function addPriceData(data = INITIAL_STATE, marketName, newDataPoint = NU
 		return addPriceData(data.updateIn([marketName, DATA_POINTS], marketData => marketData.shift()), marketName, newDataPoint);
 	}
 }
+
+export function updateCurrencies(data = INITIAL_STATE, newCurrencyData = INITIAL_STATE) {
+	var updatedState = data;
+	for (const key of Object.keys(newCurrencyData)) {
+		updatedState = addPriceData(updatedState, key, newCurrencyData[key]);
+	}
+
+	return updatedState;
+}
+
+export function getBittrexInfo() {
+	bittrex.publicGetMarketSummaries().then((response) => {
+		var newData = {};
+		const markets = response.result;
+		for (let i = 0; i < markets.length; i++) {
+			let market = markets[i];
+			newData[market.MarketName] = market.Last;
+		}
+		return newData;
+	});
+}
