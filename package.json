@@ -10,7 +10,10 @@
     "build": "cp src/client/index.html dist/index.html"
   },
   "babel": {
-    "presets": ["es2015", "react"]
+    "presets": [
+      "es2015",
+      "react"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -32,6 +35,7 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.0",
     "chai-immutable": "^1.6.0",
+    "jsdom": "^6.5.1",
     "mocha": "^3.4.2",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
