@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {List, Map, Repeat, fromJS} from 'immutable';
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
-import {addPriceData, MAX_SIZE, DATA_POINTS} from '../../src/server/data';
+import {addPriceData, MAX_SIZE, DATA_POINTS, makeGraph, getMarkets} from '../../src/server/data';
 
 chai.use(chaiImmutable);
 
@@ -69,5 +69,35 @@ describe('addPriceData', () => {
 				[DATA_POINTS]: [25]
 			}
 		}));
+	});
+});
+
+describe('making graph', () => {
+	it('testy', () => {
+		const data = fromJS({
+			a: {[DATA_POINTS]: [1, 2, 3]},
+		});
+		const graphData = makeGraph(data, 'a');
+		expect(graphData).to.equal(fromJS(
+			[
+				{name: 0, a: 1},
+				{name: 1, a: 2},
+				{name: 2, a: 3}
+			]
+		));
+	});
+});
+
+describe('getting markets', () => {
+	it('testy', () => {
+		const data = fromJS({
+			a: {[DATA_POINTS]: [1, 2, 3]},
+			b: {[DATA_POINTS]: [1, 2, 3]},
+			c: {[DATA_POINTS]: [1, 2, 3]}
+		});
+		const markets = getMarkets(data);
+		expect(markets).to.equal(fromJS(
+			['a', 'b', 'c']
+		));
 	});
 });

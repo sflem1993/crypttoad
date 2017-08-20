@@ -1,6 +1,6 @@
 module.exports = {
 	entry: [
-		'./src/client/client.js'
+		'./src/client/index.jsx'
 	],
 	module: {
 		loaders: [{
@@ -11,6 +11,9 @@ module.exports = {
       		query: {
       			presets: ['react', 'es2015']
       		}
+		}, {
+			 test: /\.css$/,
+     		 loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
 		}]
 	},
 	resolve: {

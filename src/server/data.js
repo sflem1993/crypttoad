@@ -1,5 +1,5 @@
 import Bittrex from 'bittrex-wrapper';
-import {List, Map} from 'immutable';
+import {List, Map, fromJS} from 'immutable';
 
 export const DATA_POINTS = 'price_list';
 export const NULL_DATA_POINT = -1;
@@ -48,4 +48,21 @@ export function getBittrexInfo() {
 		}
 		return newData;
 	});
+}
+
+export function makeGraph(data, marketName) {
+	const market = data.get(marketName);
+	var graphData = List();
+	for (let i=0; i<3; i++) {
+		graphData = graphData.push(fromJS({
+			'name': i,
+			[marketName]: data.getIn([marketName, DATA_POINTS]).get(i),
+		}));
+	}
+	return graphData;
+}
+
+
+export function getMarkets(data) {
+	return data.keySeq().toList();
 }

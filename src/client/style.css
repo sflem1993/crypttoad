@@ -1,0 +1,24 @@
+.crypttoad {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.marketSelect {
+	height: 100%;
+	width: 20%;
+}
+
+.rest {
+	height: 100%;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.html, .body, #app {
+	height: 100vh;
+}
