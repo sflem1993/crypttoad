@@ -10,8 +10,9 @@ export default class MarketInfo extends React.PureComponent {
 	}
 	render() {
 		return <div className="marketInfo">
+			
 				{this.getSelectedMarkets().map(market =>
-					<div class="market">
+					<div className="market">
 						<h1 key={market}>{market}</h1>
 				    	<LineChart width={800} height={400} data={this.getData()}
 				            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
@@ -25,6 +26,7 @@ export default class MarketInfo extends React.PureComponent {
 				      </LineChart>
 					</div>
 				)}
+			
 		</div>
 	}
 }

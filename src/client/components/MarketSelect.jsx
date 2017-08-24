@@ -9,11 +9,6 @@ export default class MarketSelect extends React.PureComponent {
 		return this.props.selectedMarkets || [];
 	}
 
-	selectMarket() {
-
-	}
-	// get marketsel=ect?
-
 	render() {
 		return <div className="marketSelect">
 			<div>
@@ -28,7 +23,7 @@ export default class MarketSelect extends React.PureComponent {
 				SELECTED MARKETS:
 
 				{this.getSelectedMarkets().map(selectedMarket =>
-					{selectedMarket}
+					<div key={selectedMarket}>{selectedMarket}</div>
 				)}
 			</div>
 		</div>
