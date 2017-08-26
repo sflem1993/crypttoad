@@ -10,8 +10,8 @@ export default class MarketSelect extends React.PureComponent {
 	}
 
 	render() {
-		return <div className="marketSelect">
-			<div>
+		return <div className="sidebar">
+			<div className="marketOptions">
 				<select onChange={this.selectMarket}>
 					<option></option>
 					{this.getMarkets().map(market =>
@@ -19,11 +19,13 @@ export default class MarketSelect extends React.PureComponent {
 					)}
 				</select>
 			</div>
-			<div>
-				SELECTED MARKETS:
+			<div className="selectedMarkets">
 
 				{this.getSelectedMarkets().map(selectedMarket =>
-					<div key={selectedMarket}>{selectedMarket}</div>
+					<div key={selectedMarket} className="selectedMarket">
+						<div>{selectedMarket}</div>
+						<div>XXX</div>
+					</div>
 				)}
 			</div>
 		</div>

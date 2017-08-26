@@ -10,11 +10,16 @@ module.exports = {
       		loader: 'babel-loader',
       		query: {
       			presets: ['react', 'es2015']
-      		}
+      		},
+
 		}, {
 			 test: /\.css$/,
      		 loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
-		}]
+		},
+		      		{
+		    	test: /\.(png|jpg)$/,
+		    	loader: 'url-loader?limit=25000'
+		    }]
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']
@@ -26,5 +31,5 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: './dist'
-	}
+	},
 };

@@ -2,12 +2,14 @@ import React from 'react';
 import MarketSelect from './MarketSelect';
 import MarketInfo from './MarketInfo';
 
+import logo from './../img/frog1.png';
+
 export default class Crypttoad extends React.PureComponent {
 	render() {
 		return <div className="crypttoad">
-			<div className="marketSelect"><MarketSelect {...this.props} /></div>
+			<MarketSelect {...this.props} />
 			<div className="page">
-				<div className="logo">CRYPTTOAD BOX</div>
+				<div className="logo">fdsa</div>
 				<MarketInfo {...this.props} />
 			</div>
 		</div>

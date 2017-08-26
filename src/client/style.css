@@ -9,9 +9,36 @@ html, body, #app, .crypttoad {
 	align-content: flex-start;
 }
 
-.marketSelect {
+.sidebar {
 	flex-basis: 100%;
 	background-color: #e3e3e3;
+	font-family: verdana;
+	width: 15%;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: flex-start;
+}
+
+.marketOptions {
+	flex-basis: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+select {
+	width: 100%;
+}
+
+.selectedMarkets {
+	display: flex;
+	flex-flow: row wrap;
+	font-size: 24px;
+}
+
+.selectedMarket {
+	flex-basis: 100%;
+	display: flex;
+	justify-content: space-around;
 }
 
 .page {
