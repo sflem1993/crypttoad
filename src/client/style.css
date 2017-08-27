@@ -5,24 +5,26 @@ html, body, #app, .crypttoad {
 
 .crypttoad {
 	display: flex;
-	flex-flow: column wrap;
-	align-content: flex-start;
+	flex-direction: row;
 }
 
 .sidebar {
-	flex-basis: 100%;
+	flex: 12%;
 	background-color: #e3e3e3;
 	font-family: verdana;
-	width: 15%;
 	display: flex;
-	flex-flow: row wrap;
-	align-content: flex-start;
+	flex-direction: column;
+	align-items: center;
 }
 
-.marketOptions {
-	flex-basis: 100%;
+.page {
+	flex: 88%;
 	display: flex;
-	justify-content: center;
+	flex-flow: column;
+ }
+
+.marketOptions {
+	width: 100%;
 }
 
 select {
@@ -30,24 +32,70 @@ select {
 }
 
 .selectedMarkets {
+	width: 100%;
 	display: flex;
-	flex-flow: row wrap;
-	font-size: 24px;
+	flex-direction: column;
 }
 
 .selectedMarket {
-	flex-basis: 100%;
+	width: 100%;
 	display: flex;
-	justify-content: space-around;
 }
 
-.page {
-	display: flex;
-	flex-flow: row wrap;
-	width: 100%;
+.selectedMarketName {
+	flex: 0 0 75%;
 }
+
+.selectedMarketButton {
+	flex: 0 0 25%;
+}
+
 
 .logo {
 	background-color: #7F47C4;
-	flex-basis: 100%;
+	display: flex;
+	justify-content: center;
+	flex: 0 0 60px;
+}
+
+.mainPage {
+	display: flex;
+	flex-direction: column;
+	flex: 1
+}
+
+.market {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.marketHeader {
+	display: flex;
+	justify-content: center;
+}
+
+.marketName {
+	background-color: red;
+	font-size: 10px;
+	display: flex;
+	justify-content: center;
+}
+
+.marketGraph {
+	background-color: blue;
+
+	flex: 16;
+}
+
+.marketStats {
+	background-color: yellow;
+
+	flex: 4;
+}
+
+.marketInfo {
+	flex: 9;
+
+	display: flex;
 }

@@ -89,7 +89,7 @@ describe('making graph', () => {
 });
 
 describe('getting markets', () => {
-	it('testy', () => {
+	it('returns market names', () => {
 		const data = fromJS({
 			a: {[DATA_POINTS]: [1, 2, 3]},
 			b: {[DATA_POINTS]: [1, 2, 3]},
