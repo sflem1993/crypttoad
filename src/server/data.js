@@ -2,6 +2,7 @@ import Bittrex from 'bittrex-wrapper';
 import {List, Map, fromJS} from 'immutable';
 
 export const DATA_POINTS = 'price_list';
+export const MARKET_STATS = "market_stats";
 export const NULL_DATA_POINT = -1;
 export const INITIAL_STATE = Map();
 export const MAX_SIZE = 5766; //storing data every 15 seconds for 24 hour period
@@ -27,6 +28,14 @@ export function addPriceData(data = INITIAL_STATE, marketName, newDataPoint = NU
 	} else {
 		return addPriceData(data.updateIn([marketName, DATA_POINTS], marketData => marketData.shift()), marketName, newDataPoint);
 	}
+}
+
+export function updateCurrencyInfo(data, marketName, rawNewInfo) {
+	if (!data.get(marketName)) {
+		return data.set(marketName, Map([[MARKET_STATS, rawNewInfo]]));
+	}
+
+	return data.setIn([marketName, MARKET_STATS], Map(rawNewInfo));
 }
 
 export function updateCurrencies(data = INITIAL_STATE, newCurrencyData = INITIAL_STATE) {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {List, Map, Repeat, fromJS} from 'immutable';
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
-import {addPriceData, MAX_SIZE, DATA_POINTS, makeGraph, getMarkets} from '../../src/server/data';
+import {addPriceData, updateCurrencyInfo, MAX_SIZE, DATA_POINTS, MARKET_STATS, makeGraph, getMarkets} from '../../src/server/data';
 
 chai.use(chaiImmutable);
 
@@ -70,6 +70,29 @@ describe('addPriceData', () => {
 			}
 		}));
 	});
+});
+
+describe('updateCurrencyInfo', () => {
+	it('sets data', () => {
+		const data = fromJS({
+			a: {[MARKET_STATS]: {a: 1, b: 2}}
+		});
+		const updatedData = updateCurrencyInfo(data, 'a', Map({a: 7}));
+		expect(updatedData).to.equal(fromJS({
+			a: {[MARKET_STATS]: {a: 7}}
+		}));
+	});
+
+		it('converts non immutable object to immutable map', () => {
+		const data = fromJS({
+			a: {[MARKET_STATS]: {a: 1, b: 2}}
+		});
+		const updatedData = updateCurrencyInfo(data, 'a', {a: 7});
+		expect(updatedData).to.equal(fromJS({
+			a: {[MARKET_STATS]: {a: 7}}
+		}));
+	});
+
 });
 
 describe('making graph', () => {

@@ -1,6 +1,8 @@
 html, body, #app, .crypttoad {
 	height: 100%;
 	width: 100%;
+	padding: 0;
+	margin: 0;
 }
 
 .crypttoad {
@@ -9,8 +11,8 @@ html, body, #app, .crypttoad {
 }
 
 .sidebar {
-	flex: 12%;
-	background-color: #e3e3e3;
+	flex: 0 0 125px;
+	background-color: #345f4f;
 	font-family: verdana;
 	display: flex;
 	flex-direction: column;
@@ -18,7 +20,7 @@ html, body, #app, .crypttoad {
 }
 
 .page {
-	flex: 88%;
+	flex: 1;
 	display: flex;
 	flex-flow: column;
  }
@@ -52,10 +54,10 @@ select {
 
 
 .logo {
-	background-color: #7F47C4;
 	display: flex;
 	justify-content: center;
 	flex: 0 0 60px;
+		-color: #345f4f;
 }
 
 .mainPage {
@@ -75,27 +77,46 @@ select {
 	justify-content: center;
 }
 
-.marketName {
-	background-color: red;
-	font-size: 10px;
+
+.marketInfo {
+	flex: 1 1 100px;
+
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 }
 
 .marketGraph {
-	background-color: blue;
-
-	flex: 16;
+	flex: 0 0 74%;
+	width: 0;
 }
 
 .marketStats {
-	background-color: yellow;
-
-	flex: 4;
+	flex: 0 0 22%;
+	border-style: solid;
+    border-width: 0px 0px 2px 0px;
+	background-color: #e3e3e3;
+	font-family: verdana;
+	font-style: italic;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: space-around;
 }
 
-.marketInfo {
-	flex: 9;
+.marketStatsRow{
+	font-size: 20px;
+
+	flex-basis: 100%;
 
 	display: flex;
+	flex-flow: row nowrap;
+	text-align: center;
+	justify-content: space-around;
+}
+
+.marketStatsRowLabel {
+	flex-basis: 30%;
+}
+
+.marketStatsRowValue{
+
 }
