@@ -47,20 +47,8 @@ const data = [
       { uv: 3490, pv: 4300, amt: 2100},
 ];
 
-// const store = createStore(reducer);
-// store.dispatch({
-//   type: 'SET_STATE',
-//   state: {
-// 	'ETH': {data_points: [1,2,3,9,5]},
-// 	'NEO': {data_points: [1,2,3,4,5]}
-//   }
-
-// });
-
 ReactDOM.render(
-	//<Provider store={store}>
-		<Crypttoad marketInfo={marketInfo} markets={markets} selectedMarkets={selectedMarkets} data={data}/>
-	//</Provider>
+	<Crypttoad marketInfo={marketInfo} markets={markets} selectedMarkets={selectedMarkets} data={data}/>
 	,
 	document.getElementById('app')
 );
