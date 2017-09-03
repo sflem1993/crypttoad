@@ -19,7 +19,6 @@ export default class MainPage extends React.PureComponent {
 		return <div className="mainPage">
 				{this.getMarketInfo().entrySeq().map( ([marketName, marketInfo]) =>
 					<div key={marketName} className="market">
-
 						<div className="marketInfo">
 							<div className="marketGraph">
 								<ResponsiveContainer height="100%" width="100%">

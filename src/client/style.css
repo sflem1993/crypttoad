@@ -11,7 +11,7 @@ html, body, #app, .crypttoad {
 }
 
 .sidebar {
-	flex: 0 0 125px;
+	flex: 0 0 150px;
 	background-color: #345f4f;
 	font-family: verdana;
 	display: flex;
@@ -20,13 +20,33 @@ html, body, #app, .crypttoad {
 }
 
 .page {
-	flex: 1;
 	display: flex;
+	flex: 1;
 	flex-flow: column;
  }
 
+ .logo {
+	display: flex;
+	justify-content: center;
+	flex: 0 0 1;
+	background-color: #345f4f;
+}
+
+ .mainPage {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
 .marketOptions {
+	flex: 1 1 50%;
+	list-style: none;
 	width: 100%;
+}
+
+.footer {
+	flex: 0 0 1;
+	background-color: #345f4f;
 }
 
 select {
@@ -37,6 +57,7 @@ select {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	flex: 3 0 50%;
 }
 
 .selectedMarket {
@@ -50,20 +71,6 @@ select {
 
 .selectedMarketButton {
 	flex: 0 0 25%;
-}
-
-
-.logo {
-	display: flex;
-	justify-content: center;
-	flex: 0 0 60px;
-		-color: #345f4f;
-}
-
-.mainPage {
-	display: flex;
-	flex-direction: column;
-	flex: 1
 }
 
 .market {
@@ -92,14 +99,17 @@ select {
 
 .marketStats {
 	flex: 0 0 22%;
-	border-style: solid;
-    border-width: 0px 0px 2px 0px;
 	background-color: #e3e3e3;
 	font-family: verdana;
 	font-style: italic;
 	display: flex;
 	flex-flow: row wrap;
 	align-content: space-around;
+	border-style: dotted;
+    border-width: 1px 1px 1px 1px;
+}
+
+.border {
 }
 
 .marketStatsRow{

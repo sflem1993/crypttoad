@@ -11,7 +11,9 @@ export default class Crypttoad extends React.PureComponent {
 			<div className="page">
 				<div className="logo"><img src={logo}/></div>
 				<MainPage {...this.props} />
+				<div className="footer">footer</div>
 			</div>
+			<div className="sidebar">A sidebar</div>
 		</div>
 	}
 }

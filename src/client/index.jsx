@@ -8,6 +8,7 @@ import reducer from './reducer';
 import Crypttoad from './components/Crypttoad';
 
 require('./style.css');
+require('./react-select.css')
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 
@@ -35,7 +36,11 @@ const marketInfo = fromJS({
             }
       }
 });
-const markets = List.of('ETH', 'NEO', 'SCM');
+const markets = [
+      {value: 'ETH', label: 'ETH'},
+      {value: 'NEO', label: 'NEO'},
+      {value: 'SCM', label: 'SCM'}
+];
 const selectedMarkets = List.of('ETH', 'NEO');
 const data = [
       {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},

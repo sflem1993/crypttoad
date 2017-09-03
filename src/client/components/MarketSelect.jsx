@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 
 export default class MarketSelect extends React.PureComponent {
 	getMarkets() {
@@ -13,12 +14,10 @@ export default class MarketSelect extends React.PureComponent {
 	render() {
 		return <div className="sidebar">
 			<div className="marketOptions">
-				<select>
-					<option></option>
-					{this.getMarkets().map(market =>
-						<option key={market}>{market}</option>
-					)}
-				</select>
+				<Select
+					name="market-select"
+					options={this.getMarkets()}
+				/>
 			</div>
 			<div className="selectedMarkets">
 				{this.getSelectedMarkets().map(selectedMarket =>
