@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
+import AutoSelect from './AutoSelect';
 
 export default class MarketSelect extends React.PureComponent {
 	getMarkets() {
@@ -14,10 +14,7 @@ export default class MarketSelect extends React.PureComponent {
 	render() {
 		return <div className="sidebar">
 			<div className="marketOptions">
-				<Select
-					name="market-select"
-					options={this.getMarkets()}
-				/>
+				 <AutoSelect/>
 			</div>
 			<div className="selectedMarkets">
 				{this.getSelectedMarkets().map(selectedMarket =>
