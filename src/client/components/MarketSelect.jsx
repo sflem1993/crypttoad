@@ -14,7 +14,7 @@ export default class MarketSelect extends React.PureComponent {
 	render() {
 		return <div className="sidebar">
 			<div className="marketOptions">
-				 <AutoSelect/>
+				 <div className="autoSelect"><AutoSelect /></div>
 			</div>
 			<div className="selectedMarkets">
 				{this.getSelectedMarkets().map(selectedMarket =>
