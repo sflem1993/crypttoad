@@ -45,10 +45,22 @@ export default class AutoSelect extends React.PureComponent {
 	}
 
 	onChange = (event, { newValue }) => {
+
     	this.setState({
       	value: newValue
     	});
   	};
+
+  	onKeyDown(e) {
+	    if (e.keyCode === 13) { // Enter
+	        // Stop it here
+	        //e.preventDefault();
+	       // e.stopPropagation();
+	       	console.log("@@ " + e.target.value + " @@")
+	        // Do something else...
+	        e.target.value = 'afd';
+	    }
+	}
 
 	// Autosuggest will call this function every time you need to update suggestions.
 	// You already implemented this logic above, so just use it.
@@ -65,6 +77,12 @@ export default class AutoSelect extends React.PureComponent {
 		});
 	};
 
+	onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+		if (method === 'click') {
+			console.log("selected: " + suggestionValue  + " @@@ method: " + method);
+		}
+	};
+
 	 render() {
 		const { value, suggestions } = this.state;
 
@@ -72,7 +90,8 @@ export default class AutoSelect extends React.PureComponent {
 		const inputProps = {
 			placeholder: 'Select a coin!',
 			value,
-			onChange: this.onChange
+			onChange: this.onChange,
+			onKeyDown: this.onKeyDown
 		};
 
 		// Finally, render it!
@@ -81,6 +100,7 @@ export default class AutoSelect extends React.PureComponent {
 				suggestions={suggestions}
 				onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
 				onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+				onSuggestionSelected={this.onSuggestionSelected}
 				getSuggestionValue={getSuggestionValue}
 				renderSuggestion={renderSuggestion}
 				inputProps={inputProps}
