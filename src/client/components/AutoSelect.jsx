@@ -2,18 +2,19 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 
 const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-    {
-    name: 'Elmo',
-    year: 2012
-  }
+	{ name: 'C', year: 1972},
+ 	{ name: 'Elm', year: 2012},
+  	{ name: 'Elmo', year: 2012},
+  	{ name: 'Elmoz', year: 2012},
+  	{ name: 'Elmozz', year: 2012},
+  	{ name: 'Elmozzz', year: 2012},
+  	{ name: 'Elmozzzz', year: 2012},
+  	{ name: 'Elmo', year: 2012},
+  	{ name: 'Elmo', year: 2012},
+  	{ name: 'Elmo', year: 2012},
+  	{ name: 'Elmo', year: 2012},
+  	{ name: 'Elmo', year: 2012},
+  	{ name: 'Elmo', year: 2012}
 ];
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -58,7 +59,6 @@ export default class AutoSelect extends React.PureComponent {
 	       // e.stopPropagation();
 	       	console.log("@@ " + e.target.value + " @@")
 	        // Do something else...
-	        e.target.value = 'afd';
 	    }
 	}
 

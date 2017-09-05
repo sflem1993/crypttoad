@@ -26,8 +26,8 @@ html, body, #app, .crypttoad {
 }
 
 .selectSidebar {
-	flex: 0 0 150px;
-	background-color: white;
+	flex: 0 0 15%;
+	background-color: #e3e3e3;
 	font-family: verdana;
 	display: flex;
 	flex-direction: column;
@@ -36,7 +36,7 @@ html, body, #app, .crypttoad {
 
 .sidebar {
 	flex: 0 0 150px;
-	background-color: #345f4f;
+	background-color: #e3e3e3;
 	font-family: verdana;
 	display: flex;
 	flex-direction: column;
@@ -44,7 +44,7 @@ html, body, #app, .crypttoad {
 }
 
 .page {
-	display: flex;
+	display: flex;z-
 	flex: 1;
 	flex-flow: column;
  }
@@ -156,4 +156,64 @@ input {
 
 .marketStatsRowValue{
 
+}
+
+
+
+
+
+
+
+
+
+.react-autosuggest__input {
+  width: 100%240px;
+  height: 15px;
+  padding: 5px 10px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+}
+
+.react-autosuggest__input--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: flex;
+  width: 100%;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  max-height: 60px;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 3px 6px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #ddd;
 }

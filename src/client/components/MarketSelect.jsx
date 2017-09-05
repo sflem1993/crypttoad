@@ -12,7 +12,7 @@ export default class MarketSelect extends React.PureComponent {
 	}
 
 	render() {
-		return <div className="sidebar">
+		return <div className="selectSidebar">
 			<div className="marketOptions">
 				 <div className="autoSelect"><AutoSelect /></div>
 			</div>
