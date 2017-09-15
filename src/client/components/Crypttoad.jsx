@@ -1,19 +1,30 @@
 import React from 'react';
 import MarketSelect from './MarketSelect';
 import MainPage from './MainPage';
+import AutoSelect from './AutoSelect';
+
 
 import logo from './../img/frog1.png';
 
 export default class Crypttoad extends React.PureComponent {
 	render() {
 		return <div className="crypttoad">
-			<MarketSelect {...this.props} />
-			<div className="page">
+			<div className="leftSide">
 				<div className="logo"><img src={logo}/></div>
-				<MainPage {...this.props} />
-				<div className="footer">footer</div>
+				<MarketSelect {...this.props}/>
 			</div>
-			<div className="sidebar">A sidebar</div>
+			<div className="theStuff">
+				<div className="topStuff">
+					<div className="theSelect"><AutoSelect/></div>
+					<div className="topRight">RIGHT TOP</div>
+				</div>
+				<MainPage {...this.props}/>
+				<div className="footer">
+					<div>A FOOT</div>
+					<div>B FOOT</div>
+					<div>C FOOT</div>
+				</div>
+			</div>
 		</div>
 	}
 }

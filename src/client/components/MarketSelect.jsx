@@ -1,6 +1,9 @@
 import React from 'react';
 import AutoSelect from './AutoSelect';
 
+import close from './../img/newclose.png';
+
+
 export default class MarketSelect extends React.PureComponent {
 	getMarkets() {
 		return this.props.markets || [];
@@ -12,18 +15,13 @@ export default class MarketSelect extends React.PureComponent {
 	}
 
 	render() {
-		return <div className="selectSidebar">
-			<div className="marketOptions">
-				 <div className="autoSelect"><AutoSelect /></div>
-			</div>
-			<div className="selectedMarkets">
-				{this.getSelectedMarkets().map(selectedMarket =>
-					<div key={selectedMarket} className="selectedMarket">
-						<div className="selectedMarketName">{selectedMarket}</div>
-						<div className="selectedMarketButton">XXX</div>
-					</div>
-				)}
-			</div>
+		return <div className="selectedMarkets">
+			{this.getSelectedMarkets().map(selectedMarket =>
+				<div key={selectedMarket} className="selectedMarket">
+					<div className="selectedMarketName">{selectedMarket}</div>
+					<img  className="selectedMarketButton" src={close}/>
+				</div>
+			)}
 		</div>
 	}
 }

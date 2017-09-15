@@ -16,10 +16,9 @@ export default class MainPage extends React.PureComponent {
 		return this.props.data || [];
 	}
 	render() {
-		return <div className="mainPage">
+		return <div className="mainStuff">
 				{this.getMarketInfo().entrySeq().map( ([marketName, marketInfo]) =>
 					<div key={marketName} className="market">
-						<div className="marketInfo">
 							<div className="marketGraph">
 								<ResponsiveContainer height="100%" width="100%">
 						    		<LineChart data={this.getData()}>
@@ -32,7 +31,6 @@ export default class MainPage extends React.PureComponent {
 					      		</ResponsiveContainer>
 							</div>
 							<MarketStats marketName={marketName} stats={marketInfo.get('market_stats')}/>
-						</div>
 					</div>
 				)}
 		</div>
