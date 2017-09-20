@@ -25,7 +25,6 @@ export default class MainPage extends React.PureComponent {
 									  	<XAxis dataKey="name"/>
 								        <YAxis />
 								        <CartesianGrid strokeDashArray="3 3" vertical={false}/>
-								        <Tooltip/>
 								        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
 							      	</LineChart>
 					      		</ResponsiveContainer>

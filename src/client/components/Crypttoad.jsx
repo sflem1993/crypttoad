@@ -4,7 +4,7 @@ import MainPage from './MainPage';
 import AutoSelect from './AutoSelect';
 
 
-import logo from './../img/frog1.png';
+import logo from './../img/rotaty.gif';
 
 export default class Crypttoad extends React.PureComponent {
 	render() {
