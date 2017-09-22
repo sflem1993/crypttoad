@@ -34,56 +34,38 @@ html, body, #app, .crypttoad {
 	font-size: 30px;
 }
 
-.theStuff {
-	display: flex;
-	flex: 1;
-	flex-flow: column nowrap;
-}
-
-.topStuff {
-	display: flex;
-	flex: 0 0 50px;
-}
-
 .logo {
 	flex: 0 0 50px;
 	display: flex;
 	justify-content: center;
 }
 
+.mainPageInfo {
+	flex: 1;
+
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.currencySelect {
+	flex: 1;
+}
+
+.markets {
+	flex: 1;
+}
+
+/*
 .theSelect {
 	flex:1;
 	display: flex;
 	justify-content: center;
 	padding: 16px 0px 0px 0px;
 }
-
-.mainStuff {
-	display: flex;
-	flex: 1;
-	flex-flow: column nowrap;
-}
-
-.footer {
-	display: flex;
-	justify-content: space-between;
-}
-
-.TEST {
-	width: 0;
-}
-
-.market {
-	display: flex;
-	flex: 1;
-	flex-flow: row nowrap;
-}
-
-.marketGraph {
-	flex: 1;
-	background-color: red;
-	width: 0;
-}
+*/
 
 ul {
     list-style-type: none;
@@ -98,6 +80,8 @@ li {
 	font-size: 30px;
 	height: 40px;
 }
+
+
 
 .react-autosuggest__input {
 	width: 600px;
@@ -162,3 +146,5 @@ li {
 .react-autosuggest__container {
 	width: 600px;
 }
+
+
