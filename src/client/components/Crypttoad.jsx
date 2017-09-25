@@ -21,7 +21,20 @@ export default class Crypttoad extends React.PureComponent {
 			</div>
 			<div className="mainPageInfo">
 				<div className="currencySelect"><AutoSelect/></div>
-				<div className="markets">B</div>
+				<div className="markets">
+					<div className="market">
+						<div className="marketGraph">
+							<ResponsiveContainer height="100%" width="100%">
+						    		<LineChart data={this.getData()}>
+									  	<XAxis dataKey="name"/>
+								        <YAxis />
+								        <CartesianGrid strokeDashArray="3 3" vertical={false}/>
+								        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+							      	</LineChart>
+					</ResponsiveContainer>
+						</div>
+					</div>
+				</div>
 			{/*
 				<div className="currencySelect"><AutoSelect/></div>
 				<div className="markets">
