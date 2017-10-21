@@ -84,12 +84,12 @@ html, body, #app, .crypttoad {
 .marketGraph {
 	flex: 32;
 	width: 0;
-	background-color: white;
+		background-color: #345f4f;
+
 }
 
 .marketStats {
 	flex: 4;
-	background-color: #e3e3e3;
 	margin: 0 0 0 3%;
 }
 
@@ -99,6 +99,11 @@ html, body, #app, .crypttoad {
 
 .rightSidebar {
 	flex: 1;
+}
+
+.recharts-text {
+	font-size: 25px;
+	stroke: #e3e3e3;
 }
 
 /*

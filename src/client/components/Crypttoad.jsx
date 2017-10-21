@@ -26,10 +26,10 @@ export default class Crypttoad extends React.PureComponent {
 						<div className="marketGraph">
 							<ResponsiveContainer height="100%" width="100%">
 						    		<LineChart data={this.getData()}>
-									  	<XAxis dataKey="name"/>
-								        <YAxis />
-								        <CartesianGrid strokeDashArray="3 3" vertical={false}/>
-								        <Line strokeWidth={5} type="monotone" dataKey="uv" stroke="#82ca9d" />
+									  	<XAxis strokeWidth={2} dataKey="name"/>
+								        <YAxis strokeWidth={2} />
+								        <CartesianGrid  strokeDashArray="3 3" vertical={false}/>
+								        <Line strokeWidth={5} type="monotone" dataKey="uv" stroke="#e3e3e3" />
 							      	</LineChart>
 							</ResponsiveContainer>
 						</div>
