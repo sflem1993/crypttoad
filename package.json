@@ -24,8 +24,9 @@
   "dependencies": {
     "babel-preset-stage-2": "^6.24.1",
     "bittrex-wrapper": "^1.0.3",
-    "express": "^4.15.3",
+    "express": "^4.16.2",
     "immutable": "^3.8.1",
+    "path": "^0.12.7",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-autosuggest": "^9.3.2",
