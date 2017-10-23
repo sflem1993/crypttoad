@@ -17,12 +17,6 @@ socket.on('state', state =>
   console.log("TESTSTATE@!!")
 );
 
-socket.on('state2', state =>
-  console.log("TESTSTATE@!!")
-);
-
-
-
 const marketInfo = fromJS({
       'ETH' : {
             data_points: [1,2,3,9,5],

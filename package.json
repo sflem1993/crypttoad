@@ -25,6 +25,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "bittrex-wrapper": "^1.0.3",
     "express": "^4.16.2",
+    "http": "0.0.0",
     "immutable": "^3.8.1",
     "path": "^0.12.7",
     "react": "^15.6.1",
