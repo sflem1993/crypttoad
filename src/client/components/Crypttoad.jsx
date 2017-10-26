@@ -35,7 +35,30 @@ export default class Crypttoad extends React.PureComponent {
 						</div>
 
 						<div className="marketStats">
-							STATS
+							<div className="marketStatsRow">
+								<div className="marketStatsRowLabel"><div>Current Price:</div></div>
+								<div className="marketStatsRowValue">0.00000904</div>
+							</div>
+							<div className="marketStatsRow">
+								<div className="marketStatsRowLabel"><div>Current Bid:</div></div>
+								<div className="marketStatsRowValue">0.00000890</div>
+							</div>
+							<div className="marketStatsRow">
+								<div className="marketStatsRowLabel">Current Ask:</div>
+								<div className="marketStatsRowValue">0.00000900</div>
+							</div>
+							<div className="marketStatsRow">
+								<div className="marketStatsRowLabel">24 Hour High:</div>
+								<div className="marketStatsRowValue">0.00000919</div>
+							</div>
+							<div className="marketStatsRow">
+								<div className="marketStatsRowLabel">24 Hour Low:</div>
+								<div className="marketStatsRowValue">0.00000819</div>
+							</div>
+							<div className="marketStatsRow">
+								<div className="marketStatsRowLabel">24 Hours Ago:</div>
+								<div className="marketStatsRowValue">0.00000900</div>
+							</div>
 						</div>
 					</div>
 				</div>

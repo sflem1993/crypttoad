@@ -94,7 +94,37 @@ html, body, #app, .crypttoad {
 
 .marketStats {
 	flex: 4;
-	margin: 0 0 0 3%;
+	margin: 0 0 0 2%;
+
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.marketStatsRow {
+	flex: 1;
+
+	display: flex;
+	flex-flow: row nowrap;
+	color: white;
+	font-size: 20px;
+	justify-content: space-around;
+	min-width: 200px;
+}
+
+.marketStatsRowLabel {
+	flex: 1;
+	display: flex;
+	justify-content: flex-start;
+	flex-flow: row nowrap;
+	min-width: 100px;
+}
+
+.marketStatsRowValue {
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
+	flex-flow: row nowrap;
+	min-width: 100px;
 }
 
 .footer {
