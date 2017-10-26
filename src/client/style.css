@@ -57,7 +57,8 @@ html, body, #app, .crypttoad {
 .currencySelect {
 	flex: 2;
 	width: 100%;
-	min-height: 50px;
+	min-height: 100px;
+	max-height: 100px;
 
 	display: flex;
 	justify-content: center;
@@ -106,7 +107,7 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-flow: row nowrap;
 	color: white;
-	font-size: 20px;
+	font-size: 18px;
 	justify-content: space-around;
 	min-width: 200px;
 }
@@ -200,7 +201,7 @@ li {
 	font-weight: 300;
 	font-size: 20px;
 	max-height: 60px;
-	overflow-y: auto;
+	overflow-y: scroll;
 	z-index: 2;
 
 	display: flex;
