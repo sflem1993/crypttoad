@@ -15,9 +15,10 @@ html, body, #app, .crypttoad {
 
 .leftSide {
 	flex: 1;
-
+	
 	display: flex;
 	flex-flow: column nowrap;
+	min-width: 100px;
 }
 
 .selectedMarkets {
@@ -32,13 +33,14 @@ html, body, #app, .crypttoad {
 }
 
 .selectedMarketName {
+	color: black;
 	flex: 1;
 	padding: 0px 0px 0px 6px;
 	font-size: 30px;
 }
 
 .logo {
-	flex: 0 0 50px;
+	min-height: 92px;
 
 	display: flex;
 	justify-content: center;
