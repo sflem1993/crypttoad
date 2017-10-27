@@ -22,8 +22,11 @@ html, body, #app, .crypttoad {
 }
 
 .selectedMarkets {
+	flex : 1;
+
 	display: flex;
 	flex-flow: column nowrap;
+	justify-content: space-around;
 }
 
 .selectedMarket {
