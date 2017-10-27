@@ -7,7 +7,18 @@ html, body, #app, .crypttoad {
 
 .crypttoad {
 	background-color: #345f4f;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+}
 
+.footer {
+	flex: 1;
+}
+
+
+.main {
+	flex: 16;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -15,7 +26,7 @@ html, body, #app, .crypttoad {
 
 .leftSide {
 	flex: 1;
-	
+
 	display: flex;
 	flex-flow: column nowrap;
 	min-width: 100px;
@@ -62,8 +73,6 @@ html, body, #app, .crypttoad {
 .currencySelect {
 	flex: 2;
 	width: 100%;
-	min-height: 100px;
-	max-height: 100px;
 
 	display: flex;
 	justify-content: center;
@@ -90,6 +99,7 @@ html, body, #app, .crypttoad {
 
 	display: flex;
 	flex-flow: row nowrap;
+	padding: 1%;
 }
 
 .marketGraph {
@@ -131,10 +141,6 @@ html, body, #app, .crypttoad {
 	justify-content: flex-end;
 	flex-flow: row nowrap;
 	min-width: 100px;
-}
-
-.footer {
-	flex: 1;
 }
 
 .rightSidebar {
