@@ -15,7 +15,7 @@ export default class Crypttoad extends React.PureComponent {
 	}
 	render() {
 		return <div className="crypttoad">
-				<div className="main">
+		<div className="main">
 				<div className="leftSide">
 					<div className="logo"><img src={logo}/></div>
 					<MarketSelect {...this.props}/>
@@ -39,15 +39,15 @@ export default class Crypttoad extends React.PureComponent {
 
 							<div className="marketStats">
 								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">Current Price:</div>
+									<div className="marketStatsRowLabel">Last Sold:</div>
 									<div className="marketStatsRowValue">0.00000904</div>
 								</div>
 								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">Current Bid:</div>
+									<div className="marketStatsRowLabel">Bid:</div>
 									<div className="marketStatsRowValue">0.00000890</div>
 								</div>
 								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">Current Ask:</div>
+									<div className="marketStatsRowLabel">Ask:</div>
 									<div className="marketStatsRowValue">0.00000900</div>
 								</div>
 								<div className="marketStatsRow">
@@ -65,43 +65,43 @@ export default class Crypttoad extends React.PureComponent {
 							</div>
 						</div>
 							<div className="market">
-							<div className="marketGraph">
-								<ResponsiveContainer height="100%" width="100%">
-							    		<LineChart data={this.getData()}>
-										  	<XAxis strokeWidth={2} dataKey="name"/>
-									        <YAxis strokeWidth={2} />
-									        <CartesianGrid  strokeDashArray="3 3" vertical={false}/>
-									        <Line strokeWidth={5} type="monotone" dataKey="uv" stroke="#e3e3e3" />
-								      	</LineChart>
-								</ResponsiveContainer>
-							</div>
+								<div className="marketGraph">
+									<ResponsiveContainer height="100%" width="100%">
+								    		<LineChart data={this.getData()}>
+											  	<XAxis strokeWidth={2} dataKey="name"/>
+										        <YAxis strokeWidth={2} />
+										        <CartesianGrid  strokeDashArray="3 3" vertical={false}/>
+										        <Line strokeWidth={5} type="monotone" dataKey="uv" stroke="#e3e3e3" />
+									      	</LineChart>
+									</ResponsiveContainer>
+								</div>
 
-							<div className="marketStats">
-								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">Current Price:</div>
-									<div className="marketStatsRowValue">0.00000904</div>
+								<div className="marketStats">
+									<div className="marketStatsRow">
+										<div className="marketStatsRowLabel">Last Sold:</div>
+										<div className="marketStatsRowValue">0.00000904</div>
+									</div>
+									<div className="marketStatsRow">
+										<div className="marketStatsRowLabel">Bid:</div>
+										<div className="marketStatsRowValue">0.00000890</div>
+									</div>
+									<div className="marketStatsRow">
+										<div className="marketStatsRowLabel">Ask:</div>
+										<div className="marketStatsRowValue">0.00000908</div>
+									</div>
+									<div className="marketStatsRow">
+										<div className="marketStatsRowLabel">24 Hour High:</div>
+										<div className="marketStatsRowValue">0.00000919</div>
+									</div>
+									<div className="marketStatsRow">
+										<div className="marketStatsRowLabel">24 Hour Low:</div>
+										<div className="marketStatsRowValue">0.00000819</div>
+									</div>
+									<div className="marketStatsRow">
+										<div className="marketStatsRowLabel">24 Hours Ago:</div>
+										<div className="marketStatsRowValue">0.00000900</div>
+									</div>
 								</div>
-								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">Current Bid:</div>
-									<div className="marketStatsRowValue">0.00000890</div>
-								</div>
-								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">Current Ask:</div>
-									<div className="marketStatsRowValue">0.00000900</div>
-								</div>
-								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">24 Hour High:</div>
-									<div className="marketStatsRowValue">0.00000919</div>
-								</div>
-								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">24 Hour Low:</div>
-									<div className="marketStatsRowValue">0.00000819</div>
-								</div>
-								<div className="marketStatsRow">
-									<div className="marketStatsRowLabel">24 Hours Ago:</div>
-									<div className="marketStatsRowValue">0.00000900</div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
