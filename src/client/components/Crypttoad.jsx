@@ -13,6 +13,12 @@ export default class Crypttoad extends React.PureComponent {
 	getData() {
 		return this.props.data || [];
 	}
+	getDomain() {
+		var min = Math.min(this.props.data);
+		var max = Math.max(this.props.data);
+		var diff = max - min;
+		return [min, max];
+	}
 	render() {
 		return <div className="crypttoad">
 		<div className="main">
@@ -29,9 +35,9 @@ export default class Crypttoad extends React.PureComponent {
 							<div className="marketGraph">
 								<ResponsiveContainer height="100%" width="100%">
 							    		<LineChart data={this.getData()}>
-										  	<XAxis strokeWidth={2} dataKey="name"/>
-									        <YAxis strokeWidth={2} />
-									        <CartesianGrid  strokeDashArray="3 3" vertical={false}/>
+										  	<XAxis strokeWidth={2} label="TEE" dataKey="name"/>
+									        <YAxis strokeWidth={2} domain={this.getDomain()} />
+									        <CartesianGrid  strokeDashArray="1 1" vertical={false}/>
 									        <Line strokeWidth={5} type="monotone" dataKey="uv" stroke="#e3e3e3" />
 								      	</LineChart>
 								</ResponsiveContainer>

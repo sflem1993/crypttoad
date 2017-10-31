@@ -74,8 +74,8 @@ html, body, #app, .crypttoad {
 	flex: 2;
 	width: 100%;
 
-	min-height: 60px;
-	max-height: 60px;
+	min-height: 95px;
+	max-height: 95px;
 	display: flex;
 	justify-content: center;
 }
@@ -150,8 +150,11 @@ html, body, #app, .crypttoad {
 }
 
 .recharts-text {
-	font-size: 25px;
+	font-size: 14px;
 	stroke: #e3e3e3;
+}
+.recharts-label {
+	font-size: 12px;
 }
 
 /*
@@ -213,7 +216,7 @@ li {
 	font-family: Helvetica, sans-serif;
 	font-weight: 300;
 	font-size: 20px;
-	max-height: 100px;
+	max-height: 70px;
 	overflow-y: scroll;
 	z-index: 2;
 
