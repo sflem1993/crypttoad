@@ -152,6 +152,7 @@ html, body, #app, .crypttoad {
 .recharts-text {
 	font-size: 14px;
 	stroke: #e3e3e3;
+	stroke-width: 1;
 }
 .recharts-label {
 	font-size: 12px;
