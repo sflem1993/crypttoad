@@ -39,12 +39,14 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: space-around;
+	min-height: 200px;
 }
 
 .selectedMarket {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	min-height: 100px;
 }
 
 .selectedMarketName {
@@ -103,6 +105,7 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-flow: row nowrap;
 	padding: 1%;
+	min-height: 100px;
 }
 
 .marketGraph {
@@ -117,6 +120,7 @@ html, body, #app, .crypttoad {
 
 	display: flex;
 	flex-flow: column nowrap;
+	min-height: 100px;
 }
 
 .marketStatsRow {
@@ -128,6 +132,7 @@ html, body, #app, .crypttoad {
 	font-size: 18px;
 	justify-content: space-around;
 	min-width: 200px;
+	min-height: 15px;
 }
 
 .marketStatsRowLabel {
@@ -135,7 +140,8 @@ html, body, #app, .crypttoad {
 	display: flex;
 	justify-content: flex-start;
 	flex-flow: row nowrap;
-	min-width: 100px;
+	min-width: 125px;
+	min-height: 15px;
 }
 
 .marketStatsRowValue {
@@ -143,7 +149,7 @@ html, body, #app, .crypttoad {
 	display: flex;
 	justify-content: flex-end;
 	flex-flow: row nowrap;
-	min-width: 100px;
+	min-width: 75px;
 }
 
 .rightSidebar {

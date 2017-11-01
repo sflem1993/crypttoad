@@ -18,6 +18,12 @@ export default class Crypttoad extends React.PureComponent {
 		var max = 0.00000962;
 		return [min, max];
 	}
+	getTicks() {
+		var min = 0.00000827;
+		var max = 0.00000962;
+		var interval = (max - min) / 4;
+		return [min, (min + interval).toFixed(8), (min + (2*interval)).toFixed(8), (min + (3*interval)).toFixed(8), max];
+	}
 	render() {
 		return <div className="crypttoad">
 		<div className="main">
@@ -37,8 +43,8 @@ export default class Crypttoad extends React.PureComponent {
 										  	<XAxis tickSize={10} strokeWidth={3} label="30 second interval" dataKey="name"/>
 									        <YAxis
 									        	type="number"
-									        	ticks={[0.00000827, 0.00000900,  0.00000962]}
-									        	domain={[0.00000827,  0.00000962]}
+									        	ticks={this.getTicks()}
+									        	domain={this.getDomain()}
 									        	strokeWidth={3}
           										interval={0}
 									        />
@@ -102,15 +108,15 @@ export default class Crypttoad extends React.PureComponent {
 										<div className="marketStatsRowValue">0.00000908</div>
 									</div>
 									<div className="marketStatsRow">
-										<div className="marketStatsRowLabel">24 Hour High:</div>
+										<div className="marketStatsRowLabel">24 Hr High:</div>
 										<div className="marketStatsRowValue">0.00000919</div>
 									</div>
 									<div className="marketStatsRow">
-										<div className="marketStatsRowLabel">24 Hour Low:</div>
+										<div className="marketStatsRowLabel">24 Hr Low:</div>
 										<div className="marketStatsRowValue">0.00000819</div>
 									</div>
 									<div className="marketStatsRow">
-										<div className="marketStatsRowLabel">24 Hours Ago:</div>
+										<div className="marketStatsRowLabel">24 Hr Ago:</div>
 										<div className="marketStatsRowValue">0.00000900</div>
 									</div>
 								</div>
