@@ -1,7 +1,7 @@
 import React from 'react';
 import AutoSelect from './AutoSelect';
 
-import close from './../img/newclose.png';
+import close from './../img/newclose2.png';
 
 
 export default class MarketSelect extends React.PureComponent {

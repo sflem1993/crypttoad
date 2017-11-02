@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {List, Map, Repeat, fromJS} from 'immutable';
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
-import {addPriceData, updateCurrencyInfo, MAX_SIZE, DATA_POINTS, MARKET_STATS, makeGraph, getMarkets} from '../../src/server/data';
+import {addPriceData, updateCurrencyInfo, updateMin, updateMax, MAX_SIZE, DATA_POINTS, MARKET_STATS, makeGraph, getMarkets} from '../../src/server/data';
 
 chai.use(chaiImmutable);
 
@@ -68,6 +68,48 @@ describe('addPriceData', () => {
 				'other_info': [1, 2, 3],
 				[DATA_POINTS]: [25]
 			}
+		}));
+	});
+});
+
+describe('updateMinMax', () => {
+	it('min-yes', () => {
+		const data = fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], min: 2}
+		});
+		const updatedData = updateMin(data, 'a', 1);
+		expect(updatedData).to.equal(fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], min: 1}
+		}));
+	});
+
+	it('min-no', () => {
+		const data = fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], min: 2}
+		});
+		const updatedData = updateMin(data, 'a', 4);
+		expect(updatedData).to.equal(fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], min: 2}
+		}));
+	});
+
+	it('max-yes', () => {
+		const data = fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], max: 4}
+		});
+		const updatedData = updateMax(data, 'a', 9);
+		expect(updatedData).to.equal(fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], max: 9}
+		}));
+	});
+
+	it('max-no', () => {
+		const data = fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], max: 4}
+		});
+		const updatedData = updateMax(data, 'a', 3);
+		expect(updatedData).to.equal(fromJS({
+			a: {[DATA_POINTS]: [2, 3, 4], max: 4}
 		}));
 	});
 });

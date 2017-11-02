@@ -50,7 +50,7 @@ export default class Crypttoad extends React.PureComponent {
 									        />
 									        <CartesianGrid vertical={false}/>
 									        <Tooltip/>
-									        <Line strokeWidth={5} type="monotone" dataKey="uv" stroke="#e3e3e3" />
+									        <Line strokeWidth={3} type="monotone" dataKey="uv" stroke="#e3e3e3" />
 								      	</LineChart>
 								</ResponsiveContainer>
 							</div>
@@ -124,7 +124,7 @@ export default class Crypttoad extends React.PureComponent {
 					</div>
 				</div>
 				<div className="rightSidebar">
-					SS
+
 				</div>
 			</div>
 			<div className="footer">

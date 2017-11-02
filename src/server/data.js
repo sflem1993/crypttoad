@@ -3,11 +3,58 @@ import {List, Map, fromJS} from 'immutable';
 
 export const DATA_POINTS = 'price_list';
 export const MARKET_STATS = "market_stats";
+export const MARKETS = "markets";
 export const NULL_DATA_POINT = -1;
 export const INITIAL_STATE = Map();
-export const MAX_SIZE = 5766; //storing data every 15 seconds for 24 hour period
+export const MAX_SIZE = 10; //storing data every 15 seconds for 24 hour period
 
 const bittrex = new Bittrex();
+
+//returns promise
+export function getBTC() {
+	return bittrex.publicGetTicker('BTC-LTC');
+}
+
+export function getBTCTest() {
+	return bittrex.publicGetTicker('BTC-LTC');
+}
+
+//returns promise
+export function getMarketSummaries() {
+	return bittrex.publicGetMarketSummaries();
+}
+
+//returns promise
+export function saveMarketSummaries() {
+	bittrex.publicGetMarketSummaries().then((response) => {
+		const currencies = response.result;
+
+		for (let i = 0; i < currencies.length; i++) {
+			let currency = currencies[i];
+			//state update marketname -> last
+			console.log(currency.MarketName + " " + currency.Last);
+		}
+	});
+}
+
+//returns promise
+export function updateMarketList(data) {
+	bittrex.publicGetMarkets().then((response) => {
+		const currencies = response.result;
+
+		var autoselectCurrencies = [];
+		for (let i = 0; i < currencies.length; i++) {
+			let currency = currencies[i];
+			if (currency) {
+				if (currency.BaseCurrency && currency.MarketCurrency) {
+					autoselectCurrencies.push({currency: currency.MarketName});
+				}
+			}
+		}
+
+		return data.set()
+	});
+}
 
 //currencyData - current list of data points for a specific currency
 //newDataPoint - the new point of info being added to this currency
@@ -27,6 +74,40 @@ export function addPriceData(data = INITIAL_STATE, marketName, newDataPoint = NU
 		return data.updateIn([marketName, DATA_POINTS], marketData => marketData.shift().push(newDataPoint));
 	} else {
 		return addPriceData(data.updateIn([marketName, DATA_POINTS], marketData => marketData.shift()), marketName, newDataPoint);
+	}
+}
+
+export function updateMin(data, marketName, newDataPoint) {
+	if (!data.get(marketName)) {
+		return data.set(marketName, Map([['min', newDataPoint]]));
+	}
+	if (!data.get(marketName).get('min')) {
+		return data.setIn([marketName, 'min'], newDataPoint)
+	}
+
+	const min = data.get(marketName).get('min');
+
+	if (newDataPoint < min) {
+		return data.setIn([marketName, 'min'], newDataPoint)
+	} else {
+		return data;
+	}
+}
+
+export function updateMax(data, marketName, newDataPoint) {
+	if (!data.get(marketName)) {
+		return data.set(marketName, Map([['max', newDataPoint]]));
+	}
+	if (!data.get(marketName).get('max')) {
+		return data.setIn([marketName, 'max'], newDataPoint)
+	}
+
+	const max = data.get(marketName).get('max');
+
+	if (newDataPoint > max) {
+		return data.setIn([marketName, 'max'], newDataPoint)
+	} else {
+		return data;
 	}
 }
 
