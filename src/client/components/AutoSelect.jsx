@@ -1,6 +1,8 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import {connect} from 'react-redux';
+import {toJS} from 'immutable';
+
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
@@ -13,7 +15,7 @@ const getSuggestionValue = suggestion => suggestion.currency;
 export const AutoSelect = class AutoSelect extends React.PureComponent {
 	getMarkets() {
 		console.log ("here markets" + this.props.markets);
-		return this.props.markets || [];
+		return this.props.markets.toJS() || [];
 	}
 	constructor() {
 		super();
@@ -28,7 +30,7 @@ getSuggestions = value => {
 	  const inputLength = inputValue.length;
 
 	  return inputLength === 0 ? [] : this.getMarkets().filter(lang =>
-	    lang.currency.toLowerCase().slice(0, inputLength) === inputValue
+	   lang.currency.toLowerCase().slice(0, inputLength) === inputValue
 	  );
 };
 

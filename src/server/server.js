@@ -35,7 +35,7 @@ console.log("A");
 console.log("B");
 store.dispatch({
 	type: 'UPDATE_MARKET_LISTz',
-	markets: [{currency: 'namezz'}]
+	markets: [{currency: 'namezz'}, {currency: 'namezzzzzz'}]
 });
 
 socketServer.on('connection', (socket) => {
