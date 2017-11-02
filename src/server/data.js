@@ -39,10 +39,10 @@ export function saveMarketSummaries() {
 
 //returns promise
 export function updateMarketList(state = INITIAL_STATE) {
+		var autoselectCurrencies = [];
 	bittrex.publicGetMarkets().then((response) => {
 		const currencies = response.result;
 
-		var autoselectCurrencies = [];
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
 			if (currency) {
@@ -53,8 +53,8 @@ export function updateMarketList(state = INITIAL_STATE) {
 			}
 		}
 
-		return autoselectCurrencies;
 	});
+	return autoselectCurrencies;
 }
 
 
