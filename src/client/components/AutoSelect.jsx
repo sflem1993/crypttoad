@@ -1,42 +1,20 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-
-const languages = [
-	{ name: 'C', year: 1972},
- 	{ name: 'Elm', year: 2012},
-  	{ name: 'Elmo', year: 2012},
-  	{ name: 'Elmoz', year: 2012},
-  	{ name: 'Elmozz', year: 2012},
-  	{ name: 'Elmozzz', year: 2012},
-  	{ name: 'Elmozzzz', year: 2012},
-  	{ name: 'Elmo', year: 2012},
-  	{ name: 'Elmo', year: 2012},
-  	{ name: 'Elmo', year: 2012},
-  	{ name: 'Elmo', year: 2012},
-  	{ name: 'Elmo', year: 2012},
-  	{ name: 'Elmo', year: 2012}
-];
-
-// Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  return inputLength === 0 ? [] : languages.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
-  );
-};
+import {connect} from 'react-redux';
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.name}
+    {suggestion.currency}
   </div>
 );
+const getSuggestionValue = suggestion => suggestion.currency;
 
-const getSuggestionValue = suggestion => suggestion.name;
-
-export default class AutoSelect extends React.PureComponent {
+export const AutoSelect = class AutoSelect extends React.PureComponent {
+	getMarkets() {
+		console.log ("here markets" + this.props.markets);
+		return this.props.markets || [];
+	}
 	constructor() {
 		super();
 		this.state = {
@@ -44,6 +22,15 @@ export default class AutoSelect extends React.PureComponent {
 	    	suggestions: []
 	    };
 	}
+// Teach Autosuggest how to calculate suggestions for any given input value.
+getSuggestions = value => {
+	  const inputValue = value.trim().toLowerCase();
+	  const inputLength = inputValue.length;
+
+	  return inputLength === 0 ? [] : this.getMarkets().filter(lang =>
+	    lang.currency.toLowerCase().slice(0, inputLength) === inputValue
+	  );
+};
 
 	onChange = (event, { newValue }) => {
 
@@ -66,7 +53,7 @@ export default class AutoSelect extends React.PureComponent {
 	// You already implemented this logic above, so just use it.
 	onSuggestionsFetchRequested = ({ value }) => {
 		this.setState({
-			suggestions: getSuggestions(value)
+			suggestions: this.getSuggestions(value)
 		});
 	};
 
@@ -108,3 +95,11 @@ export default class AutoSelect extends React.PureComponent {
 		);
 	}
 }
+
+function mapStateToProps(state) {
+  return {
+    markets: state.get('markets')
+  };
+}
+
+export const AutoSelectContainter = connect(mapStateToProps)(AutoSelect);

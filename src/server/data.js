@@ -38,7 +38,7 @@ export function saveMarketSummaries() {
 }
 
 //returns promise
-export function updateMarketList(data) {
+export function updateMarketList(state = INITIAL_STATE) {
 	bittrex.publicGetMarkets().then((response) => {
 		const currencies = response.result;
 
@@ -48,13 +48,15 @@ export function updateMarketList(data) {
 			if (currency) {
 				if (currency.BaseCurrency && currency.MarketCurrency) {
 					autoselectCurrencies.push({currency: currency.MarketName});
+					//console.log(currency.MarketName);
 				}
 			}
 		}
 
-		return data.set()
+		return autoselectCurrencies;
 	});
 }
+
 
 //currencyData - current list of data points for a specific currency
 //newDataPoint - the new point of info being added to this currency

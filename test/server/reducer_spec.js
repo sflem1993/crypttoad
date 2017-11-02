@@ -2,21 +2,20 @@ import {Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
 import reducer from '../../src/server/reducer';
+import {updateMarketList} from '../../src/server/data';
 
 describe('reducer', () => {
-	it('handles UPDATE_MARKETS', () => {
-		const state = Map();
+
+	it('handles SET_ENTRIES', () => {
+		const initialState = Map();
+		var markets = updateMarketList();
 		const action = {
-			type:'UPDATE_MARKETS',
-			newCurrencyData: {
-				'BTC-FUT': 12
-			}
+			type:'UPDATE_MARKET_LIST',
+			markets: [{currency: 'name'}]
 		};
-		const nextState = reducer(state, action);
+		const nextState = reducer(initialState, action);
 		expect(nextState).to.equal(fromJS({
-			'BTC-FUT': {
-				'price_list': [12]
-			}
+			markets: [{currency: 'name'}]
 		}));
-	});
+	})
 });

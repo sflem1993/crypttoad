@@ -1,13 +1,17 @@
 import makeStore from './store';
+import {fromJS} from 'immutable';
 import express from 'express';
 import http from 'http';
+import io from 'socket.io';
+
+
 
 import {updateMarketList} from './data';
 
 export const store = makeStore();
 const app = express();
 const server = http.createServer(app);
-const io = require('socket.io').listen(server)
+const socketServer = io(server);
 var path = require('path');
 
 server.listen(8090);
@@ -25,14 +29,22 @@ const server2 = app.listen(9000, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-updateMarketList();
+//updateMarketList();
 console.log("MEOW");
-
-io.on('connection', (socket) => {
-	socket.emit('state', store.getState().toJS());
-});
-
+console.log("A");
+console.log("B");
 store.dispatch({
-	type: 'UPDATE_MARKETS'
+	type: 'UPDATE_MARKET_LISTz',
+	markets: [{currency: 'namezz'}]
 });
+
+socketServer.on('connection', (socket) => {
+	socket.emit('state', store.getState().toJS())
+});
+
+store.subscribe(
+    () => io.emit('state', store.getState().toJS())
+);
+
+console.log("state : " + store.getState());
 //io.emit('state', store.getState().toJS());

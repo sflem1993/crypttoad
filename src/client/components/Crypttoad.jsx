@@ -1,7 +1,7 @@
 import React from 'react';
 import MarketSelect from './MarketSelect';
 import MainPage from './MainPage';
-import AutoSelect from './AutoSelect';
+import {AutoSelectContainter} from './AutoSelect';
 
 import {ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area} from 'recharts';
 
@@ -33,7 +33,7 @@ export default class Crypttoad extends React.PureComponent {
 				</div>
 				<div className="mainPageInfo">
 					<div className="top">
-						<div className="currencySelect"><AutoSelect/></div>
+						<div className="currencySelect"><AutoSelectContainter {...this.props}/></div>
 					</div>
 					<div className="markets">
 						<div className="market">

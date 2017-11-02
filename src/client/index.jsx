@@ -5,17 +5,24 @@ import {List, fromJS} from 'immutable';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducer from './reducer';
+import {setState} from './action_creators';
 import Crypttoad from './components/Crypttoad';
 
 require('./style.css');
 require('./react-select.css')
 
+const store = createStore(reducer);
+
+
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 
 console.log("TEST!!");
 socket.on('state', state =>
-  console.log("TESTSTATE@!!")
+      store.dispatch(setState(state))
 );
+
+
+
 
 const marketInfo = fromJS({
       'ETH' : {
@@ -41,11 +48,6 @@ const marketInfo = fromJS({
             }
       }
 });
-const markets = [
-      {value: 'ETH', label: 'ETH'},
-      {value: 'NEO', label: 'NEO'},
-      {value: 'SCM', label: 'SCM'}
-];
 const selectedMarkets = List.of('ETH', 'NEO');
 const data = [
       {uv: 0.00000904},
@@ -77,7 +79,9 @@ const data = [
 ];
 
 ReactDOM.render(
-	<Crypttoad marketInfo={marketInfo} markets={markets} selectedMarkets={selectedMarkets} data={data}/>
+      <Provider store={store}>
+	     <Crypttoad marketInfo={marketInfo} selectedMarkets={selectedMarkets} data={data}/>
+      </Provider>
 	,
 	document.getElementById('app')
 );
