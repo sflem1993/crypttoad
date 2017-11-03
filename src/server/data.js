@@ -38,8 +38,8 @@ export function saveMarketSummaries() {
 }
 
 //returns promise
-export function updateMarketList(state = INITIAL_STATE) {
-		var autoselectCurrencies = [];
+export function updateMarketList() {
+	var autoselectCurrencies = [];
 	bittrex.publicGetMarkets().then((response) => {
 		const currencies = response.result;
 
@@ -53,8 +53,13 @@ export function updateMarketList(state = INITIAL_STATE) {
 			}
 		}
 
+		autoselectCurrencies.sort(function(a,b) {
+    		var x = a.currency.toLowerCase();
+   			 var y = b.currency.toLowerCase();
+    		return x < y ? -1 : x > y ? 1 : 0;
+		});
+
 	});
-	console.log("updating");
 	return autoselectCurrencies;
 }
 

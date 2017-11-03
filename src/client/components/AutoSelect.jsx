@@ -15,7 +15,10 @@ const getSuggestionValue = suggestion => suggestion.currency;
 export const AutoSelect = class AutoSelect extends React.PureComponent {
 	getMarkets() {
 		console.log ("here markets" + this.props.markets);
-		return this.props.markets.toJS() || [];
+		if (this.props.markets)
+				return this.props.markets.toJS()
+		else
+				return [];
 	}
 	constructor() {
 		super();

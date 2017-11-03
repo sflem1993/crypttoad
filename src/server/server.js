@@ -34,13 +34,17 @@ store.dispatch({
 	markets: updateMarketList()
 });
 
+// store.dispatch({
+// 	type: 'UPDATE_SELECTED_MARKETS',
+// 	markets: {'USDT-BTC': {a: 1}}
+// });
+
 setInterval(() => {
 	store.dispatch({
 	type: 'UPDATE_MARKET_LISTz',
 	markets: updateMarketList()
 	});
-	console.log("up2in");
-}, 1000);
+}, 1000000);
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
 });
@@ -49,5 +53,4 @@ store.subscribe(
     () => socketServer.emit('state', store.getState().toJS())
 );
 
-console.log("state : " + store.getState());
 //socketServer.emit('state', store.getState().toJS());
