@@ -5,8 +5,10 @@ export default function reducer(state = Map(), action) {
 	switch(action.type) {
 		case 'UPDATE_MARKET_LIST':
 			return updateMarketList(state, fromJS(action.markets));
-		case 'UPDATE_MARKET_LISTz':
+		case 'UPDATE_MARKET_LISTz': {
+			console.log('hity');
 			return state.set('markets', action.markets);
+		}
 		default:
 			return state;
 	}

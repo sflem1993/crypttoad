@@ -16,10 +16,10 @@ const store = createStore(reducer);
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 
-console.log("TEST!!");
-socket.on('state', state =>
-      store.dispatch(setState(state))
-);
+socket.on('state', state => {
+      console.log("WOAH");
+      store.dispatch(setState(state));
+});
 
 
 

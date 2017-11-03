@@ -38,15 +38,16 @@ setInterval(() => {
 	store.dispatch({
 	type: 'UPDATE_MARKET_LISTz',
 	markets: updateMarketList()
-	})
-}, 5000);
+	});
+	console.log("up2in");
+}, 1000);
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
 });
 
-// store.subscribe(
-//     () => io.emit('state', store.getState().toJS())
-// );
+store.subscribe(
+    () => socketServer.emit('state', store.getState().toJS())
+);
 
 console.log("state : " + store.getState());
-//io.emit('state', store.getState().toJS());
+//socketServer.emit('state', store.getState().toJS());

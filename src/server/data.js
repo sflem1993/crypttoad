@@ -54,6 +54,7 @@ export function updateMarketList(state = INITIAL_STATE) {
 		}
 
 	});
+	console.log("updating");
 	return autoselectCurrencies;
 }
 
