@@ -3,9 +3,6 @@ import {fromJS} from 'immutable';
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
-
-
-
 import {updateMarketList} from './data';
 
 export const store = makeStore();
@@ -29,7 +26,6 @@ const server2 = app.listen(9000, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-//updateMarketList();
 console.log("MEOW");
 console.log("A");
 console.log("B");
@@ -38,13 +34,19 @@ store.dispatch({
 	markets: updateMarketList()
 });
 
+setInterval(() => {
+	store.dispatch({
+	type: 'UPDATE_MARKET_LISTz',
+	markets: updateMarketList()
+	})
+}, 5000);
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
 });
 
-store.subscribe(
-    () => io.emit('state', store.getState().toJS())
-);
+// store.subscribe(
+//     () => io.emit('state', store.getState().toJS())
+// );
 
 console.log("state : " + store.getState());
 //io.emit('state', store.getState().toJS());
