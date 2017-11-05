@@ -106,4 +106,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const AutoSelectContainter = connect(mapStateToProps)(AutoSelect);
+export const AutoSelectContainer = connect(mapStateToProps)(AutoSelect);
