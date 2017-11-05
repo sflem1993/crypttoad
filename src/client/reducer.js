@@ -11,7 +11,7 @@ export default function(state = Map(), action) {
 	switch(action.type) {
 		case 'SET_STATE':
     		return setState(state, action.state);
-    	case 'UPDATED_SELECTED_MARKETS':
+    	case 'SET_SELECTED_MARKETS':
 			return state.set('selectedMarkets', action.selectedMarkets);
 		//case 'SELECT_MARKET':
 			//return selectMarket(state, action.market);

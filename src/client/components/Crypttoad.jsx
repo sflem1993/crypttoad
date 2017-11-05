@@ -1,5 +1,5 @@
 import React from 'react';
-import MarketSelect from './MarketSelect';
+import {MarketSelectContainer} from './MarketSelect';
 import {AutoSelectContainer} from './AutoSelect';
 
 import {ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area} from 'recharts';
@@ -28,7 +28,7 @@ export default class Crypttoad extends React.PureComponent {
 		<div className="main">
 				<div className="leftSide">
 					<div className="logo"><img src={logo}/></div>
-					<MarketSelect {...this.props}/>
+					<MarketSelectContainer {...this.props}/>
 				</div>
 				<div className="mainPageInfo">
 					<div className="top">

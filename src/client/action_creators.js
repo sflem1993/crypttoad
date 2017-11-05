@@ -4,3 +4,10 @@ export function setState(state) {
 		state
 	};
 }
+
+export function setSelectedMarkets(selectedMarkets) {
+	return {
+		type: 'SET_SELECTED_MARKETS',
+		selectedMarkets
+	};
+}

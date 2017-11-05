@@ -1,11 +1,11 @@
 import React from 'react';
 import {List} from 'immutable';
-import AutoSelect from './AutoSelect';
+import {connect} from 'react-redux';
 
 import close from './../img/newclose2.png';
 
 
-export default class MarketSelect extends React.PureComponent {
+export const MarketSelect = class MarketSelect extends React.PureComponent {
 	getMarkets() {
 		if (this.props.selectedMarkets) {
 			return List(this.props.selectedMarkets);
@@ -25,3 +25,11 @@ export default class MarketSelect extends React.PureComponent {
 		</div>
 	}
 }
+
+function mapStateToProps(state) {
+  return {
+    selectedMarkets: state.get('selectedMarkets')
+  };
+}
+
+export const MarketSelectContainer = connect(mapStateToProps)(MarketSelect);

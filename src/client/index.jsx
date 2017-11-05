@@ -5,7 +5,7 @@ import {List, fromJS} from 'immutable';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducer from './reducer';
-import {setState} from './action_creators';
+import {setState, setSelectedMarkets} from './action_creators';
 import Crypttoad from './components/Crypttoad';
 
 require('./style.css');
@@ -20,7 +20,9 @@ socket.on('state', state => {
       console.log(state);
       store.dispatch(setState(state));
 });
-const selectedMarkets = ['ETH', 'NEO'];
+const selectedMarkets = ['BTC'];
+
+store.dispatch(setSelectedMarkets(selectedMarkets));
 const data = [
       {uv: 0.00000904},
       {uv: 0.00000899},
@@ -52,7 +54,7 @@ const data = [
 
 ReactDOM.render(
       <Provider store={store}>
-	     <Crypttoad selectedMarkets={selectedMarkets} data={data}/>
+	     <Crypttoad data={data}/>
       </Provider>
 	,
 	document.getElementById('app')
