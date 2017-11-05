@@ -7,18 +7,17 @@ import {toJS} from 'immutable';
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.currency}
+    {suggestion.marketCurrencyLong + ' (' + suggestion.marketCurrency + ')' + suggestion.baseDisplay}
   </div>
 );
-const getSuggestionValue = suggestion => suggestion.currency;
+const getSuggestionValue = suggestion => suggestion.marketName;
 
 export const AutoSelect = class AutoSelect extends React.PureComponent {
 	getMarkets() {
-		console.log ("here markets" + this.props.markets);
 		if (this.props.markets)
-				return this.props.markets.toJS()
+			return this.props.markets.toJS()
 		else
-				return [];
+			return [];
 	}
 	constructor() {
 		super();
@@ -32,8 +31,8 @@ getSuggestions = value => {
 	  const inputValue = value.trim().toLowerCase();
 	  const inputLength = inputValue.length;
 
-	  return inputLength === 0 ? [] : this.getMarkets().filter(lang =>
-	   lang.currency.toLowerCase().slice(0, inputLength) === inputValue
+	  return inputLength === 0 ? [] : this.getMarkets().filter(market =>
+	   market.marketCurrency.toLowerCase().slice(0, inputLength) === inputValue || market.marketCurrencyLong.toLowerCase().slice(0, inputLength) === inputValue
 	  );
 };
 

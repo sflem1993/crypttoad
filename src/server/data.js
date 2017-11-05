@@ -37,7 +37,6 @@ export function saveMarketSummaries() {
 	});
 }
 
-//returns promise
 export function updateMarketList() {
 	var autoselectCurrencies = [];
 	bittrex.publicGetMarkets().then((response) => {
@@ -45,17 +44,26 @@ export function updateMarketList() {
 
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
-			if (currency) {
-				if (currency.BaseCurrency && currency.MarketCurrency) {
-					autoselectCurrencies.push({currency: currency.MarketName});
-					//console.log(currency.MarketName);
+			if (currency && currency.BaseCurrency && currency.MarketCurrency && (currency.BaseCurrency === 'BTC' || currency.BaseCurrency === 'USDT')) {
+				let baseDisplay = '';
+				if (currency.BaseCurrency !== 'BTC')
+				{
+					baseDisplay = ' (to US dollars)';
 				}
+				autoselectCurrencies.push({
+					marketCurrency: currency.MarketCurrency,
+					marketCurrencyLong: currency.MarketCurrencyLong,
+					baseCurrency: currency.BaseCurrency,
+					baseCurrencyLong: currency.BaseCurrencyLong,
+					marketName: currency.MarketName,
+					baseDisplay: baseDisplay
+				});
 			}
 		}
 
 		autoselectCurrencies.sort(function(a,b) {
-    		var x = a.currency.toLowerCase();
-   			 var y = b.currency.toLowerCase();
+    		var x = a.marketCurrencyLong.toLowerCase();
+   			 var y = b.marketCurrencyLong.toLowerCase();
     		return x < y ? -1 : x > y ? 1 : 0;
 		});
 
