@@ -44,19 +44,13 @@ export function updateMarketList() {
 
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
-			if (currency && currency.BaseCurrency && currency.MarketCurrency && (currency.BaseCurrency === 'BTC' || currency.BaseCurrency === 'USDT')) {
-				let baseDisplay = '';
-				if (currency.BaseCurrency !== 'BTC')
-				{
-					baseDisplay = ' (to US dollars)';
-				}
+			if (currency && currency.BaseCurrency && currency.MarketCurrency && (currency.BaseCurrency === 'BTC' || currency.MarketCurrency === 'BTC' && currency.BaseCurrency === 'USDT')) {
 				autoselectCurrencies.push({
 					marketCurrency: currency.MarketCurrency,
 					marketCurrencyLong: currency.MarketCurrencyLong,
 					baseCurrency: currency.BaseCurrency,
 					baseCurrencyLong: currency.BaseCurrencyLong,
-					marketName: currency.MarketName,
-					baseDisplay: baseDisplay
+					marketName: currency.MarketName
 				});
 			}
 		}

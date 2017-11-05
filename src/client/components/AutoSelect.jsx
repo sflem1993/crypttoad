@@ -7,10 +7,10 @@ import {toJS} from 'immutable';
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.marketCurrencyLong + ' (' + suggestion.marketCurrency + ')' + suggestion.baseDisplay}
+    {suggestion.marketCurrencyLong + ' (' + suggestion.marketCurrency + ')'}
   </div>
 );
-const getSuggestionValue = suggestion => suggestion.marketName;
+const getSuggestionValue = suggestion => suggestion.marketCurrency
 
 export const AutoSelect = class AutoSelect extends React.PureComponent {
 	getMarkets() {

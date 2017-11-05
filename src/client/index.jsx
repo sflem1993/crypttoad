@@ -20,35 +20,7 @@ socket.on('state', state => {
       console.log(state);
       store.dispatch(setState(state));
 });
-
-
-
-
-const marketInfo = fromJS({
-      'ETH' : {
-            data_points: [1,2,3,9,5],
-            market_stats: {
-                  Bid: .00000354,
-                  Ask: .00000377,
-                  Last: .00000358,
-                  High: .00000456,
-                  Low: .00000299,
-                  PrevDay: .00000323
-            }
-      },
-      'NEO' : {
-            data_points: [1,2,3,4,5],
-            market_stats: {
-                  Bid: .00003432,
-                  Ask: .00003667,
-                  Last: .00003434,
-                  High: .00004998,
-                  Low: .00003229,
-                  PrevDay: .00004888
-            }
-      }
-});
-const selectedMarkets = List.of('ETH', 'NEO');
+const selectedMarkets = ['ETH', 'NEO'];
 const data = [
       {uv: 0.00000904},
       {uv: 0.00000899},
@@ -80,7 +52,7 @@ const data = [
 
 ReactDOM.render(
       <Provider store={store}>
-	     <Crypttoad marketInfo={marketInfo} selectedMarkets={selectedMarkets} data={data}/>
+	     <Crypttoad selectedMarkets={selectedMarkets} data={data}/>
       </Provider>
 	,
 	document.getElementById('app')
