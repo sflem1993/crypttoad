@@ -3,7 +3,7 @@ import {fromJS} from 'immutable';
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
-import {updateMarketList, getMarketData} from './data';
+import {updateMarketList, updateMarketListPromise, getMarketData} from './data';
 
 export const store = makeStore();
 const app = express();
@@ -28,9 +28,13 @@ const server2 = app.listen(9000, () => {
 console.log("MEOW");
 console.log("A");
 console.log("B");
+var newmarkets = updateMarketList();
+console.log("*****");
+console.log(newmarkets);
+console.log("*****");
 store.dispatch({
 	type: 'UPDATE_MARKET_LISTz',
-	markets: updateMarketList()
+	markets: newmarkets
 });
 
 // store.dispatch({
@@ -39,21 +43,45 @@ store.dispatch({
 // });
 
 setInterval(() => {
-	store.dispatch({
-		type: 'UPDATE_MARKET_LISTz',
-		markets: updateMarketList()
+	updateMarketListPromise().then((response) => {
+		const currencies = response.result;
+		var autoselectCurrencies = [];
+
+		for (let i = 0; i < currencies.length; i++) {
+			let currency = currencies[i];
+			if (currency && currency.BaseCurrency && currency.MarketCurrency && (currency.BaseCurrency === 'BTC' || currency.MarketCurrency === 'BTC' && currency.BaseCurrency === 'USDT')) {
+				autoselectCurrencies.push({
+					marketCurrency: currency.MarketCurrency,
+					marketCurrencyLong: currency.MarketCurrencyLong,
+					baseCurrency: currency.BaseCurrency,
+					baseCurrencyLong: currency.BaseCurrencyLong,
+					marketName: currency.MarketName
+				});
+			}
+		}
+
+		autoselectCurrencies.sort(function(a,b) {
+    		var x = a.marketCurrencyLong.toLowerCase();
+   			 var y = b.marketCurrencyLong.toLowerCase();
+    		return x < y ? -1 : x > y ? 1 : 0;
+		});
+		store.dispatch({
+			type: 'UPDATE_MARKET_LISTz',
+			markets: autoselectCurrencies
+		});
+
 	});
 }, 5000);
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
 });
 
-setInterval(() => {
-	store.dispatch({
-		type: 'UPDATE_MARKET_DATA',
-		marketData: getMarketData()
-	});
-}, 5000);
+// setInterval(() => {
+// 	store.dispatch({
+// 		type: 'UPDATE_MARKET_DATA',
+// 		marketData: getMarketData()
+// 	});
+// }, 20000);
 
 store.subscribe(
     () => socketServer.emit('state', store.getState().toJS())

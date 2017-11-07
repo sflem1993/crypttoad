@@ -58,6 +58,9 @@ export function updateMarketList() {
 	console.log(autoselectCurrencies);
 	return autoselectCurrencies;
 }
+export function updateMarketListPromise() {
+	return bittrex.publicGetMarkets();
+}
 
 
 //currencyData - current list of data points for a specific currency
