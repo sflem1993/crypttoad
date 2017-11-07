@@ -20,7 +20,7 @@ socket.on('state', state => {
       console.log(state);
       store.dispatch(setState(state));
 });
-const selectedMarkets = ['BTC'];
+const selectedMarkets = List(['BTC']);
 
 store.dispatch(setSelectedMarkets(selectedMarkets));
 const data = [

@@ -1,6 +1,7 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 import {toJS} from 'immutable';
 
 
@@ -25,6 +26,19 @@ export const AutoSelect = class AutoSelect extends React.PureComponent {
 	    	value: '',
 	    	suggestions: []
 	    };
+
+	    this.onKeyDown = this.onKeyDown.bind(this);
+	}
+
+	handleKeyDown(event) {
+		if (e.keyCode === 13) { // Enter
+	        // Stop it here
+	        e.preventDefault();
+	        e.stopPropagation();
+	       	console.log("@@ " + e.target.value + " @@");
+	       	return this.props.addSelectedMarket(e.target.value);
+	        // Do something else...
+	    }
 	}
 // Teach Autosuggest how to calculate suggestions for any given input value.
 getSuggestions = value => {
@@ -46,9 +60,10 @@ getSuggestions = value => {
   	onKeyDown(e) {
 	    if (e.keyCode === 13) { // Enter
 	        // Stop it here
-	        //e.preventDefault();
-	       // e.stopPropagation();
-	       	console.log("@@ " + e.target.value + " @@")
+	        e.preventDefault();
+	        e.stopPropagation();
+	       	console.log("@@ " + e.target.value + " @@");
+	       	return this.props.addSelectedMarket(e.target.value);
 	        // Do something else...
 	    }
 	}
@@ -106,4 +121,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const AutoSelectContainer = connect(mapStateToProps)(AutoSelect);
+export const AutoSelectContainer = connect(mapStateToProps, actionCreators)(AutoSelect);

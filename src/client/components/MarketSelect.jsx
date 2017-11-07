@@ -1,6 +1,7 @@
 import React from 'react';
 import {List} from 'immutable';
 import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
 import close from './../img/newclose2.png';
 
@@ -19,7 +20,10 @@ export const MarketSelect = class MarketSelect extends React.PureComponent {
 			{this.getMarkets().map(selectedMarket =>
 				<div key={selectedMarket} className="selectedMarket">
 					<div className="selectedMarketName">{selectedMarket}</div>
-					<img  className="selectedMarketButton" src={close}/>
+					<img
+						className="selectedMarketButton"
+						onClick={() => this.props.deleteSelectedMarket(selectedMarket)}
+						src={close}/>
 				</div>
 			)}
 		</div>
@@ -32,4 +36,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const MarketSelectContainer = connect(mapStateToProps)(MarketSelect);
+export const MarketSelectContainer = connect(mapStateToProps, actionCreators)(MarketSelect);
