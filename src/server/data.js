@@ -11,30 +11,22 @@ export const MAX_SIZE = 10; //storing data every 15 seconds for 24 hour period
 const bittrex = new Bittrex();
 
 //returns promise
-export function getBTC() {
-	return bittrex.publicGetTicker('BTC-LTC');
-}
-
-export function getBTCTest() {
-	return bittrex.publicGetTicker('BTC-LTC');
-}
-
-//returns promise
-export function getMarketSummaries() {
-	return bittrex.publicGetMarketSummaries();
-}
-
-//returns promise
-export function saveMarketSummaries() {
+export function getMarketData() {
+	var newData = [];
 	bittrex.publicGetMarketSummaries().then((response) => {
 		const currencies = response.result;
-
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
 			//state update marketname -> last
-			console.log(currency.MarketName + " " + currency.Last);
+			var newCurrencyData = {};
+			var newMarketName = currency.MarketName.substr(currency.MarketName.indexOf("-") + 1);
+			newCurrencyData[newMarketName] = currency.Last;
+			newData.push(newCurrencyData);
 		}
 	});
+	console.log("HITMEW");
+	console.log(newData);
+	return fromJS(newData);
 }
 
 export function updateMarketList() {
@@ -62,6 +54,8 @@ export function updateMarketList() {
 		});
 
 	});
+	console.log("SUITY");
+	console.log(autoselectCurrencies);
 	return autoselectCurrencies;
 }
 
@@ -140,14 +134,14 @@ export function updateCurrencies(data = INITIAL_STATE, newCurrencyData = INITIAL
 
 export function getBittrexInfo() {
 	bittrex.publicGetMarketSummaries().then((response) => {
-		var newData = {};
+		var newData = Map();
 		const markets = response.result;
 		for (let i = 0; i < markets.length; i++) {
 			let market = markets[i];
-			newData[market.MarketName] = market.Last;
+			newData = newData.set(market.MarketName, market.Last);
 		}
-		return newData;
 	});
+	return newData;
 }
 
 export function makeGraph(data, marketName) {

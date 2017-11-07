@@ -3,7 +3,7 @@ import {fromJS} from 'immutable';
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
-import {updateMarketList} from './data';
+import {updateMarketList, getMarketData} from './data';
 
 export const store = makeStore();
 const app = express();
@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
 
 app.use('/dist', express.static(path.resolve(__dirname + '/../../dist')));
 
-console.log("HELP");
 const server2 = app.listen(9000, () => {
   let port = server2.address().port;
   console.log(`Server running at http://localhost:${port}`);
@@ -41,13 +40,20 @@ store.dispatch({
 
 setInterval(() => {
 	store.dispatch({
-	type: 'UPDATE_MARKET_LISTz',
-	markets: updateMarketList()
+		type: 'UPDATE_MARKET_LISTz',
+		markets: updateMarketList()
 	});
-}, 1000000);
+}, 5000);
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
 });
+
+setInterval(() => {
+	store.dispatch({
+		type: 'UPDATE_MARKET_DATA',
+		marketData: getMarketData()
+	});
+}, 5000);
 
 store.subscribe(
     () => socketServer.emit('state', store.getState().toJS())
