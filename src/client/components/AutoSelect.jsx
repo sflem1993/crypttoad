@@ -59,12 +59,9 @@ getSuggestions = value => {
 
   	onKeyDown(e) {
 	    if (e.keyCode === 13) { // Enter
-	        // Stop it here
 	        e.preventDefault();
 	        e.stopPropagation();
-	       	console.log("@@ " + e.target.value + " @@");
 	       	return this.props.addSelectedMarket(e.target.value);
-	        // Do something else...
 	    }
 	}
 
@@ -85,7 +82,7 @@ getSuggestions = value => {
 
 	onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
 		if (method === 'click') {
-			console.log("selected: " + suggestionValue  + " @@@ method: " + method);
+			return this.props.addSelectedMarket(suggestionValue);
 		}
 	};
 
