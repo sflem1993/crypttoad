@@ -1,5 +1,3 @@
-
-//VOTING-CLIENT
 import {List, Map} from 'immutable';
 
 const MAX_SELECTED_MARKETS = 4;
@@ -10,8 +8,11 @@ function setState(state = Map(), newState) {
 
 function addSelectedMarket(state, selectedMarket) {
 	const selectedMarkets = state.get('selectedMarkets');
+	const markets = state.get('marketData');
+	console.log("@@");
+	console.log(markets);
 	const indexOf = selectedMarkets.indexOf(selectedMarket);
-	if (indexOf == -1 && selectedMarkets.size < MAX_SELECTED_MARKETS) {
+	if (indexOf == -1 && markets.has(selectedMarket.toUpperCase()) && selectedMarkets.size < MAX_SELECTED_MARKETS) {
 		return state.set('selectedMarkets', selectedMarkets.push(selectedMarket));
 	 } else {
 	 	return state;
@@ -21,7 +22,6 @@ function addSelectedMarket(state, selectedMarket) {
 function deleteSelectedMarket(state, selectedMarket) {
 	const selectedMarkets = state.get('selectedMarkets');
 	const indexOf = selectedMarkets.indexOf(selectedMarket);
-	console.log(selectedMarkets);
 	return state.set('selectedMarkets', selectedMarkets.delete(indexOf));
 }
 
@@ -35,10 +35,7 @@ export default function(state = Map(), action) {
 			return addSelectedMarket(state, action.selectedMarket);
 		case 'DELETE_SELECTED_MARKET':
 			return deleteSelectedMarket(state, action.selectedMarket);
-		//case 'SELECT_MARKET':
-			//return selectMarket(state, action.market);
 	}
 
-	// if cant process action return state unchanged
 	return state;
 }

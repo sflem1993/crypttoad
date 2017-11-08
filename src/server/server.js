@@ -87,7 +87,7 @@ updateMarkets();
 setInterval(updateMarkets, 86400000);
 
 updateMarketData();
-setInterval(updateMarketData, 15000); //120000
+setInterval(updateMarketData, 10000); //120000
 
 
 socketServer.on('connection', (socket) => {

@@ -13,13 +13,12 @@ require('./react-select.css')
 
 const store = createStore(reducer);
 
-
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 
 socket.on('state', state => {
-      console.log("yell")
-      console.log(state);
-      console.log("yell2")
+     // console.log("yell")
+     // console.log(state);
+//console.log("yell2")
       store.dispatch(setState(state));
 });
 const selectedMarkets = List(['BTC']);
