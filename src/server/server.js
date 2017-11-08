@@ -14,7 +14,6 @@ var path = require('path');
 server.listen(8090);
 
 app.get('/', (req, res) => {
-	//res.send("react apps");
  	res.sendFile(path.resolve(__dirname + '/../../dist/index.html'));
 });
 
@@ -32,7 +31,7 @@ function updateMarkets() {
 
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
-			if (currency && currency.BaseCurrency && currency.MarketCurrency && (currency.BaseCurrency === 'BTC' || currency.MarketCurrency === 'BTC' && currency.BaseCurrency === 'USDT')) {
+			if (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC') {
 				autoselectCurrencies.push({
 					marketCurrency: currency.MarketCurrency,
 					marketCurrencyLong: currency.MarketCurrencyLong,
@@ -62,19 +61,21 @@ function updateMarketData() {
 		var newData = {};
 		for (let i = 0; i < markets.length; i++) {
 			let market = markets[i];
-			//state update marketname -> last
-			var currencyData = {};
-			currencyData.Last = market.Last;
-			currencyData.PrevDay = market.PrevDay;
-			currencyData.Bid = market.Bid;
-			currencyData.Ask = market.Ask;
-			currencyData.High = market.High;
-			currencyData.Low = market.Low;
-
 			var formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
-			newData[formattedMarketName] = currencyData;
+			var formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
+			if (formattedBaseCurrency === 'BTC' || market.marketName === 'USDT-BTC') {
+				var currencyData = {};
+				currencyData.Last = market.Last;
+				currencyData.PrevDay = market.PrevDay;
+				currencyData.Bid = market.Bid;
+				currencyData.Ask = market.Ask;
+				currencyData.High = market.High;
+				currencyData.Low = market.Low;
+				currencyData.PriceList = [1];
+				newData[formattedMarketName] = currencyData;
+			}
 		}
-		console.log("dataz");
+		newData = fromJS(newData);
 		store.dispatch({
 			type: 'UPDATE_MARKET_DATA',
 			marketData: newData
@@ -82,27 +83,17 @@ function updateMarketData() {
 	});
 }
 
-
-// setInterval(() => {
-// 	store.dispatch({
-// 		type: 'UPDATE_MARKET_DATA',
-// 		marketData: getMarketData()
-// 	});
-// }, 20000);
-
-
 updateMarkets();
 setInterval(updateMarkets, 86400000);
+
+updateMarketData();
+setInterval(updateMarketData, 2000);
+
+
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
 });
 
-updateMarketData();
-
 store.subscribe(
     () => socketServer.emit('state', store.getState().toJS())
 );
-
-
-
-socketServer.emit('state', store.getState().toJS());
