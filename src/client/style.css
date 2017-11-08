@@ -47,7 +47,7 @@ html, body, #app, .crypttoad {
 	flex: 1;
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	min-height: 115px;
 }
@@ -56,7 +56,8 @@ html, body, #app, .crypttoad {
 	color: white;
 	flex: 1;
 	padding: 0px 0px 0px 6px;
-	font-size: 20px;
+	font-size: 25px;
+	font-family: verdana;
 }
 
 .logo {
@@ -120,22 +121,28 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-flow: row nowrap;
 	padding: 1%;
-	min-height: 100px;
+	min-height: 140px;
 }
 
 .marketGraph {
-	flex: 32;
+	flex: 3;
 	width: 0;
 	background-color: #345f4f;
 }
 
+.marketStatsContainer {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
 .marketStats {
-	flex: 4;
-	margin: 0 0 0 2%;
+	flex: 1;
 
 	display: flex;
 	flex-flow: column nowrap;
-	min-height: 100px;
+	min-height: 140px;
 }
 
 .marketStatsRow {
@@ -145,25 +152,32 @@ html, body, #app, .crypttoad {
 	flex-flow: row nowrap;
 	color: white;
 	font-size: 18px;
-	justify-content: space-around;
-	min-width: 200px;
-	min-height: 15px;
+	align-items: flex-start;
+	min-width: 215px;
+	min-height: 20px;
+
+	font-family: verdana;
+	font-weight: 900;
 }
 
 .marketStatsRowLabel {
 	flex: 1;
 	display: flex;
 	justify-content: flex-start;
+	align-items: center;
 	flex-flow: row nowrap;
-	min-width: 125px;
-	min-height: 15px;
+	min-width: 140px;
+
+	font-size: 15px;
 }
 
 .marketStatsRowValue {
 	flex: 1;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	flex-flow: row nowrap;
+
 	min-width: 75px;
 }
 
@@ -269,5 +283,8 @@ li {
 .react-autosuggest__container {
 	width: 600px;
 }
+
+
+
 
 

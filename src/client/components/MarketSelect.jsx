@@ -15,7 +15,7 @@ export const MarketSelect = class MarketSelect extends React.PureComponent {
 		return <div className="selectedMarkets">
 			{this.getMarkets().map(selectedMarket =>
 				<div key={selectedMarket} className="selectedMarket">
-					<div className="selectedMarketName">{selectedMarket}</div>
+					<div className="selectedMarketName">{selectedMarket.toUpperCase()}</div>
 					<img
 						className="selectedMarketButton"
 						onClick={() => this.props.deleteSelectedMarket(selectedMarket)}

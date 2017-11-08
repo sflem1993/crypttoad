@@ -20,33 +20,34 @@ export default class MarketStats extends React.PureComponent {
 		return this.props.stats.get('PrevDay') || -99;
 	}
 	render() {
-		return <div className="marketStats">
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Last Sold:</div>
-				<div className="marketStatsRowValue">0.00000904</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Bid:</div>
-				<div className="marketStatsRowValue">0.00000890</div> 
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Ask:</div>
-				<div className="marketStatsRowValue">0.00000900</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hour High:</div>
-				<div className="marketStatsRowValue">0.00000919</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hour Low:</div>
-				<div className="marketStatsRowValue">0.00000819</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hours Ago:</div>
-				<div className="marketStatsRowValue">0.00000900</div>
+		return <div className="marketStatsContainer">
+				<div className="marketStats">
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">LAST SOLD:</div>
+					<div className="marketStatsRowValue">0.00000904</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">LAST BID:</div>
+					<div className="marketStatsRowValue">0.00000890</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">LAST ASK:</div>
+					<div className="marketStatsRowValue">0.00000900</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">24 HOUR HIGH:</div>
+					<div className="marketStatsRowValue">0.00000919</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">24 HOUR LOW:</div>
+					<div className="marketStatsRowValue">0.00000819</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">24 HOURS AGO:</div>
+					<div className="marketStatsRowValue">0.00000900</div>
+				</div>
 			</div>
 		</div>
-
 	{/*	 <div className="marketStats">
 			<div className="marketStatsRow">
 				<div className="marketStatsRowLabel">Last</div>

@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from  'react-dom';
 import {List, fromJS} from 'immutable';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {compose, applyMiddleware, createStore} from 'redux';
 import reducer from './reducer';
 import {setState, setSelectedMarkets} from './action_creators';
 import Crypttoad from './components/Crypttoad';

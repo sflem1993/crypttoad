@@ -9,8 +9,6 @@ function setState(state = Map(), newState) {
 function addSelectedMarket(state, selectedMarket) {
 	const selectedMarkets = state.get('selectedMarkets');
 	const markets = state.get('marketData');
-	console.log("@@");
-	console.log(markets);
 	const indexOf = selectedMarkets.indexOf(selectedMarket);
 	if (indexOf == -1 && markets.has(selectedMarket.toUpperCase()) && selectedMarkets.size < MAX_SELECTED_MARKETS) {
 		return state.set('selectedMarkets', selectedMarkets.push(selectedMarket));

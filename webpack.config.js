@@ -15,11 +15,10 @@ module.exports = {
 		}, {
 			 test: /\.css$/,
      		 loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
-		},
-		      		{
-		    	test: /\.(png|jpg|gif)$/,
-		    	loader: 'img-loader!url-loader?limit=25000'
-		    }]
+		}, {
+	    	test: /\.(png|jpg|gif)$/,
+	    	loader: 'img-loader!url-loader?limit=25000'
+	    }]
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']
