@@ -13,14 +13,12 @@ export default class MainInfo extends React.PureComponent {
 
 	render() {
 		return <div className="mainPageInfo">
+			<div className="top">
+				<div className="currencySelect"><AutoSelectContainer {...this.props}/></div>
+			</div>
 			<div className="markets">
 				{this.getMarkets().map(selectedMarket =>
 					<div key={selectedMarket} className="market">
-						<div className="selectedMarketName">{selectedMarket}</div>
-						<img
-							className="selectedMarketButton"
-							onClick={() => this.props.deleteSelectedMarket(selectedMarket)}
-							src={close}/>
 						<MarketGraph {...this.props}/>
 						<MarketStats {...this.props}/>
 					</div>
