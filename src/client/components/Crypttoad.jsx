@@ -4,7 +4,7 @@ import MarketStats from './MarketStats';
 import {MarketSelectContainer} from './MarketSelect';
 import {AutoSelectContainer} from './AutoSelect';
 
-import logo from './../img/rotaty.gif';
+import logo from './../img/logo.gif';
 
 export default class Crypttoad extends React.PureComponent {
 

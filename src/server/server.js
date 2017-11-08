@@ -3,7 +3,7 @@ import {fromJS} from 'immutable';
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
-import {updateMarketList, updateMarketListPromise, getMarketData} from './data';
+import {updateMarketList, getMarketData} from './data';
 
 export const store = makeStore();
 const app = express();
@@ -25,22 +25,8 @@ const server2 = app.listen(9000, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-console.log("MEOW");
-console.log("A");
-console.log("B");
-var newmarkets = updateMarketList();
-store.dispatch({
-	type: 'UPDATE_MARKET_LIST',
-	markets: newmarkets
-});
-
-// store.dispatch({
-// 	type: 'UPDATE_SELECTED_MARKETS',
-// 	markets: {'USDT-BTC': {a: 1}}
-// });
-
-setInterval(() => {
-	updateMarketListPromise().then((response) => {
+function updateMarkets() {
+	updateMarketList().then((response) => {
 		const currencies = response.result;
 		var autoselectCurrencies = [];
 
@@ -68,10 +54,34 @@ setInterval(() => {
 		});
 
 	});
-}, 5000);
-socketServer.on('connection', (socket) => {
-	socket.emit('state', store.getState().toJS())
-});
+}
+
+function updateMarketData() {
+	getMarketData().then((response) => {
+		const markets = response.result;
+		var newData = {};
+		for (let i = 0; i < markets.length; i++) {
+			let market = markets[i];
+			//state update marketname -> last
+			var currencyData = {};
+			currencyData.Last = market.Last;
+			currencyData.PrevDay = market.PrevDay;
+			currencyData.Bid = market.Bid;
+			currencyData.Ask = market.Ask;
+			currencyData.High = market.High;
+			currencyData.Low = market.Low;
+
+			var formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
+			newData[formattedMarketName] = currencyData;
+		}
+		console.log("dataz");
+		store.dispatch({
+			type: 'UPDATE_MARKET_DATA',
+			marketData: newData
+		});
+	});
+}
+
 
 // setInterval(() => {
 // 	store.dispatch({
@@ -80,8 +90,19 @@ socketServer.on('connection', (socket) => {
 // 	});
 // }, 20000);
 
+
+updateMarkets();
+setInterval(updateMarkets, 86400000);
+socketServer.on('connection', (socket) => {
+	socket.emit('state', store.getState().toJS())
+});
+
+updateMarketData();
+
 store.subscribe(
     () => socketServer.emit('state', store.getState().toJS())
 );
 
-//socketServer.emit('state', store.getState().toJS());
+
+
+socketServer.emit('state', store.getState().toJS());

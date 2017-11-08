@@ -12,53 +12,10 @@ const bittrex = new Bittrex();
 
 //returns promise
 export function getMarketData() {
-	var newData = [];
-	bittrex.publicGetMarketSummaries().then((response) => {
-		const currencies = response.result;
-		for (let i = 0; i < currencies.length; i++) {
-			let currency = currencies[i];
-			//state update marketname -> last
-			var newCurrencyData = {};
-			var newMarketName = currency.MarketName.substr(currency.MarketName.indexOf("-") + 1);
-			newCurrencyData[newMarketName] = currency.Last;
-			newData.push(newCurrencyData);
-		}
-	});
-	console.log("HITMEW");
-	console.log(newData);
-	return fromJS(newData);
+	return bittrex.publicGetMarketSummaries();
 }
 
 export function updateMarketList() {
-	var autoselectCurrencies = [];
-	bittrex.publicGetMarkets().then((response) => {
-		const currencies = response.result;
-
-		for (let i = 0; i < currencies.length; i++) {
-			let currency = currencies[i];
-			if (currency && currency.BaseCurrency && currency.MarketCurrency && (currency.BaseCurrency === 'BTC' || currency.MarketCurrency === 'BTC' && currency.BaseCurrency === 'USDT')) {
-				autoselectCurrencies.push({
-					marketCurrency: currency.MarketCurrency,
-					marketCurrencyLong: currency.MarketCurrencyLong,
-					baseCurrency: currency.BaseCurrency,
-					baseCurrencyLong: currency.BaseCurrencyLong,
-					marketName: currency.MarketName
-				});
-			}
-		}
-
-		autoselectCurrencies.sort(function(a,b) {
-    		var x = a.marketCurrencyLong.toLowerCase();
-   			 var y = b.marketCurrencyLong.toLowerCase();
-    		return x < y ? -1 : x > y ? 1 : 0;
-		});
-
-	});
-	console.log("SUITY");
-	console.log(autoselectCurrencies);
-	return autoselectCurrencies;
-}
-export function updateMarketListPromise() {
 	return bittrex.publicGetMarkets();
 }
 
