@@ -49,7 +49,7 @@ html, body, #app, .crypttoad {
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
-	min-height: 115px;
+	min-height: 160px;
 }
 
 .selectedMarketName {
