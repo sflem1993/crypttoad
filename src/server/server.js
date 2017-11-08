@@ -29,11 +29,8 @@ console.log("MEOW");
 console.log("A");
 console.log("B");
 var newmarkets = updateMarketList();
-console.log("*****");
-console.log(newmarkets);
-console.log("*****");
 store.dispatch({
-	type: 'UPDATE_MARKET_LISTz',
+	type: 'UPDATE_MARKET_LIST',
 	markets: newmarkets
 });
 
@@ -66,7 +63,7 @@ setInterval(() => {
     		return x < y ? -1 : x > y ? 1 : 0;
 		});
 		store.dispatch({
-			type: 'UPDATE_MARKET_LISTz',
+			type: 'UPDATE_MARKET_LIST',
 			markets: autoselectCurrencies
 		});
 

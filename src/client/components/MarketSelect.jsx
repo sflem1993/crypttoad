@@ -8,11 +8,7 @@ import close from './../img/newclose2.png';
 
 export const MarketSelect = class MarketSelect extends React.PureComponent {
 	getMarkets() {
-		if (this.props.selectedMarkets) {
-			return List(this.props.selectedMarkets);
-		} else {
-			return [];
-		}
+		return this.props.selectedMarkets || [];
 	}
 
 	render() {

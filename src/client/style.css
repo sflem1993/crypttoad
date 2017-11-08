@@ -39,7 +39,6 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: space-around;
-	min-height: 200px;
 }
 
 .selectedMarket {

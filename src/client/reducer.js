@@ -2,6 +2,8 @@
 //VOTING-CLIENT
 import {List, Map} from 'immutable';
 
+const MAX_SELECTED_MARKETS = 4;
+
 function setState(state = Map(), newState) {
 	return state.merge(newState);
 }
@@ -9,7 +11,7 @@ function setState(state = Map(), newState) {
 function addSelectedMarket(state, selectedMarket) {
 	const selectedMarkets = state.get('selectedMarkets');
 	const indexOf = selectedMarkets.indexOf(selectedMarket);
-	if (indexOf == -1) {
+	if (indexOf == -1 && selectedMarkets.size < MAX_SELECTED_MARKETS) {
 		return state.set('selectedMarkets', selectedMarkets.push(selectedMarket));
 	 } else {
 	 	return state;
