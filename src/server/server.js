@@ -71,7 +71,7 @@ function updateMarketData() {
 				currencyData.Ask = market.Ask;
 				currencyData.High = market.High;
 				currencyData.Low = market.Low;
-				currencyData.PriceList = [1];
+				currencyData.PriceList = [];
 				newData[formattedMarketName] = currencyData;
 			}
 		}
@@ -87,7 +87,7 @@ updateMarkets();
 setInterval(updateMarkets, 86400000);
 
 updateMarketData();
-setInterval(updateMarketData, 2000);
+setInterval(updateMarketData, 15000); //120000
 
 
 socketServer.on('connection', (socket) => {
