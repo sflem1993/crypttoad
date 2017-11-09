@@ -29,12 +29,11 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 	}
 
 	getMarketInfoZ() {
-		if (this.props.marketData ) {
-			var x = Map(this.props.marketData);
-			return x.get(this.props.selectedMarket);
-		} else {
-			return 'AAA';
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket);
 		}
+
+		return []
 	}
 
 	render() {
