@@ -63,7 +63,7 @@ function updateMarketData() {
 			let market = markets[i];
 			var formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
 			var formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
-			if (formattedBaseCurrency === 'BTC' || market.marketName === 'USDT-BTC') {
+			if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
 				var currencyData = {};
 				currencyData.Last = market.Last;
 				currencyData.PrevDay = market.PrevDay;

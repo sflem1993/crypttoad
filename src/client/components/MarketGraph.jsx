@@ -1,13 +1,12 @@
 import React from 'react';
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 import {ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area} from 'recharts';
 
-//import {connect} from 'react-redux';
+import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
-//import * as actionCreators from '../action_creators';
 
-
-export default class MarketGraph extends React.PureComponent {
+export const MarketGraph = class MarketGraph extends React.PureComponent {
 	getData() {
 		return this.props.data || [];
 	}
@@ -22,17 +21,27 @@ export default class MarketGraph extends React.PureComponent {
 		var interval = (max - min) / 4;
 		return [min, (min + interval).toFixed(8), (min + (2*interval)).toFixed(8), (min + (3*interval)).toFixed(8), max];
 	}
-	getMarkets() {
-		if (this.props.selectedMarkets) {
-			return List(this.props.selectedMarkets);
+	getSelectedMarket() {
+		return this.props.selectedMarket || [];
+	}
+	getMarketInfo() {
+		return this.props.marketData || [];
+	}
+
+	getMarketInfoZ() {
+		if (this.props.marketData ) {
+			var x = Map(this.props.marketData);
+			return x.get(this.props.selectedMarket);
 		} else {
-			return [];
+			return 'AAA';
 		}
 	}
 
 	render() {
 		return <div className="marketGraph">
-			<ResponsiveContainer height="100%" width="100%">
+			{this.getSelectedMarket()}
+			{this.getMarketInfoZ()}
+			{/*<ResponsiveContainer height="100%" width="100%">
     		<LineChart data={this.getData()}>
 			  	<XAxis tickSize={10} strokeWidth={3} label="30 second interval" dataKey="name"/>
 		        <YAxis
@@ -46,16 +55,17 @@ export default class MarketGraph extends React.PureComponent {
 		        <Tooltip/>
 		        <Line strokeWidth={3} type="monotone" dataKey="uv" stroke="#e3e3e3" />
 	      	</LineChart>
-			</ResponsiveContainer>
+			</ResponsiveContainer> */}
 		</div>
+
 
 	}
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     selectedMarkets: state.get('selectedMarkets')
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    marketData: state.get('marketData')
+  };
+}
 
-//export const MarketSelectContainer = connect(mapStateToProps, actionCreators)(MarketSelect);
+export const MarketGraphContainer = connect(mapStateToProps, actionCreators)(MarketGraph);
