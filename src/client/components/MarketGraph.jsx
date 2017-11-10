@@ -38,9 +38,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 
 	render() {
 		return <div className="marketGraph">
-			{this.getSelectedMarket()}
-			{this.getMarketInfoZ()}
-			{/*<ResponsiveContainer height="100%" width="100%">
+			<ResponsiveContainer height="100%" width="100%">
     		<LineChart data={this.getData()}>
 			  	<XAxis tickSize={10} strokeWidth={3} label="30 second interval" dataKey="name"/>
 		        <YAxis
@@ -54,7 +52,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		        <Tooltip/>
 		        <Line strokeWidth={3} type="monotone" dataKey="uv" stroke="#e3e3e3" />
 	      	</LineChart>
-			</ResponsiveContainer> */}
+			</ResponsiveContainer>
 		</div>
 
 

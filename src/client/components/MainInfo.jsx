@@ -3,7 +3,7 @@ import {List} from 'immutable';
 import {connect} from 'react-redux';
 import {AutoSelectContainer} from './AutoSelect';
 import {MarketGraphContainer} from './MarketGraph';
-import MarketStats from './MarketStats';
+import {MarketStatsContainer} from './MarketStats';
 import * as actionCreators from '../action_creators';
 
 export default class MainInfo extends React.PureComponent {
@@ -20,7 +20,7 @@ export default class MainInfo extends React.PureComponent {
 				{this.getMarkets().map(selectedMarket =>
 					<div key={selectedMarket} className="market">
 						<MarketGraphContainer selectedMarket={selectedMarket} {...this.props}/>
-						<MarketStats {...this.props}/>
+						<MarketStatsContainer selectedMarket={selectedMarket} {...this.props}/>
 					</div>
 				)}
 			</div>

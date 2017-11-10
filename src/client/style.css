@@ -125,21 +125,23 @@ html, body, #app, .crypttoad {
 }
 
 .marketGraph {
-	flex: 3;
+	flex: 75%;
 	width: 0;
 	background-color: #345f4f;
 }
 
 .marketStatsContainer {
-	flex: 1;
+	flex: 25%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
+	min-width: 270px;
 }
 .marketStats {
 	flex: 1;
-
+	padding : 3px;
+	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
 	min-height: 140px;
@@ -153,6 +155,7 @@ html, body, #app, .crypttoad {
 	color: white;
 	font-size: 18px;
 	align-items: flex-start;
+	justify-content: space-between;
 	min-width: 215px;
 	min-height: 20px;
 

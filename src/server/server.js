@@ -32,6 +32,7 @@ function updateMarkets() {
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
 			if (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC') {
+				//FORMAT DECIMALS ON STATS
 				autoselectCurrencies.push({
 					marketCurrency: currency.MarketCurrency,
 					marketCurrencyLong: currency.MarketCurrencyLong,
