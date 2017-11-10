@@ -7,12 +7,13 @@ function updateMarkets(state, marketData) {
 	var newState = state;
 	var data = state.get('marketData');
 	var finalMarketData = data.mapEntries(([finalMarket, finalMarketData]) => {
+		newState = newState.updateIn(['marketData', finalMarket, 'stats'], stats => marketData.get(finalMarket).get('stats'));
 		const size = finalMarketData.get('PriceList').size;
 		console.log(newState.getIn(['marketData', finalMarket]));
-		if (size < 8) { //720
-			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], marketData => marketData.push({price: finalMarketData.get('Last')}));
+		if (size < 720) { //720
+			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({price: marketData.get(finalMarket).get('stats').get('Last')}));
 		} else {
-			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], marketData => marketData.shift().push({price:finalMarketData.get('Last')}));
+			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({price: marketData.get(finalMarket).get('stats').get('Last')}));
 		}
 	});
 	return newState;

@@ -5,45 +5,45 @@ import * as actionCreators from '../action_creators';
 export default class MarketStats extends React.PureComponent {
 	getLast() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('Last');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Last');
 		}
 
-		return []
+		return [];
 	}
 	getBid() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('Bid');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Bid');
 		}
 
-		return []
+		return [];
 	}
 	getAsk() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('Ask');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Ask');
 		}
 
-		return []
+		return [];
 	}
 	getHigh() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('High');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
 		}
 
-		return []
+		return [];
 	}
 	getLow() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('Low');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
 		}
 
-		return []
+		return [];
 	}
 	getPrevDay() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('PrevDay');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('PrevDay');
 		}
 
-		return []
+		return [];
 	}
 	render() {
 		return <div className="marketStatsContainer">

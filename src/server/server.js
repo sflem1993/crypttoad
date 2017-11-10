@@ -66,13 +66,15 @@ function updateMarketData() {
 			var formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
 			if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
 				var currencyData = {};
-				currencyData.Last = market.Last;
-				currencyData.PrevDay = market.PrevDay;
-				currencyData.Bid = market.Bid;
-				currencyData.Ask = market.Ask;
-				currencyData.High = market.High;
-				currencyData.Low = market.Low;
+				var formattedStats = {};
+				formattedStats.Last = market.Last;
+				formattedStats.PrevDay = market.PrevDay;
+				formattedStats.Bid = market.Bid;
+				formattedStats.Ask = market.Ask;
+				formattedStats.High = market.High;
+				formattedStats.Low = market.Low;
 				currencyData.PriceList = [];
+				currencyData.stats = formattedStats;
 				newData[formattedMarketName] = currencyData;
 			}
 		}
