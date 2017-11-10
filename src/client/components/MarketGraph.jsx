@@ -8,16 +8,28 @@ import * as actionCreators from '../action_creators';
 
 export const MarketGraph = class MarketGraph extends React.PureComponent {
 	getData() {
-		return this.props.data || [];
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('PriceList').toJS();
+		}
+		return [];
 	}
 	getDomain() {
 		var min = 0.00000827;
 		var max = 0.00000962;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
+			max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+		}
 		return [min, max];
 	}
 	getTicks() {
 		var min = 0.00000827;
 		var max = 0.00000962;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+
+			var min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
+			var max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+		}
 		var interval = (max - min) / 4;
 		return [min, (min + interval).toFixed(8), (min + (2*interval)).toFixed(8), (min + (3*interval)).toFixed(8), max];
 	}
@@ -50,7 +62,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		        />
 		        <CartesianGrid vertical={false}/>
 		        <Tooltip/>
-		        <Line strokeWidth={3} type="monotone" dataKey="uv" stroke="#e3e3e3" />
+		        <Line strokeWidth={3} type="monotone" dataKey="price" stroke="#e3e3e3" />
 	      	</LineChart>
 			</ResponsiveContainer>
 		</div>
