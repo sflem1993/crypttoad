@@ -15,13 +15,13 @@ export function setSelectedMarkets(selectedMarkets) {
 export function addSelectedMarket(selectedMarket) {
 	return {
 		type: 'ADD_SELECTED_MARKET',
-		selectedMarket
+		selectedMarket: selectedMarket.toUpperCase()
 	}
 }
 
 export function deleteSelectedMarket(selectedMarket) {
 	return {
 		type: 'DELETE_SELECTED_MARKET',
-		selectedMarket
+		selectedMarket: selectedMarket.toUpperCase()
 	}
 }

@@ -16,14 +16,8 @@ const store = createStore(reducer);
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 
 socket.on('state', state => {
-      console.log("yell")
-      console.log(state);
-      console.log("yell2")
       store.dispatch(setState(state));
 });
-const selectedMarkets = List(['BTC']);
-
-store.dispatch(setSelectedMarkets(selectedMarkets));
 const data = [
       {uv: 0.00000904},
       {uv: 0.00000899},
@@ -52,6 +46,10 @@ const data = [
       {uv: 0.00000919},
 
 ];
+const selectedMarkets = List(['BTC']);
+
+store.dispatch(setSelectedMarkets(selectedMarkets));
+
 
 ReactDOM.render(
       <Provider store={store}>

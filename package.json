@@ -28,6 +28,7 @@
     "http": "0.0.0",
     "immutable": "^3.8.1",
     "path": "^0.12.7",
+    "rc-switch": "^1.5.3",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-autosuggest": "^9.3.2",
