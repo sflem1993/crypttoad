@@ -44,32 +44,31 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 ];
 	}
 	getDomain() {
-		var min = 0.00000827;
-		var max = 0.00000962;
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
-			max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+			var min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
+			var max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+			return [min, max];
 		}
-		return [min, max];
+		return [0, 1];
 	}
 	getTicks() {
-		var min = 0.00000827;
-		var max = 0.00000962;
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
 
 			var min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
 			var max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+
+			var interval = (max - min) / 4;
+			var tick1 = (min + interval)
+			var tick2 = (min + (2*interval));
+			var tick3 =(min + (3*interval));
+			var decimals = 0;
+			if (this.props.selectedMarket !== 'BTC')
+			{
+				decimals = 8;
+			}
+			return [min.toFixed(decimals), tick1.toFixed(decimals), tick2.toFixed(decimals), tick3.toFixed(decimals), max.toFixed(decimals)];
 		}
-		var interval = (max - min) / 4;
-		var tick1 = (min + interval)
-		var tick2 = (min + (2*interval));
-		var tick3 =(min + (3*interval));
-		var decimals = 0;
-		if (this.props.selectedMarket !== 'BTC')
-		{
-			decimals = 8;
-		}
-		return [min.toFixed(decimals), tick1.toFixed(decimals), tick2.toFixed(decimals), tick3.toFixed(decimals), max.toFixed(decimals)];
+		return [0, 1];
 	}
 	getSelectedMarket() {
 		return this.props.selectedMarket || [];
