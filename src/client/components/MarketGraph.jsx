@@ -47,8 +47,8 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		var min = 0.00000827;
 		var max = 0.00000962;
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-		//	min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
-			//max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+			min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
+			max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
 		}
 		return [min, max];
 	}
@@ -89,7 +89,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 	render() {
 		return <div className="marketGraph">
 			<ResponsiveContainer height="100%" width="100%">
-    		<LineChart data={this.getFakeData()}>
+    		<LineChart data={this.getData()}>
 			  	<XAxis tickSize={10} strokeWidth={3} label="30 second interval" dataKey="name"/>
 		        <YAxis
 		        	type="number"
