@@ -1,6 +1,6 @@
 import React from 'react';
 import {List, Map} from 'immutable';
-import {ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area} from 'recharts';
+import {ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area, Label} from 'recharts';
 
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
@@ -86,18 +86,28 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		return []
 	}
 
+	getYAxisLabel() {
+		if (this.props.selectedMarket === 'BTC') {
+			return '(USD)';
+		} else {
+			return '(BTC)';
+		}
+	}
+
 	render() {
 		return <div className="marketGraph">
 			<ResponsiveContainer height="100%" width="100%">
     		<LineChart data={this.getData()}>
-			  	<XAxis tickSize={10} strokeWidth={3} label="30 second interval" dataKey="name"/>
+			  	<XAxis tickSize={10} interval={3}  domain={this.getDomain()} strokeWidth={3} label="LAST 24 HOURS (15 MINUTE INTERVALS)" dataKey="name"/>
 		        <YAxis
 		        	type="number"
 		        	ticks={this.getTicks()}
 		        	domain={this.getDomain()}
 		        	strokeWidth={3}
 					interval={0}
-		        />
+		        >
+		        	<Label value={this.getYAxisLabel()} position="bottom" angle={-15} offset={15}/>
+		        </YAxis>
 		        <CartesianGrid vertical={false}/>
 		        <Tooltip/>
 		        <Line strokeWidth={3} type="monotone" dataKey="price" stroke="#e3e3e3" dot={false}/>

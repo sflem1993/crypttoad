@@ -7,18 +7,28 @@ function updateMarkets(state, marketData) {
 	var newState = state;
 	var data = state.get('marketData');
 	var counter = state.get('counter');
+	var setPriceList = false;
 	if (!counter) {
 		newState = state.set('counter', 1);
+		setPriceList = true;
 	} else {
-		newState = state.set('counter', counter+1);
+		counter = counter +1;
+		if (counter == 2) {
+			newState = state.set('counter', 1);
+			setPriceList = true;
+		} else {
+			newState = state.set('counter', counter);
+		}
 	}
 	var finalMarketData = data.mapEntries(([finalMarket, finalMarketData]) => {
 		newState = newState.updateIn(['marketData', finalMarket, 'stats'], stats => marketData.get(finalMarket).get('stats'));
-		const size = finalMarketData.get('PriceList').size;
-		if (size < 96) { //720
-			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({price: marketData.get(finalMarket).get('stats').get('Last')}));
-		} else {
-			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({price: marketData.get(finalMarket).get('stats').get('Last')}));
+		if (setPriceList) {
+			const size = finalMarketData.get('PriceList').size;
+			if (size < 96) { //720
+				newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({price: marketData.get(finalMarket).get('stats').get('Last')}));
+			} else {
+				newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({price: marketData.get(finalMarket).get('stats').get('Last')}));
+			}
 		}
 	});
 	return newState;

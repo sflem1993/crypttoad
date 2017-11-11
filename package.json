@@ -27,6 +27,7 @@
     "express": "^4.16.2",
     "http": "0.0.0",
     "immutable": "^3.8.1",
+    "node-schedule": "^1.2.5",
     "path": "^0.12.7",
     "rc-switch": "^1.5.3",
     "react": "^15.6.1",

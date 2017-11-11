@@ -3,6 +3,7 @@ import {fromJS} from 'immutable';
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
+import schedule from 'node-schedule';
 import {updateMarketList, getMarketData} from './data';
 
 export const store = makeStore();
@@ -32,7 +33,6 @@ function updateMarkets() {
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
 			if (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC') {
-				//FORMAT DECIMALS ON STATS
 				autoselectCurrencies.push({
 					marketCurrency: currency.MarketCurrency,
 					marketCurrencyLong: currency.MarketCurrencyLong,
@@ -72,15 +72,12 @@ function updateMarketData() {
 					decimals = 2;
 				}
 				formattedStats.Last = market.Last;
-				if (market.Last > 1) {
-					console.log(formattedMarketName);
-				}
 				formattedStats.PrevDay = market.PrevDay;
 				formattedStats.Bid = market.Bid;
 				formattedStats.Ask = market.Ask;
 				formattedStats.High = market.High;
 				formattedStats.Low = market.Low;
-				currencyData.PriceList = [{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last},{price: market.Last}];
+				currencyData.PriceList = [];
 				currencyData.stats = formattedStats;
 				newData[formattedMarketName] = currencyData;
 			}
@@ -95,9 +92,10 @@ function updateMarketData() {
 
 updateMarkets();
 setInterval(updateMarkets, 86400000);
+//cron.schedule('0 0/1 * 1/1 * ? *', updateMarketData);
 
-updateMarketData();
-setInterval(updateMarketData, 4000); //120000
+var job = schedule.scheduleJob('*/15 * * * * *', updateMarketData);
+//setInterval(updateMarketData, ); //120000
 
 
 socketServer.on('connection', (socket) => {
