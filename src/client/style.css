@@ -32,7 +32,7 @@ html, body, #app, .crypttoad {
 
 	display: flex;
 	flex-flow: column nowrap;
-	min-width: 100px;
+	min-width: 150px;
 }
 
 .selectedMarkets {
@@ -56,7 +56,7 @@ html, body, #app, .crypttoad {
 	color: white;
 	flex: 1;
 	padding: 0px 0px 0px 6px;
-	font-size: 22px;
+	font-size: 30px;
 	font-family: verdana;
 }
 
@@ -157,7 +157,7 @@ html, body, #app, .crypttoad {
 	color: white;
 	font-size: 18px;
 	align-items: flex-start;
-	justify-content: space-between;
+	justify-content: space-around;
 	min-width: 215px;
 	min-height: 20px;
 
@@ -168,18 +168,19 @@ html, body, #app, .crypttoad {
 .marketStatsRowLabel {
 	flex: 1;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	flex-flow: row nowrap;
 	min-width: 140px;
-
+	min-height: 22px;
 	font-size: 15px;
 }
 
 .marketStatsRowValue {
 	flex: 1;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
+	min-height: 22px;
 	align-items: center;
 	flex-flow: row nowrap;
 
