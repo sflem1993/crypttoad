@@ -105,7 +105,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		        	strokeWidth={3}
 					interval={0}
 		        >
-		        	<Label value={this.getYAxisLabel()} position="bottom" angle={-15} offset={15}/>
+		        <Label value={this.getYAxisLabel()} position="bottom" angle={-15} offset={15}/>
 		        </YAxis>
 		        <CartesianGrid vertical={false}/>
 		        <Tooltip/>

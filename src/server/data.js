@@ -18,15 +18,3 @@ export function getMarketData() {
 export function updateMarketList() {
 	return bittrex.publicGetMarkets();
 }
-
-export function makeGraph(data, marketName) {
-	const market = data.get(marketName);
-	var graphData = List();
-	for (let i=0; i<3; i++) {
-		graphData = graphData.push(fromJS({
-			'name': i,
-			[marketName]: data.getIn([marketName, DATA_POINTS]).get(i),
-		}));
-	}
-	return graphData;
-}

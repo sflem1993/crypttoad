@@ -35,9 +35,7 @@ export const AutoSelect = class AutoSelect extends React.PureComponent {
 	        // Stop it here
 	        e.preventDefault();
 	        e.stopPropagation();
-	       	console.log("@@ " + e.target.value + " @@");
 	       	return this.props.addSelectedMarket(e.target.value);
-	       	e.target.value = '';
 	        // Do something else...
 	    }
 	}
