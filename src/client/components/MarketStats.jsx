@@ -3,44 +3,52 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
 export default class MarketStats extends React.PureComponent {
+	getDecimals() {
+		var decimals = 2;
+		if (this.props.selectedMarket !== 'BTC')
+		{
+			decimals = 8;
+		}
+		return decimals;
+	}
 	getLast() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Last');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Last').toFixed(this.getDecimals());
 		}
 
 		return [];
 	}
 	getBid() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Bid');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Bid').toFixed(this.getDecimals());
 		}
 
 		return [];
 	}
 	getAsk() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Ask');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Ask').toFixed(this.getDecimals());
 		}
 
 		return [];
 	}
 	getHigh() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('High').toFixed(this.getDecimals());
 		}
 
 		return [];
 	}
 	getLow() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low').toFixed(this.getDecimals());
 		}
 
 		return [];
 	}
 	getPrevDay() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('PrevDay');
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('PrevDay').toFixed(this.getDecimals());
 		}
 
 		return [];
