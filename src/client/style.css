@@ -189,11 +189,6 @@ html, body, #app, .crypttoad {
 	min-width: 75px;
 }
 
-.rightSidebar {
-	flex: 0 0 100px;
-}
-
-
 .xAxis .recharts-cartesian-axis-tick-value {
 	font-size: 0px;
 }
