@@ -67,14 +67,18 @@ function updateMarketData() {
 			if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
 				var currencyData = {};
 				var formattedStats = {};
+				var graphDomain = {};
 				formattedStats.Last = market.Last;
 				formattedStats.PrevDay = market.PrevDay;
 				formattedStats.Bid = market.Bid;
 				formattedStats.Ask = market.Ask;
 				formattedStats.High = market.High;
 				formattedStats.Low = market.Low;
+				graphDomain.Low = market.Low;
+				graphDomain.High = market.High;
 				currencyData.PriceList = [{}];
 				currencyData.stats = formattedStats;
+				currencyData.graphDomain = graphDomain;
 				newData[formattedMarketName] = currencyData;
 			}
 		}
