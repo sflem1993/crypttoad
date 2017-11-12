@@ -14,8 +14,8 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 	}
 	getDomain() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			var min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
-			var max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+			var min = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('Low');
+			var max = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('High');
 			return [min, max];
 		}
 		return [0, 1];
@@ -23,8 +23,8 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 	getTicks() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
 
-			var min = this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low');
-			var max = this.props.marketData.get(this.props.selectedMarket).get('stats').get('High');
+			var min = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('Low');
+			var max = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('High');
 
 			var interval = (max - min) / 4;
 			var tick1 = (min + interval)

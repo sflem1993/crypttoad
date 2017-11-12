@@ -73,7 +73,7 @@ function updateMarketData() {
 				formattedStats.Ask = market.Ask;
 				formattedStats.High = market.High;
 				formattedStats.Low = market.Low;
-				currencyData.PriceList = [];
+				currencyData.PriceList = [{}];
 				currencyData.stats = formattedStats;
 				newData[formattedMarketName] = currencyData;
 			}
@@ -86,13 +86,38 @@ function updateMarketData() {
 	});
 }
 
+function updateMarketGraph() {
+	getMarketData().then((response) => {
+		const markets = response.result;
+		var newData = {};
+		for (let i = 0; i < markets.length; i++) {
+			let market = markets[i];
+			var formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
+			var formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
+			if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
+				var currencyData = {};
+				var formattedStats = {};
+				currencyData.Last = market.Last;
+				formattedStats.Low = market.Low;
+				formattedStats.High = market.High;
+				currencyData.graphDomain = formattedStats;
+
+				newData[formattedMarketName] = currencyData;
+			}
+		}
+		newData = fromJS(newData);
+		store.dispatch({
+			type: 'UPDATE_MARKET_GRAPH',
+			marketData: newData
+		});
+	});
+}
+
 updateMarkets();
-setInterval(updateMarkets, 86400000);
-//cron.schedule('0 0/1 * 1/1 * ? *', updateMarketData);
-
-var job = schedule.scheduleJob('*/1 * * * * *', updateMarketData);
-//setInterval(updateMarketData, ); //120000
-
+updateMarketData();
+var marketsJob = schedule.scheduleJob('0 0 * * * ', updateMarkets);
+var marketStatsJob = schedule.scheduleJob('*/15 * * * * *', updateMarketData);
+var marketGraphJob = schedule.scheduleJob('*/15 * * * *', updateMarketGraph);
 
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())

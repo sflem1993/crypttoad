@@ -10,7 +10,6 @@ export const MAX_SIZE = 10; //storing data every 15 seconds for 24 hour period
 
 const bittrex = new Bittrex();
 
-//returns promise
 export function getMarketData() {
 	return bittrex.publicGetMarketSummaries();
 }
