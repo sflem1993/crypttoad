@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export default class MarketStats extends React.PureComponent {
+export const MarketStats = class MarketStats extends React.PureComponent {
 	getDecimals() {
 		var decimals = 2;
 		if (this.props.selectedMarket !== 'BTC')
@@ -82,33 +82,6 @@ export default class MarketStats extends React.PureComponent {
 				</div>
 			</div>
 		</div>
-	{/*	 <div className="marketStats">
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Last</div>
-				<div className="marketStatsRowValue">{this.getLast()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Current Bid</div>
-				<div className="marketStatsRowValue">{this.getBid()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Current Ask</div>
-				<div className="marketStatsRowValue">{this.getAsk()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hour High</div>
-				<div className="marketStatsRowValue">{this.getHigh()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hour Low</div>
-				<div className="marketStatsRowValue">{this.getLow()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hours Ago</div>
-				<div className="marketStatsRowValue">{this.getPrevDay()}</div>
-			</div>
-		</div>
-	*/}
 	}
 }
 

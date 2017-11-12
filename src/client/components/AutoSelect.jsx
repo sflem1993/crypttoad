@@ -60,6 +60,9 @@ getSuggestions = value => {
 	    if (e.keyCode === 13) { // Enter
 	        e.preventDefault();
 	        e.stopPropagation();
+	        this.setState({
+      			value: ''
+    		});
 	       	return this.props.addSelectedMarket(e.target.value);
 	    }
 	}
@@ -81,6 +84,9 @@ getSuggestions = value => {
 
 	onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
 		if (method === 'click') {
+			this.setState({
+      			value: ''
+    		});
 			return this.props.addSelectedMarket(suggestionValue);
 		}
 	};

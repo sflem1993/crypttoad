@@ -1,5 +1,9 @@
 import {List, Map, fromJS} from 'immutable';
 
+import moment from 'moment';
+import 'moment-timezone';
+
+
 function updateMarkets(state, marketData) {
 	if (!state.has('marketData'))	{
 		return state.set("marketData", fromJS(marketData));
@@ -12,7 +16,7 @@ function updateMarkets(state, marketData) {
 		newState = state.set('counter', 1);
 		setPriceList = true;
 	} else {
-		counter = counter +1;
+		counter++;
 		if (counter == 2) {
 			newState = state.set('counter', 1);
 			setPriceList = true;
@@ -24,10 +28,16 @@ function updateMarkets(state, marketData) {
 		newState = newState.updateIn(['marketData', finalMarket, 'stats'], stats => marketData.get(finalMarket).get('stats'));
 		if (setPriceList) {
 			const size = finalMarketData.get('PriceList').size;
+			let time = moment().tz("EST").format("MMM D YYYY, h:mm A") + '  EST';
+			let decimals = 8;
+			if (finalMarket === 'BTC') {
+				decimals = 2;
+			}
+			let newDataPoint = marketData.get(finalMarket).get('stats').get('Last').toFixed(decimals);
 			if (size < 96) { //720
-				newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({price: marketData.get(finalMarket).get('stats').get('Last'), name: 'TESTER'}));
+				newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: newDataPoint}));
 			} else {
-				newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({price: marketData.get(finalMarket).get('stats').get('Last'), name: 'TESTER'}));
+				newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: newDataPoint}));
 			}
 		}
 	});

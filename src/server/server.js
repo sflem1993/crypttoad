@@ -90,7 +90,7 @@ updateMarkets();
 setInterval(updateMarkets, 86400000);
 //cron.schedule('0 0/1 * 1/1 * ? *', updateMarketData);
 
-var job = schedule.scheduleJob('*/15 * * * * *', updateMarketData);
+var job = schedule.scheduleJob('*/1 * * * * *', updateMarketData);
 //setInterval(updateMarketData, ); //120000
 
 

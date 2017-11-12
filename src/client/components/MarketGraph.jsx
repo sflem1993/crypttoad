@@ -5,43 +5,12 @@ import {ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Toolt
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-
 export const MarketGraph = class MarketGraph extends React.PureComponent {
 	getData() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
 			return this.props.marketData.get(this.props.selectedMarket).get('PriceList').toJS();
 		}
 		return [];
-	}
-	getFakeData() {
-		return [
-      {price: 0.00000904},
-      {price: 0.00000899},
-      {price: 0.00000903},
-      {price: 0.00000906},
-      {price: 0.00000909},
-      {price: 0.00000915},
-      {price: 0.00000945},
-      {price: 0.00000914},
-      {price: 0.00000919},
-      {price: 0.00000957},
-      {price: 0.00000910},
-      {price: 0.00000918},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000919},
-      {price: 0.00000832},
-      {price: 0.00000919},
-      {price: 0.00000919},
-
-];
 	}
 	getDomain() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
@@ -60,7 +29,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 			var interval = (max - min) / 4;
 			var tick1 = (min + interval)
 			var tick2 = (min + (2*interval));
-			var tick3 =(min + (3*interval));
+			var tick3 = (min + (3*interval));
 			var decimals = 0;
 			if (this.props.selectedMarket !== 'BTC')
 			{
@@ -97,7 +66,13 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		return <div className="marketGraph">
 			<ResponsiveContainer height="100%" width="100%">
     		<LineChart data={this.getData()}>
-			  	<XAxis tickSize={10} interval={3}  domain={this.getDomain()} strokeWidth={3} label="LAST 24 HOURS (15 MINUTE INTERVALS)" dataKey="name"/>
+			  	<XAxis
+			  		tickSize={10}
+			  		interval={3}
+			  		domain={this.getDomain()}
+			  		strokeWidth={3}
+			  		label="LAST 24 HOURS (15 MINUTE INTERVALS)"
+			  		dataKey="name" class/>
 		        <YAxis
 		        	type="number"
 		        	ticks={this.getTicks()}
@@ -105,11 +80,11 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		        	strokeWidth={3}
 					interval={0}
 		        >
-		        <Label value={this.getYAxisLabel()} position="bottom" angle={-15} offset={15}/>
+		        	<Label value={this.getYAxisLabel()} position="bottom" angle={-15} offset={15}/>
 		        </YAxis>
 		        <CartesianGrid vertical={false}/>
-		        <Tooltip/>
-		        <Line strokeWidth={3} type="monotone" dataKey="price" stroke="#e3e3e3" dot={false}/>
+		        <Tooltip itemStyle={{color: '#000000'}}/>
+		        <Line strokeWidth={3} type="monotone" dataKey="Price" stroke="#e3e3e3" dot={false}/>
 	      	</LineChart>
 			</ResponsiveContainer>
 		</div>
