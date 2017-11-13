@@ -1,50 +1,94 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
-export default class MarketStats extends React.PureComponent {
+export const MarketStats = class MarketStats extends React.PureComponent {
+	getDecimals() {
+		var decimals = 2;
+		if (this.props.selectedMarket !== 'BTC')
+		{
+			decimals = 8;
+		}
+		return decimals;
+	}
 	getLast() {
-		return this.props.stats.get('Last') || -99;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Last').toFixed(this.getDecimals());
+		}
+
+		return [];
 	}
 	getBid() {
-		return this.props.stats.get('Bid') || -99;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Bid').toFixed(this.getDecimals());
+		}
+
+		return [];
 	}
 	getAsk() {
-		return this.props.stats.get('Ask') || -99;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Ask').toFixed(this.getDecimals());
+		}
+
+		return [];
 	}
 	getHigh() {
-		return this.props.stats.get('High') || -99;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('High').toFixed(this.getDecimals());
+		}
+
+		return [];
 	}
 	getLow() {
-		return this.props.stats.get('Low') || -99;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low').toFixed(this.getDecimals());
+		}
+
+		return [];
 	}
 	getPrevDay() {
-		return this.props.stats.get('PrevDay') || -99;
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('PrevDay').toFixed(this.getDecimals());
+		}
+
+		return [];
 	}
 	render() {
-		return <div className="marketStats">
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Last</div>
-				<div className="marketStatsRowValue">{this.getLast()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Current Bid</div>
-				<div className="marketStatsRowValue">{this.getBid()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">Current Ask</div>
-				<div className="marketStatsRowValue">{this.getAsk()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hour High</div>
-				<div className="marketStatsRowValue">{this.getHigh()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hour Low</div>
-				<div className="marketStatsRowValue">{this.getLow()}</div>
-			</div>
-			<div className="marketStatsRow">
-				<div className="marketStatsRowLabel">24 Hours Ago</div>
-				<div className="marketStatsRowValue">{this.getPrevDay()}</div>
+		return <div className="marketStatsContainer">
+				<div className="marketStats">
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">LAST SOLD:</div>
+					<div className="marketStatsRowValue">{this.getLast()}</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">LAST BID:</div>
+					<div className="marketStatsRowValue">{this.getBid()}</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">LAST ASK:</div>
+					<div className="marketStatsRowValue">{this.getAsk()}</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">24 HOUR HIGH:</div>
+					<div className="marketStatsRowValue">{this.getHigh()}</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">24 HOUR LOW:</div>
+					<div className="marketStatsRowValue">{this.getLow()}</div>
+				</div>
+				<div className="marketStatsRow">
+					<div className="marketStatsRowLabel">24 HOURS AGO:</div>
+					<div className="marketStatsRowValue">{this.getPrevDay()}</div>
+				</div>
 			</div>
 		</div>
 	}
 }
+
+function mapStateToProps(state) {
+  return {
+    marketData: state.get('marketData')
+  };
+}
+
+export const MarketStatsContainer = connect(mapStateToProps, actionCreators)(MarketStats);

@@ -1,4 +1,5 @@
 html, body, #app, .crypttoad {
+	background-color: #345f4f;
 	height: 100%;
 	width: 100%;
 	padding: 0;
@@ -6,117 +7,291 @@ html, body, #app, .crypttoad {
 }
 
 .crypttoad {
+	background-color: #345f4f;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+}
+
+.footer {
+	flex: 1;
+	min-height: 30px;
+	max-height: 30px;
+}
+
+
+.main {
+	flex: 16;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 }
 
-.sidebar {
-	flex: 0 0 125px;
-	background-color: #345f4f;
-	font-family: verdana;
+.leftSide {
+	flex: 0 0 100px;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.page {
-	flex: 1;
-	display: flex;
-	flex-flow: column;
- }
-
-.marketOptions {
-	width: 100%;
-}
-
-select {
-	width: 100%;
+	flex-flow: column nowrap;
+	min-width: 150px;
 }
 
 .selectedMarkets {
-	width: 100%;
+	flex: 16;
 	display: flex;
-	flex-direction: column;
+	flex-flow: column nowrap;
+	align-content: space-between;
 }
 
 .selectedMarket {
-	width: 100%;
+	flex: 1;
 	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 160px;
 }
 
 .selectedMarketName {
-	flex: 0 0 75%;
+	color: white;
+	flex: 1;
+	padding: 0px 0px 0px 6px;
+	font-size: 30px;
+	font-family: verdana;
+}
+
+.logo {
+	flex: 1;
+	padding: 0px 0px 0px 2%;
+}
+
+.logoWrapper {
+	min-height: 92px;
+	max-height: 92px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+}
+
+.theToad {
+	flex: 16;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.theToad img {
+	width: 100%;
+}
+
+.top {
+	flex: 1;
+	padding: 0px 100px 0px 0px;
+}
+
+.mainPageInfo {
+	flex: 14;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.currencySelect {
+	flex: 2;
+	width: 100%;
+	padding: 5px 0px 0px 0px;
+	min-height: 95px;
+	max-height: 95px;
+	display: flex;
+	justify-content: center;
 }
 
 .selectedMarketButton {
-	flex: 0 0 25%;
+	margin: 5%;
 }
 
-
-.logo {
-	display: flex;
-	justify-content: center;
-	flex: 0 0 60px;
-		-color: #345f4f;
-}
-
-.mainPage {
-	display: flex;
-	flex-direction: column;
-	flex: 1
-}
-
-.market {
-	display: flex;
-	flex-direction: column;
+.autocorrect {
 	flex: 1;
 }
 
-.marketHeader {
+.markets {
+	flex: 16;
+	width: 100%;
 	display: flex;
-	justify-content: center;
+	flex-flow: column nowrap;
 }
 
-
-.marketInfo {
-	flex: 1 1 100px;
-
+.market {
+	flex: 1;
 	display: flex;
-	justify-content: space-around;
+	flex-flow: row nowrap;
+	padding: 1%;
+	min-height: 140px;
 }
 
 .marketGraph {
-	flex: 0 0 74%;
+	flex: 75%;
 	width: 0;
+	background-color: #345f4f;
+}
+
+.marketStatsContainer {
+	flex: 25%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	min-width: 270px;
 }
 
 .marketStats {
-	flex: 0 0 22%;
-	border-style: solid;
-    border-width: 0px 0px 2px 0px;
-	background-color: #e3e3e3;
-	font-family: verdana;
-	font-style: italic;
+	flex: 1;
+	padding : 3px;
+	width: 100%;
 	display: flex;
-	flex-flow: row wrap;
-	align-content: space-around;
+	flex-flow: column nowrap;
+	min-height: 140px;
 }
 
-.marketStatsRow{
-	font-size: 20px;
-
-	flex-basis: 100%;
-
+.marketStatsRow {
+	flex: 1;
 	display: flex;
 	flex-flow: row nowrap;
-	text-align: center;
+	color: white;
+	font-size: 18px;
+	align-items: flex-start;
 	justify-content: space-around;
+	min-width: 215px;
+	min-height: 20px;
+	font-family: verdana;
+	font-weight: 900;
 }
 
 .marketStatsRowLabel {
-	flex-basis: 30%;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: row nowrap;
+	min-width: 140px;
+	min-height: 22px;
+	font-size: 15px;
 }
 
-.marketStatsRowValue{
+.marketStatsRowValue {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	min-height: 22px;
+	align-items: center;
+	flex-flow: row nowrap;
+	min-width: 75px;
+}
 
+.xAxis .recharts-cartesian-axis-tick-value {
+	font-size: 0px;
+}
+
+.recharts-text {
+	font-size: 14px;
+	stroke: #e3e3e3;
+	stroke-width: 1;
+}
+.recharts-label {
+	font-size: 12px;
+}
+
+.recharts-tooltip-label {
+	font-size: 22px;
+	font-family: helvetica;
+}
+
+.recharts-tooltip-item-list {
+	display: flex;
+	justify-content: center;
+	font-family: helvetica;
+}
+
+.recharts-tooltip-item {
+	color: #000000;
+}
+
+ul {
+    list-style-type: none;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;v
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
+li {
+	font-size: 30px;
+	height: 40px;
+}
+
+.react-autosuggest__input {
+	width: 600px;
+	height: 45px;
+	padding: 5px 10px;
+	font-family: Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 30px;
+	text-align: center;
+	border: 0;
+	padding: 0;
+}
+
+.react-autosuggest__input--focused {
+	width: 600px;
+ 	outline: none;
+}
+
+.react-autosuggest__input--open {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	padding: 0;
+}
+
+.react-autosuggest__suggestions-container {
+	display: none;
+	padding: 0;
+}
+
+.react-autosuggest__suggestions-container--open {
+	border: 1px solid #aaa;
+	background-color: #e3e3e3;
+	font-family: Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	max-height: 70px;
+	overflow-y: scroll;
+	z-index: 2;
+
+	display: flex;
+}
+
+.react-autosuggest__suggestions-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	width: 100%;
+
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.react-autosuggest__suggestion {
+	cursor: pointer;
+	padding: 0px 0px 0px 10px;
+	flex: 1;
+}
+
+.react-autosuggest__suggestion--highlighted {
+	background-color: #ddd;
+}
+
+.react-autosuggest__container {
+	width: 600px;
 }

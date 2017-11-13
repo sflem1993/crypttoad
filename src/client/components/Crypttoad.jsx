@@ -1,16 +1,16 @@
 import React from 'react';
-import MarketSelect from './MarketSelect';
-import MainPage from './MainPage';
-
-import logo from './../img/frog1.png';
+import {LeftSidebarContainer} from './LeftSidebar';
+import {MainInfoContainer} from './MainInfo';
 
 export default class Crypttoad extends React.PureComponent {
+
 	render() {
 		return <div className="crypttoad">
-			<MarketSelect {...this.props} />
-			<div className="page">
-				<div className="logo"><img src={logo}/></div>
-				<MainPage {...this.props} />
+			<div className="main">
+				<LeftSidebarContainer {...this.props}/>
+				<MainInfoContainer {...this.props}/>
+			</div>
+			<div className="footer">
 			</div>
 		</div>
 	}

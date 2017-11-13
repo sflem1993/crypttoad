@@ -9,17 +9,16 @@ module.exports = {
     		exclude: /node_modules/,
       		loader: 'babel-loader',
       		query: {
-      			presets: ['react', 'es2015']
+      			presets: ['react', 'es2015', 'stage-2']
       		},
 
 		}, {
 			 test: /\.css$/,
      		 loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
-		},
-		      		{
-		    	test: /\.(png|jpg)$/,
-		    	loader: 'url-loader?limit=25000'
-		    }]
+		}, {
+	    	test: /\.(png|jpg|gif)$/,
+	    	loader: 'img-loader!url-loader?limit=25000'
+	    }]
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']

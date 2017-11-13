@@ -1,33 +1,35 @@
 import React from 'react';
+import {List} from 'immutable';
+import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
-export default class MarketSelect extends React.PureComponent {
+import close from './../resources/close.png';
+
+
+export const MarketSelect = class MarketSelect extends React.PureComponent {
 	getMarkets() {
-		return this.props.markets || [];
-	}
-
-	getSelectedMarkets() {
-		if (!this.props.marketInfo) return [];
-		return this.props.marketInfo.keySeq().toList();
+		return this.props.selectedMarkets || [];
 	}
 
 	render() {
-		return <div className="sidebar">
-			<div className="marketOptions">
-				<select>
-					<option></option>
-					{this.getMarkets().map(market =>
-						<option key={market}>{market}</option>
-					)}
-				</select>
-			</div>
-			<div className="selectedMarkets">
-				{this.getSelectedMarkets().map(selectedMarket =>
-					<div key={selectedMarket} className="selectedMarket">
-						<div className="selectedMarketName">{selectedMarket}</div>
-						<div className="selectedMarketButton">XXX</div>
-					</div>
-				)}
-			</div>
+		return <div className="selectedMarkets">
+			{this.getMarkets().map(selectedMarket =>
+				<div key={selectedMarket} className="selectedMarket">
+					<div className="selectedMarketName">{selectedMarket.toUpperCase()}</div>
+					<img
+						className="selectedMarketButton"
+						onClick={() => this.props.deleteSelectedMarket(selectedMarket)}
+						src={close}/>
+				</div>
+			)}
 		</div>
 	}
 }
+
+function mapStateToProps(state) {
+  return {
+    selectedMarkets: state.get('selectedMarkets')
+  };
+}
+
+export const MarketSelectContainer = connect(mapStateToProps, actionCreators)(MarketSelect);
