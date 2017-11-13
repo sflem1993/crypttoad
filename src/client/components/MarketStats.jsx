@@ -11,47 +11,37 @@ export const MarketStats = class MarketStats extends React.PureComponent {
 		}
 		return decimals;
 	}
+
+	getStat(statName){
+		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+			return this.props.marketData.get(this.props.selectedMarket).get('stats').get(statName).toFixed(this.getDecimals());
+		}
+
+		return [];
+	}
+
 	getLast() {
-		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Last').toFixed(this.getDecimals());
-		}
-
-		return [];
+		return this.getStat('Last');
 	}
+
 	getBid() {
-		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Bid').toFixed(this.getDecimals());
-		}
-
-		return [];
+		return this.getStat('Bid');
 	}
+
 	getAsk() {
-		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Ask').toFixed(this.getDecimals());
-		}
-
-		return [];
+		return this.getStat('Ask');
 	}
+
 	getHigh() {
-		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('High').toFixed(this.getDecimals());
-		}
-
-		return [];
+		return this.getStat('High');
 	}
+
 	getLow() {
-		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('Low').toFixed(this.getDecimals());
-		}
-
-		return [];
+		return this.getStat('Low');
 	}
-	getPrevDay() {
-		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get('PrevDay').toFixed(this.getDecimals());
-		}
 
-		return [];
+	getPrevDay() {
+		return this.getStat('PrevDay');
 	}
 	render() {
 		return <div className="marketStatsContainer">

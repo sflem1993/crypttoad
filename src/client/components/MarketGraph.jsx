@@ -78,8 +78,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		        	ticks={this.getTicks()}
 		        	domain={this.getDomain()}
 		        	strokeWidth={3}
-					interval={0}
-		        >
+					interval={0}>
 		        	<Label value={this.getYAxisLabel()} position="bottom" angle={-15} offset={15}/>
 		        </YAxis>
 		        <CartesianGrid vertical={false}/>
@@ -88,8 +87,6 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 	      	</LineChart>
 			</ResponsiveContainer>
 		</div>
-
-
 	}
 }
 
