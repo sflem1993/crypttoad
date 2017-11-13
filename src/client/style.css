@@ -31,7 +31,6 @@ html, body, #app, .crypttoad {
 	flex: 0 0 150px;
 	display: flex;
 	flex-flow: column nowrap;
-	min-width: 150px;
 }
 
 .rightTopMenu {
@@ -210,6 +209,14 @@ html, body, #app, .crypttoad {
 @media (max-width: 600px) {
 	.recharts-text {
 		font-size: 12px;
+	}
+
+	.leftSide {
+		flex: 0 0 75px;
+	}
+
+	.rightTopMenu {
+		flex: 0 0 75px;
 	}
 }
 .recharts-label {
