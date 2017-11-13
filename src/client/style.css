@@ -155,7 +155,7 @@ html, body, #app, .crypttoad {
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	min-width: 270px;
+	min-width: 480px;
 }
 
 .marketStats {
@@ -174,14 +174,14 @@ html, body, #app, .crypttoad {
 	font-size: 18px;
 	align-items: center;
 	justify-content: space-around;
-	min-width: 215px;
+	min-width: 480px;
 	min-height: 20px;
 	font-family: verdana;
 	font-weight: 900;
 }
 
 .marketStatsRowLabel {
-	flex: 1;
+	flex: 2;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -192,13 +192,13 @@ html, body, #app, .crypttoad {
 }
 
 .marketStatsRowValue {
-	flex: 1;
+	flex: 4;
 	display: flex;
 	justify-content: center;
 	min-height: 24px;
 	align-items: center;
 	flex-flow: row nowrap;
-	min-width: 75px;
+	min-width: 340px;
 }
 
 .xAxis .recharts-cartesian-axis-tick-value {
