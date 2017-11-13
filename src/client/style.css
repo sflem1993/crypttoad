@@ -218,6 +218,10 @@ html, body, #app, .crypttoad {
 	.rightTopMenu {
 		flex: 0 0 75px;
 	}
+
+	.react-autosuggest__container .react-autosuggest__input .react-autosuggest__input--focused{
+		width: 450px;
+	}
 }
 .recharts-label {
 	font-size: 8px;
