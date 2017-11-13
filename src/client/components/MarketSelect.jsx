@@ -3,7 +3,7 @@ import {List} from 'immutable';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-import close from './../img/close.png';
+import close from './../resources/close.png';
 
 
 export const MarketSelect = class MarketSelect extends React.PureComponent {

@@ -7,7 +7,7 @@
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm run test -- --watch",
     "start": "babel-node src/server/server.js",
-    "build": "cp src/client/index.html dist/index.html"
+    "build": "cp -r src/client/resources/. dist"
   },
   "babel": {
     "presets": [

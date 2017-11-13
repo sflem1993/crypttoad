@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {MarketGraphContainer} from './MarketGraph';
 import {MarketStatsContainer} from './MarketStats';
 import * as actionCreators from '../action_creators';
-import logo from './../img/logo.gif';
+import logo from './../resources/logo.gif';
 
 export const Markets = class Markets extends React.PureComponent {
 	getMarkets() {

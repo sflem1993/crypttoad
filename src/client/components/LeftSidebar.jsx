@@ -1,6 +1,6 @@
 import React from 'react';
 import {MarketSelectContainer} from './MarketSelect';
-import logo from './../img/logo.gif';
+import logo from './../resources/logo.gif';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 

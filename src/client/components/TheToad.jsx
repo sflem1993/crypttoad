@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from './../img/logo.gif';
+import logo from './../resources/logo.gif';
 
 export default class TheToad extends React.PureComponent {
 
