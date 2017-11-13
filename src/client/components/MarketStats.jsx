@@ -45,31 +45,31 @@ export const MarketStats = class MarketStats extends React.PureComponent {
 	}
 	render() {
 		return <div className="marketStatsContainer">
-				<div className="marketStats">
-				<div className="marketStatsRow">
-					<div className="marketStatsRowLabel">LAST SOLD:</div>
-					<div className="marketStatsRowValue">{this.getLast()}</div>
-				</div>
-				<div className="marketStatsRow">
-					<div className="marketStatsRowLabel">LAST BID:</div>
-					<div className="marketStatsRowValue">{this.getBid()}</div>
-				</div>
-				<div className="marketStatsRow">
-					<div className="marketStatsRowLabel">LAST ASK:</div>
-					<div className="marketStatsRowValue">{this.getAsk()}</div>
-				</div>
-				<div className="marketStatsRow">
-					<div className="marketStatsRowLabel">24 HOUR HIGH:</div>
-					<div className="marketStatsRowValue">{this.getHigh()}</div>
-				</div>
-				<div className="marketStatsRow">
-					<div className="marketStatsRowLabel">24 HOUR LOW:</div>
-					<div className="marketStatsRowValue">{this.getLow()}</div>
-				</div>
-				<div className="marketStatsRow">
-					<div className="marketStatsRowLabel">24 HOURS AGO:</div>
-					<div className="marketStatsRowValue">{this.getPrevDay()}</div>
-				</div>
+			<div className="marketStats">
+					<div className="marketStatsRow">
+						<div className="marketStatsRowLabel">LAST SOLD:</div>
+						<div className="marketStatsRowValue">{this.getLast()}</div>
+					</div>
+					<div className="marketStatsRow">
+						<div className="marketStatsRowLabel">LAST BID:</div>
+						<div className="marketStatsRowValue">{this.getBid()}</div>
+					</div>
+					<div className="marketStatsRow">
+						<div className="marketStatsRowLabel">LAST ASK:</div>
+						<div className="marketStatsRowValue">{this.getAsk()}</div>
+					</div>
+					<div className="marketStatsRow">
+						<div className="marketStatsRowLabel">24 HOUR HIGH:</div>
+						<div className="marketStatsRowValue">{this.getHigh()}</div>
+					</div>
+					<div className="marketStatsRow">
+						<div className="marketStatsRowLabel">24 HOUR LOW:</div>
+						<div className="marketStatsRowValue">{this.getLow()}</div>
+					</div>
+					<div className="marketStatsRow">
+						<div className="marketStatsRowLabel">24 HOURS AGO:</div>
+						<div className="marketStatsRowValue">{this.getPrevDay()}</div>
+					</div>
 			</div>
 		</div>
 	}
