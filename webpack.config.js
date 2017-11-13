@@ -1,3 +1,5 @@
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+
 module.exports = {
 	entry: [
 		'./src/client/index.jsx'
@@ -31,4 +33,9 @@ module.exports = {
 	devServer: {
 		contentBase: './dist'
 	},
+	plugins: [
+    	new UglifyJSPlugin({
+    		include: /\.(js|jsx|css)$/,
+    	}),
+  	]
 };
