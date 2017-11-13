@@ -206,9 +206,9 @@ html, body, #app, .crypttoad {
 	stroke-width: 1;
 }
 
-@media (max-device-width: 500px) {
+@media (max-device-width: 500px) and (max-device-height: 400px) {
 	.recharts-text {
-		font-size: 12px;
+		font-size: 10px;
 	}
 
 	.leftSide {
