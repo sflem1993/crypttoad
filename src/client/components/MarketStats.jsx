@@ -14,7 +14,19 @@ export const MarketStats = class MarketStats extends React.PureComponent {
 
 	getStat(statName){
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			return this.props.marketData.get(this.props.selectedMarket).get('stats').get(statName).toFixed(this.getDecimals());
+			var rawData = this.props.marketData.get(this.props.selectedMarket).get('stats').get(statName).toFixed(this.getDecimals());
+			var priceBTC = this.props.marketData.get('BTC').get('stats').get('Last');
+			var format = '';
+			if (this.props.selectedMarket !== 'BTC') {
+				format =  ' BTC';
+				var priceMarketInBTC = priceBTC * rawData;
+				if (priceMarketInBTC > .01) {
+					format = format + ' ($' + priceMarketInBTC.toFixed(2) + ')';
+				}
+			} else {
+				return '$' + rawData;
+			}
+			return rawData + format
 		}
 
 		return [];
