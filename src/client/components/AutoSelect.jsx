@@ -32,25 +32,22 @@ export const AutoSelect = class AutoSelect extends React.PureComponent {
 
 	handleKeyDown(event) {
 		if (e.keyCode === 13) { // Enter
-	        // Stop it here
 	        e.preventDefault();
 	        e.stopPropagation();
 	       	return this.props.addSelectedMarket(e.target.value);
-	        // Do something else...
 	    }
 	}
 // Teach Autosuggest how to calculate suggestions for any given input value.
 getSuggestions = value => {
-	  const inputValue = value.trim().toLowerCase();
-	  const inputLength = inputValue.length;
+	const inputValue = value.trim().toLowerCase();
+	const inputLength = inputValue.length;
 
-	  return inputLength === 0 ? [] : this.getMarkets().filter(market =>
-	   market.marketCurrency.toLowerCase().slice(0, inputLength) === inputValue || market.marketCurrencyLong.toLowerCase().slice(0, inputLength) === inputValue
-	  );
+	return inputLength === 0 ? [] : this.getMarkets().filter(market =>
+	  	market.marketCurrency.toLowerCase().slice(0, inputLength) === inputValue || market.marketCurrencyLong.toLowerCase().slice(0, inputLength) === inputValue
+	);
 };
 
 	onChange = (event, { newValue }) => {
-
     	this.setState({
       	value: newValue
     	});
