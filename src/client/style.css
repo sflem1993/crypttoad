@@ -13,12 +13,6 @@ html, body, #app, .crypttoad {
 	justify-content: space-between;
 }
 
-.footer {
-	flex: 1;
-	min-height: 30px;
-	max-height: 30px;
-}
-
 .main {
 	flex: 16;
 	display: flex;
@@ -72,7 +66,6 @@ html, body, #app, .crypttoad {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-
 }
 
 .theToad {
@@ -101,7 +94,6 @@ html, body, #app, .crypttoad {
 	flex-flow: column;
 	align-items: center;
 	justify-content: space-between;
-
 }
 
 .currencySelect {
