@@ -30,6 +30,7 @@ html, body, #app, .crypttoad {
 .leftSide {
 	flex: 0 0 150px;
 	display: flex;
+	height: 100%;
 	flex-flow: column nowrap;
 }
 
@@ -39,6 +40,7 @@ html, body, #app, .crypttoad {
 
 .selectedMarkets {
 	flex: 16;
+	height: 100%;
 	display: flex;
 	flex-flow: column nowrap;
 	align-content: space-between;
@@ -51,6 +53,7 @@ html, body, #app, .crypttoad {
 	justify-content: space-between;
 	align-items: center;
 	min-height: 160px;
+	padding: 1%;
 }
 
 .selectedMarketName {
@@ -67,8 +70,8 @@ html, body, #app, .crypttoad {
 }
 
 .logoWrapper {
-	min-height: 92px;
-	max-height: 92px;
+	min-height: 115px;
+	max-height: 115px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -76,19 +79,23 @@ html, body, #app, .crypttoad {
 }
 
 .theToad {
-	flex: 16;
-	width: 100%;
+	flex: 12;
+	width: 50%;
+	height: 50%;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 
 .theToad img {
-	width: 100%;
+	width: 50%;
+	height: 50%;
 }
 
 .top {
 	width: 100%;
 	flex: 1;
+	min-height: 115px;
 }
 
 .topStuff {
@@ -101,15 +108,14 @@ html, body, #app, .crypttoad {
 	flex-flow: column;
 	align-items: center;
 	justify-content: space-between;
-
 }
 
 .currencySelect {
 	flex: 2;
 	width: 100%;
 	padding: 5px 0px 0px 0px;
-	min-height: 95px;
-	max-height: 95px;
+	min-height: 110px;
+	max-height: 110px;
 	display: flex;
 	justify-content: center;
 }
@@ -134,12 +140,12 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-flow: row nowrap;
 	padding: 1%;
-	min-height: 140px;
+	min-height: 150px;
 }
 
 .marketGraph {
 	flex: 75%;
-	width: 0;
+	width: 0; /* this is needed for the responsive container for the graph to expand correctly */
 	background-color: #345f4f;
 }
 
@@ -154,11 +160,10 @@ html, body, #app, .crypttoad {
 
 .marketStats {
 	flex: 1;
-	padding : 3px;
+	padding: 0px 0px 4px 0px;
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
-	min-height: 140px;
 }
 
 .marketStatsRow {
@@ -167,7 +172,7 @@ html, body, #app, .crypttoad {
 	flex-flow: row nowrap;
 	color: white;
 	font-size: 18px;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-around;
 	min-width: 215px;
 	min-height: 20px;
@@ -182,7 +187,7 @@ html, body, #app, .crypttoad {
 	align-items: center;
 	flex-flow: row nowrap;
 	min-width: 140px;
-	min-height: 22px;
+	min-height: 24px;
 	font-size: 15px;
 }
 
@@ -190,7 +195,7 @@ html, body, #app, .crypttoad {
 	flex: 1;
 	display: flex;
 	justify-content: center;
-	min-height: 22px;
+	min-height: 24px;
 	align-items: center;
 	flex-flow: row nowrap;
 	min-width: 75px;
@@ -206,7 +211,7 @@ html, body, #app, .crypttoad {
 	stroke-width: 1;
 }
 
-@media screen and (max-device-width: 500px), screen and (max-device-height: 400px) {
+@media screen and (max-device-width: 500px), screen and (max-device-height: 500px) {
 	.recharts-text {
 		font-size: 10px;
 	}
@@ -224,7 +229,7 @@ html, body, #app, .crypttoad {
 	}
 }
 .recharts-label {
-	font-size: 8px;
+	font-size: 12px;
 }
 
 .recharts-tooltip-label {
