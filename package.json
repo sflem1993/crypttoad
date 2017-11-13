@@ -4,9 +4,8 @@
   "description": "interactive charts for comparing different cryptocurrencies",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --recursive",
-    "test:watch": "npm run test -- --watch",
     "start": "babel-node src/server/server.js",
+    "start-prod": "NODE_ENV=production babel-node src/server/server.js",
     "build": "cp -r src/client/resources/. dist"
   },
   "browserslist": [
