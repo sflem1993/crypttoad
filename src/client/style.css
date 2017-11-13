@@ -208,7 +208,7 @@ html, body, #app, .crypttoad {
 
 @media (max-device-width: 500px) {
 	.recharts-text {
-		font-size: 12px;
+		font-size: 10px;
 	}
 
 	.leftSide {
