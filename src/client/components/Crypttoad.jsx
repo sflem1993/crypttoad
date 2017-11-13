@@ -10,8 +10,6 @@ export default class Crypttoad extends React.PureComponent {
 				<LeftSidebarContainer {...this.props}/>
 				<MainInfoContainer {...this.props}/>
 			</div>
-			<div className="footer">
-			</div>
 		</div>
 	}
 }

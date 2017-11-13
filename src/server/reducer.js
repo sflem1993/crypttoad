@@ -1,8 +1,6 @@
 import {List, Map, fromJS} from 'immutable';
-
 import moment from 'moment';
 import 'moment-timezone';
-
 
 function updateMarkets(state, marketData) {
 	if (!state.has('marketData'))	{
@@ -10,7 +8,6 @@ function updateMarkets(state, marketData) {
 	}
 	var newState = state;
 	var data = state.get('marketData');
-
 	var finalMarketData = data.mapEntries(([finalMarket, finalMarketData]) => {
 		newState = newState.updateIn(['marketData', finalMarket, 'stats'], stats => marketData.get(finalMarket).get('stats'));
 	});

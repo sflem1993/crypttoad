@@ -34,6 +34,5 @@ export default function(state = Map(), action) {
 		case 'DELETE_SELECTED_MARKET':
 			return deleteSelectedMarket(state, action.selectedMarket);
 	}
-
 	return state;
 }

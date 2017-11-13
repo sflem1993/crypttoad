@@ -1,3 +1,5 @@
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+
 module.exports = {
 	entry: [
 		'./src/client/index.jsx'
@@ -14,7 +16,7 @@ module.exports = {
 
 		}, {
 			 test: /\.css$/,
-     		 loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
+     		 loader: 'style-loader!css-loader!postcss-loader'
 		}, {
 	    	test: /\.(png|jpg|gif)$/,
 	    	loader: 'img-loader!url-loader?limit=25000'
@@ -31,4 +33,9 @@ module.exports = {
 	devServer: {
 		contentBase: './dist'
 	},
+	plugins: [
+    	new UglifyJSPlugin({
+    		include: /\.(js|jsx|css)$/,
+    	}),
+  	]
 };

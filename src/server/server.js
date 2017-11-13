@@ -21,15 +21,13 @@ app.get('/', (req, res) => {
 app.use('/dist', express.static(path.resolve(__dirname + '/../../dist')));
 
 const server2 = app.listen(9000, () => {
-  let port = server2.address().port;
-  console.log(`Server running at http://localhost:${port}`);
+	let port = server2.address().port;
 });
 
 function updateMarkets() {
 	updateMarketList().then((response) => {
 		const currencies = response.result;
 		var autoselectCurrencies = [];
-
 		for (let i = 0; i < currencies.length; i++) {
 			let currency = currencies[i];
 			if (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC') {
@@ -42,7 +40,6 @@ function updateMarkets() {
 				});
 			}
 		}
-
 		autoselectCurrencies.sort(function(a,b) {
     		var x = a.marketCurrencyLong.toLowerCase();
    			 var y = b.marketCurrencyLong.toLowerCase();
@@ -105,7 +102,6 @@ function updateMarketGraph() {
 				formattedStats.Low = market.Low;
 				formattedStats.High = market.High;
 				currencyData.graphDomain = formattedStats;
-
 				newData[formattedMarketName] = currencyData;
 			}
 		}
