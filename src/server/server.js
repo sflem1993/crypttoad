@@ -101,7 +101,7 @@ function updateMarketData() {
 								let graphDomain = {};
 								graphDomain.Low = market.Low;
 								graphDomain.High = market.High;
-								currencyData.PriceList = [{}];
+								currencyData.PriceList = [];
 								currencyData.stats = formattedStats;
 								currencyData.graphDomain = graphDomain;
 								newData[formattedMarketName] = currencyData;
