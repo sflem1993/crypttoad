@@ -27,7 +27,7 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 			var max = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('High');
 
 			var interval = (max - min) / 4;
-			var tick1 = (min + interval)
+			var tick1 = (min + interval);
 			var tick2 = (min + (2*interval));
 			var tick3 = (min + (3*interval));
 			var decimals = 0;

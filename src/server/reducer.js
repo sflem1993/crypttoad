@@ -24,11 +24,18 @@ function updateMarketGraph(state) {
 		if (market === 'BTC') {
 			decimals = 2;
 		}
-		let newDataPoint = marketData.get('stats').get('Last').toFixed(decimals);
-		if (size < 96) {
-			data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: newDataPoint}));
-		} else {
-			data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: newDataPoint}));
+		let newDataPoint = marketData.get('stats').get('Last');
+		let newGraphMin = marketData.get('stats').get('Low');
+		let newGraphMax = marketData.get('stats').get('High');
+		if (newDataPoint > 0 && newGraphMin > 0 && newGraphMax > 0) {
+			let formattedDataPoint = newDataPoint.toFixed(decimals);
+			let graphDomain = {Low: newGraphMin, High: newGraphMax};
+			data = data.setIn([market, 'graphDomain'], marketData => graphDomain);
+			if (size < 96) {
+				data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: formattedDataPoint}));
+			} else {
+				data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: formattedDataPoint}));
+			}
 		}
 	});
 	newState = newState.set('marketData', data);
