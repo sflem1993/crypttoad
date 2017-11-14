@@ -32,7 +32,7 @@ function updateMarkets() {
 	updateMarketList().then((response) => {
 		if (response) {
 			const currencies = response.result;
-			if (currencies) {
+			if (currencies && currencies.length) {
 				let autoselectCurrencies = [];
 				for (let i = 0; i < currencies.length; i++) {
 					let currency = currencies[i];
@@ -87,7 +87,7 @@ function updateMarketData() {
 	getMarketData().then((response) => {
 		if (response) {
 			const markets = response.result;
-			if (markets) {
+			if (markets && markets.length) {
 				var newData = {};
 				for (let i = 0; i < markets.length; i++) {
 					let market = markets[i];
