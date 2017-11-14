@@ -30,7 +30,7 @@ function updateMarketGraph(state) {
 		if (newDataPoint > 0 && newGraphMin > 0 && newGraphMax > 0) {
 			let formattedDataPoint = newDataPoint.toFixed(decimals);
 			let graphDomain = {Low: newGraphMin, High: newGraphMax};
-			data = data.setIn([market, 'graphDomain'], marketData => graphDomain);
+			data = data.setIn([market, 'graphDomain'], graphDomain);
 			if (size < 96) {
 				data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: formattedDataPoint}));
 			} else {
