@@ -40,12 +40,18 @@ export const AutoSelect = class AutoSelect extends React.PureComponent {
 
 	// Teach Autosuggest how to calculate suggestions for any given input value.
 	getSuggestions = value => {
-		const inputValue = value.trim().toLowerCase();
-		const inputLength = inputValue.length;
+		if (value) {
+			const inputValue = value.trim().toLowerCase();
+			if (inputLength) {
+				const inputLength = inputValue.length;
 
-		return inputLength === 0 ? [] : this.getMarkets().filter(market =>
-		  	market.marketCurrency.toLowerCase().slice(0, inputLength) === inputValue || market.marketCurrencyLong.toLowerCase().slice(0, inputLength) === inputValue
-		);
+				return inputLength === 0 ? [] : this.getMarkets().filter(market =>
+				  	market.marketCurrency.toLowerCase().slice(0, inputLength) === inputValue || market.marketCurrencyLong.toLowerCase().slice(0, inputLength) === inputValue
+				);
+			}
+		}
+
+		return [];
 	};
 
 	onChange = (event, { newValue }) => {

@@ -24,15 +24,19 @@ const server2 = app.listen(9000, () => {
 	let port = server2.address().port;
 });
 
+function errorHandler(error) {
+    console.log("Error reached: " + error);
+}
+
 function updateMarkets() {
 	updateMarketList().then((response) => {
 		if (response) {
 			const currencies = response.result;
-			if (currencies) {
+			if (currencies && currencies.length) {
 				let autoselectCurrencies = [];
 				for (let i = 0; i < currencies.length; i++) {
 					let currency = currencies[i];
-					if (currency && currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC') {
+					if (currency && currency.MarketCurrencyLong && (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC')) {
 						autoselectCurrencies.push({
 							marketCurrency: currency.MarketCurrency,
 							marketCurrencyLong: currency.MarketCurrencyLong,
@@ -53,9 +57,7 @@ function updateMarkets() {
 				});
 			}
 		}
-	}).catch((error) => {
-  		// market list won't change much, so just skip this update on error
-	});
+	}).catch(errorHandler);
 }
 
 function validateDataPoint(stat, market, formattedStats) {
@@ -85,7 +87,7 @@ function updateMarketData() {
 	getMarketData().then((response) => {
 		if (response) {
 			const markets = response.result;
-			if (markets) {
+			if (markets && markets.length) {
 				var newData = {};
 				for (let i = 0; i < markets.length; i++) {
 					let market = markets[i];
@@ -114,9 +116,7 @@ function updateMarketData() {
 				});
 			}
 		}
-	}).catch((error) => {
-  		// market data updates every 15 seconds, just skip on error
-	});
+	}).catch(errorHandler);
 }
 
 function updateMarketGraph() {
