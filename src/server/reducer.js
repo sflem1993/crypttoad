@@ -17,18 +17,18 @@ function updateMarkets(state, marketData) {
 function updateMarketGraph(state) {
 	var newState = state;
 	var data = state.get('marketData');
-	data.mapEntries(([finalMarket, finalMarketData]) => {
-		const size = finalMarketData.get('PriceList').size;
+	data.mapEntries(([market, marketData]) => {
+		const size = marketData.get('PriceList').size;
 		let time = moment().tz("EST").format("MMM D YYYY, h:mm A") + '  EST';
 		let decimals = 8;
-		if (finalMarket === 'BTC') {
+		if (market === 'BTC') {
 			decimals = 2;
 		}
-		let newDataPoint = finalMarketData.get('stats').get('Last').toFixed(decimals);
+		let newDataPoint = marketData.get('stats').get('Last').toFixed(decimals);
 		if (size < 96) {
-			data = data.updateIn([finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: newDataPoint}));
+			data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: newDataPoint}));
 		} else {
-			data = data.updateIn([finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: newDataPoint}));
+			data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: newDataPoint}));
 		}
 	});
 	newState = newState.set('marketData', data);

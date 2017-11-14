@@ -75,8 +75,6 @@ const stats = List.of('Last', 'PrevDay', 'Bid', 'Ask', 'High', 'Low');
 function validateAndFormatData(market) {
 	let formattedStats = {};
 	formattedStats.validData = false;
-	formattedStats.PriceList=[{}];
-
 	if (market) {
 		stats.map(stat => validateDataPoint(stat, market, formattedStats));
 	}
@@ -117,7 +115,7 @@ function updateMarketData() {
 			}
 		}
 	}).catch((error) => {
-  		//this updates every 15 seconds, just skip on error
+  		// market data updates every 15 seconds, just skip on error
 	});
 }
 
@@ -129,9 +127,9 @@ function updateMarketGraph() {
 
 updateMarkets();
 updateMarketData();
-var marketsJob = schedule.scheduleJob('0 0 * * * ', updateMarkets);
-var marketStatsJob = schedule.scheduleJob('*/3 * * * * *', updateMarketData);
-var marketGraphJob = schedule.scheduleJob('*/4 * * * * *', updateMarketGraph);
+var marketsJob = schedule.scheduleJob('30 */4 * * * ', updateMarkets);
+var marketStatsJob = schedule.scheduleJob('*/15 * * * * *', updateMarketData);
+var marketGraphJob = schedule.scheduleJob('10 */15 * * * *', updateMarketGraph);
 
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
