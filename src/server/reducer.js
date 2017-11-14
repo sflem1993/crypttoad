@@ -26,11 +26,12 @@ function updateMarketGraph(state) {
 		}
 		let newDataPoint = finalMarketData.get('stats').get('Last').toFixed(decimals);
 		if (size < 96) {
-			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: newDataPoint}));
+			data = data.updateIn([finalMarket, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: newDataPoint}));
 		} else {
-			newState = newState.updateIn(['marketData', finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: newDataPoint}));
+			data = data.updateIn([finalMarket, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: newDataPoint}));
 		}
 	});
+	newState = newState.set('marketData', data);
 	return newState;
 }
 

@@ -122,24 +122,6 @@ function updateMarketData() {
 }
 
 function updateMarketGraph() {
-	// getMarketData().then((response) => {
-	// 	const markets = response.result;
-	// 	var newData = {};
-	// 	for (let i = 0; i < markets.length; i++) {
-	// 		let market = markets[i];
-	// 		var formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
-	// 		var formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
-	// 		if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
-	// 			var currencyData = {};
-	// 			var formattedStats = {};
-	// 			currencyData.Last = market.Last;
-	// 			formattedStats.Low = market.Low;
-	// 			formattedStats.High = market.High;
-	// 			currencyData.graphDomain = formattedStats;
-	// 			newData[formattedMarketName] = currencyData;
-	// 		}
-	// 	}
-	// 	newData = fromJS(newData);
 	store.dispatch({
 		type: 'UPDATE_MARKET_GRAPH',
 	});
