@@ -22,7 +22,6 @@ const selectedMarkets = List(['BTC']);
 
 store.dispatch(setSelectedMarkets(selectedMarkets));
 
-
 ReactDOM.render(
       <Provider store={store}>
 	     <Crypttoad/>
