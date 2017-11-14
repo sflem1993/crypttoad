@@ -42,7 +42,7 @@ export const AutoSelect = class AutoSelect extends React.PureComponent {
 	getSuggestions = value => {
 		if (value) {
 			const inputValue = value.trim().toLowerCase();
-			if (inputLength) {
+			if (inputValue && inputValue.length) {
 				const inputLength = inputValue.length;
 
 				return inputLength === 0 ? [] : this.getMarkets().filter(market =>
