@@ -20,9 +20,7 @@ export const MarketStats = class MarketStats extends React.PureComponent {
 			if (this.props.selectedMarket !== 'BTC') {
 				format =  ' BTC';
 				var priceMarketInBTC = priceBTC * rawData;
-				if (priceMarketInBTC > .01) {
-					format = format + ' ($' + priceMarketInBTC.toFixed(2) + ')';
-				}
+				format = format + ' ($' + priceMarketInBTC.toFixed(2) + ')';
 			} else {
 				return '$' + rawData;
 			}
