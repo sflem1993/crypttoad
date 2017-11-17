@@ -2,6 +2,10 @@ import {List, Map, fromJS} from 'immutable';
 import moment from 'moment';
 import 'moment-timezone';
 
+const MAX_DATA_POINTS= 97;
+const BTC_BASE_CURRENCY_DECIMALS = 8;
+const USDT_BASE_CURRENCY_DECIMALS = 2;
+
 function updateMarkets(state, marketData) {
 	if (!state.has('marketData'))	{
 		return state.set("marketData", fromJS(marketData));
@@ -20,9 +24,9 @@ function updateMarketGraph(state) {
 	data.mapEntries(([market, marketData]) => {
 		const size = marketData.get('PriceList').size;
 		let time = moment().tz("EST").format("MMM D YYYY, h:mm A") + '  EST';
-		let decimals = 8;
+		let decimals = BTC_BASE_CURRENCY_DECIMALS;
 		if (market === 'BTC') {
-			decimals = 2;
+			decimals = USDT_BASE_CURRENCY_DECIMALS;
 		}
 		let newDataPoint = marketData.get('stats').get('Last');
 		let newGraphMin = marketData.get('stats').get('Low');
@@ -31,7 +35,7 @@ function updateMarketGraph(state) {
 			let formattedDataPoint = newDataPoint.toFixed(decimals);
 			let graphDomain = {Low: newGraphMin, High: newGraphMax};
 			data = data.setIn([market, 'graphDomain'], graphDomain);
-			if (size < 96) {
+			if (size < MAX_DATA_POINTS) {
 				data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: formattedDataPoint}));
 			} else {
 				data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: formattedDataPoint}));
