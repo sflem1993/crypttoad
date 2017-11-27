@@ -141,11 +141,13 @@ html, body, #app, .crypttoad {
 	flex-flow: row nowrap;
 	padding: 1%;
 	min-height: 150px;
+	min-width: 780px;
 }
 
 .marketGraph {
 	flex: 75%;
 	width: 0; /* this is needed for the responsive container for the graph to expand correctly */
+	min-width: 0;
 	background-color: #345f4f;
 }
 
