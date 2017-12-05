@@ -24,10 +24,6 @@ const server2 = app.listen(9000, () => {
 	let port = server2.address().port;
 });
 
-function errorHandler(error) {
-    console.log("Error reached: " + error);
-}
-
 function updateMarkets() {
 	updateMarketList().then((response) => {
 		if (response) {
@@ -57,7 +53,9 @@ function updateMarkets() {
 				});
 			}
 		}
-	}).catch(errorHandler);
+	}).catch(err => {
+		console.log("Failed updating the currencies");
+	});
 }
 
 function validateDataPoint(stat, market, formattedStats) {
@@ -116,7 +114,9 @@ function updateMarketData() {
 				});
 			}
 		}
-	}).catch(errorHandler);
+	}).catch(err => {
+		console.log("Failed updating the data");
+	});
 }
 
 function updateMarketGraph() {
