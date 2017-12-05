@@ -24,15 +24,11 @@ const server2 = app.listen(9000, () => {
 	let port = server2.address().port;
 });
 
-function errorHandler(error) {
-    console.log("Error reached: " + error);
-}
-
 function updateMarkets() {
 	updateMarketList().then((response) => {
 		if (response) {
 			const currencies = response.result;
-			if (currencies && currencies.length) {
+			if (currencies) {
 				let autoselectCurrencies = [];
 				for (let i = 0; i < currencies.length; i++) {
 					let currency = currencies[i];
@@ -57,7 +53,9 @@ function updateMarkets() {
 				});
 			}
 		}
-	}).catch(errorHandler);
+	}).catch(err => {
+		console.log("Failed updating the currencies");
+	});
 }
 
 function validateDataPoint(stat, market, formattedStats) {
@@ -87,7 +85,7 @@ function updateMarketData() {
 	getMarketData().then((response) => {
 		if (response) {
 			const markets = response.result;
-			if (markets && markets.length) {
+			if (markets) {
 				var newData = {};
 				for (let i = 0; i < markets.length; i++) {
 					let market = markets[i];
@@ -116,7 +114,9 @@ function updateMarketData() {
 				});
 			}
 		}
-	}).catch(errorHandler);
+	}).catch(err => {
+		console.log("Failed updating the data");
+	});
 }
 
 function updateMarketGraph() {
