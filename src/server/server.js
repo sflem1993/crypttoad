@@ -118,6 +118,15 @@ function updateMarketData() {
 		console.log("Failed updating the data");
 	});
 }
+/*
+	Keep getting a enetunreach error,I believe originating from the bittrex-wrapper api.
+	Temp fix here - gonna rework app to remove bittrex-wrapper and write http requests myself
+ */
+process.on('unhandledRejection', (reason, p) => {
+    console.error(reason, 'Unhandled Rejection at Promise', p);
+ }).on('uncaughtException', err => {
+    console.error(err, 'Uncaught Exception thrown');
+});
 
 function updateMarketGraph() {
 	store.dispatch({
