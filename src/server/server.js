@@ -5,7 +5,7 @@ import http from 'http';
 import io from 'socket.io';
 import schedule from 'node-schedule';
 import {updateMarketList, getMarketData} from './data';
-
+import https from 'https';
 export const store = makeStore();
 const app = express();
 const server = http.createServer(app);
@@ -65,7 +65,6 @@ function validateDataPoint(stat, market, formattedStats) {
 	} else {
 		return formattedStats;
 	}
-
 	formattedStats.validData = true;
 	return formattedStats;
 }
@@ -81,52 +80,58 @@ function validateAndFormatData(market) {
 	return formattedStats;
 }
 
-function updateMarketData() {
-	getMarketData().then((response) => {
-		if (response) {
-			const markets = response.result;
-			if (markets) {
-				var newData = {};
-				for (let i = 0; i < markets.length; i++) {
-					let market = markets[i];
-					if (market && market.MarketName) {
-						let formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
-						let formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
-						if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
-							let formattedStats = validateAndFormatData(market);
-							if (formattedStats.validData) {
-								let currencyData = {};
-								let graphDomain = {};
-								graphDomain.Low = market.Low;
-								graphDomain.High = market.High;
-								currencyData.PriceList = [];
-								currencyData.stats = formattedStats;
-								currencyData.graphDomain = graphDomain;
-								newData[formattedMarketName] = currencyData;
-							}
-						}
+function processData(markets) {
+	if (markets) {
+		var newData = {};
+		for (let i = 0; i < markets.length; i++) {
+			let market = markets[i];
+			if (market && market.MarketName) {
+				let formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
+				let formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
+				if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
+					let formattedStats = validateAndFormatData(market);
+					if (formattedStats.validData) {
+						let currencyData = {};
+						let graphDomain = {};
+						graphDomain.Low = market.Low;
+						graphDomain.High = market.High;
+						currencyData.PriceList = [];
+						currencyData.stats = formattedStats;
+						currencyData.graphDomain = graphDomain;
+						newData[formattedMarketName] = currencyData;
 					}
 				}
-				newData = fromJS(newData);
-				store.dispatch({
-					type: 'UPDATE_MARKET_DATA',
-					marketData: newData
-				});
 			}
 		}
-	}).catch(err => {
-		console.log("Failed updating the data");
+		newData = fromJS(newData);
+		store.dispatch({
+			type: 'UPDATE_MARKET_DATA',
+			marketData: newData
+		});
+	}
+}
+
+function getBittrexAPI(apiEndpoint, processFunction) {
+	https.get('https://bittrex.com/api/v1.1/' + apiEndpoint, (resp) => {
+		let data = '';
+		// A chunk of data has been recieved.
+		resp.on('data', (chunk) => {
+		data += chunk;
+		});
+		// The whole response has been received. Print out the result.
+		resp.on('end', () => {
+		 	const markets = JSON.parse(data).result;
+		 	return processFunction(markets);
+		});
+	}).on("error", (err) => {
+	  console.log("Error: " + err.message);
+	  return null;
 	});
 }
-/*
-	Keep getting a enetunreach error,I believe originating from the bittrex-wrapper api.
-	Temp fix here - gonna rework app to remove bittrex-wrapper and write http requests myself
- */
-process.on('unhandledRejection', (reason, p) => {
-    console.error(reason, 'Unhandled Rejection at Promise', p);
- }).on('uncaughtException', err => {
-    console.error(err, 'Uncaught Exception thrown');
-});
+
+function updateMarketData() {
+	getBittrexAPI('public/getmarketsummaries', processData);
+}
 
 function updateMarketGraph() {
 	store.dispatch({
@@ -137,8 +142,8 @@ function updateMarketGraph() {
 updateMarkets();
 updateMarketData();
 var marketsJob = schedule.scheduleJob('30 */4 * * * ', updateMarkets);
-var marketStatsJob = schedule.scheduleJob('*/15 * * * * *', updateMarketData);
-var marketGraphJob = schedule.scheduleJob('10 */15 * * * *', updateMarketGraph);
+var marketStatsJob = schedule.scheduleJob('*/5 * * * * *', updateMarketData);
+var marketGraphJob = schedule.scheduleJob('*/10 * * * * *', updateMarketGraph);
 
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())
