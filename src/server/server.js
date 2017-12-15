@@ -23,41 +23,6 @@ app.use('/dist', express.static(path.resolve(__dirname + '/../../dist')));
 const server2 = app.listen(9000, () => {
 	let port = server2.address().port;
 });
-
-function updateMarkets() {
-	updateMarketList().then((response) => {
-		if (response) {
-			const currencies = response.result;
-			if (currencies) {
-				let autoselectCurrencies = [];
-				for (let i = 0; i < currencies.length; i++) {
-					let currency = currencies[i];
-					if (currency && currency.MarketCurrencyLong && (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC')) {
-						autoselectCurrencies.push({
-							marketCurrency: currency.MarketCurrency,
-							marketCurrencyLong: currency.MarketCurrencyLong,
-							baseCurrency: currency.BaseCurrency,
-							baseCurrencyLong: currency.BaseCurrencyLong,
-							marketName: currency.MarketName
-						});
-					}
-				}
-				autoselectCurrencies.sort(function(a,b) {
-		    		var x = a.marketCurrencyLong.toLowerCase();
-		   			 var y = b.marketCurrencyLong.toLowerCase();
-		    		return x < y ? -1 : x > y ? 1 : 0;
-				});
-				store.dispatch({
-					type: 'UPDATE_MARKET_LIST',
-					markets: autoselectCurrencies
-				});
-			}
-		}
-	}).catch(err => {
-		console.log("Failed updating the currencies");
-	});
-}
-
 function validateDataPoint(stat, market, formattedStats) {
 	let dataPoint = market[stat];
 	if (dataPoint && dataPoint > 0) {
@@ -78,6 +43,33 @@ function validateAndFormatData(market) {
 		stats.map(stat => validateDataPoint(stat, market, formattedStats));
 	}
 	return formattedStats;
+}
+
+function processMarkets(currencies) {
+	if (currencies) {
+		let autoselectCurrencies = [];
+		for (let i = 0; i < currencies.length; i++) {
+			let currency = currencies[i];
+			if (currency && currency.MarketCurrencyLong && (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC')) {
+				autoselectCurrencies.push({
+					marketCurrency: currency.MarketCurrency,
+					marketCurrencyLong: currency.MarketCurrencyLong,
+					baseCurrency: currency.BaseCurrency,
+					baseCurrencyLong: currency.BaseCurrencyLong,
+					marketName: currency.MarketName
+				});
+			}
+		}
+		autoselectCurrencies.sort(function(a,b) {
+    		var x = a.marketCurrencyLong.toLowerCase();
+   			 var y = b.marketCurrencyLong.toLowerCase();
+    		return x < y ? -1 : x > y ? 1 : 0;
+		});
+		store.dispatch({
+			type: 'UPDATE_MARKET_LIST',
+			markets: autoselectCurrencies
+		});
+	}
 }
 
 function processData(markets) {
@@ -124,9 +116,14 @@ function getBittrexAPI(apiEndpoint, processFunction) {
 		 	return processFunction(markets);
 		});
 	}).on("error", (err) => {
-	  console.log("Error: " + err.message);
-	  return null;
+  		console.log("Error: " + err.message);
+  		return null;
 	});
+}
+
+
+function updateMarkets() {
+	getBittrexAPI('public/getmarkets', processMarkets)
 }
 
 function updateMarketData() {
@@ -142,8 +139,8 @@ function updateMarketGraph() {
 updateMarkets();
 updateMarketData();
 var marketsJob = schedule.scheduleJob('30 */4 * * * ', updateMarkets);
-var marketStatsJob = schedule.scheduleJob('*/5 * * * * *', updateMarketData);
-var marketGraphJob = schedule.scheduleJob('*/10 * * * * *', updateMarketGraph);
+var marketStatsJob = schedule.scheduleJob('*/15 * * * * *', updateMarketData);
+var marketGraphJob = schedule.scheduleJob('10 */15 * * * *', updateMarketGraph);
 
 socketServer.on('connection', (socket) => {
 	socket.emit('state', store.getState().toJS())

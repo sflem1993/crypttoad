@@ -7,7 +7,6 @@ module.exports = {
 	],
 	module: {
 		loaders: [{
-	    	//test: /\.jsk?$/,
     		test: /\.(js|jsx)$/,
     		exclude: /node_modules/,
       		loader: 'babel-loader',
