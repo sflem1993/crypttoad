@@ -6,11 +6,11 @@ import io from 'socket.io';
 import schedule from 'node-schedule';
 import {updateMarketList, getMarketData} from './data';
 import https from 'https';
+import path from 'path';
 export const store = makeStore();
 const app = express();
 const server = http.createServer(app);
 const socketServer = io(server);
-var path = require('path');
 
 server.listen(8090);
 
