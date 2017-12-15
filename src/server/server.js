@@ -5,12 +5,12 @@ import http from 'http';
 import io from 'socket.io';
 import schedule from 'node-schedule';
 import {updateMarketList, getMarketData} from './data';
-
+import https from 'https';
+import path from 'path';
 export const store = makeStore();
 const app = express();
 const server = http.createServer(app);
 const socketServer = io(server);
-var path = require('path');
 
 server.listen(8090);
 
@@ -23,41 +23,6 @@ app.use('/dist', express.static(path.resolve(__dirname + '/../../dist')));
 const server2 = app.listen(9000, () => {
 	let port = server2.address().port;
 });
-
-function updateMarkets() {
-	updateMarketList().then((response) => {
-		if (response) {
-			const currencies = response.result;
-			if (currencies) {
-				let autoselectCurrencies = [];
-				for (let i = 0; i < currencies.length; i++) {
-					let currency = currencies[i];
-					if (currency && currency.MarketCurrencyLong && (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC')) {
-						autoselectCurrencies.push({
-							marketCurrency: currency.MarketCurrency,
-							marketCurrencyLong: currency.MarketCurrencyLong,
-							baseCurrency: currency.BaseCurrency,
-							baseCurrencyLong: currency.BaseCurrencyLong,
-							marketName: currency.MarketName
-						});
-					}
-				}
-				autoselectCurrencies.sort(function(a,b) {
-		    		var x = a.marketCurrencyLong.toLowerCase();
-		   			 var y = b.marketCurrencyLong.toLowerCase();
-		    		return x < y ? -1 : x > y ? 1 : 0;
-				});
-				store.dispatch({
-					type: 'UPDATE_MARKET_LIST',
-					markets: autoselectCurrencies
-				});
-			}
-		}
-	}).catch(err => {
-		console.log("Failed updating the currencies");
-	});
-}
-
 function validateDataPoint(stat, market, formattedStats) {
 	let dataPoint = market[stat];
 	if (dataPoint && dataPoint > 0) {
@@ -65,7 +30,6 @@ function validateDataPoint(stat, market, formattedStats) {
 	} else {
 		return formattedStats;
 	}
-
 	formattedStats.validData = true;
 	return formattedStats;
 }
@@ -81,52 +45,90 @@ function validateAndFormatData(market) {
 	return formattedStats;
 }
 
-function updateMarketData() {
-	getMarketData().then((response) => {
-		if (response) {
-			const markets = response.result;
-			if (markets) {
-				var newData = {};
-				for (let i = 0; i < markets.length; i++) {
-					let market = markets[i];
-					if (market && market.MarketName) {
-						let formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
-						let formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
-						if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
-							let formattedStats = validateAndFormatData(market);
-							if (formattedStats.validData) {
-								let currencyData = {};
-								let graphDomain = {};
-								graphDomain.Low = market.Low;
-								graphDomain.High = market.High;
-								currencyData.PriceList = [];
-								currencyData.stats = formattedStats;
-								currencyData.graphDomain = graphDomain;
-								newData[formattedMarketName] = currencyData;
-							}
-						}
-					}
-				}
-				newData = fromJS(newData);
-				store.dispatch({
-					type: 'UPDATE_MARKET_DATA',
-					marketData: newData
+function processMarkets(currencies) {
+	if (currencies) {
+		let autoselectCurrencies = [];
+		for (let i = 0; i < currencies.length; i++) {
+			let currency = currencies[i];
+			if (currency && currency.MarketCurrencyLong && (currency.BaseCurrency === 'BTC' || currency.MarketName === 'USDT-BTC')) {
+				autoselectCurrencies.push({
+					marketCurrency: currency.MarketCurrency,
+					marketCurrencyLong: currency.MarketCurrencyLong,
+					baseCurrency: currency.BaseCurrency,
+					baseCurrencyLong: currency.BaseCurrencyLong,
+					marketName: currency.MarketName
 				});
 			}
 		}
-	}).catch(err => {
-		console.log("Failed updating the data");
+		autoselectCurrencies.sort(function(a,b) {
+    		var x = a.marketCurrencyLong.toLowerCase();
+   			 var y = b.marketCurrencyLong.toLowerCase();
+    		return x < y ? -1 : x > y ? 1 : 0;
+		});
+		store.dispatch({
+			type: 'UPDATE_MARKET_LIST',
+			markets: autoselectCurrencies
+		});
+	}
+}
+
+function processData(markets) {
+	if (markets) {
+		var newData = {};
+		for (let i = 0; i < markets.length; i++) {
+			let market = markets[i];
+			if (market && market.MarketName) {
+				let formattedMarketName = market.MarketName.substr(market.MarketName.indexOf("-") + 1);
+				let formattedBaseCurrency = market.MarketName.substr(0, market.MarketName.indexOf("-"));
+				if (formattedBaseCurrency === 'BTC' || market.MarketName === 'USDT-BTC') {
+					let formattedStats = validateAndFormatData(market);
+					if (formattedStats.validData) {
+						let currencyData = {};
+						let graphDomain = {};
+						graphDomain.Low = market.Low;
+						graphDomain.High = market.High;
+						currencyData.PriceList = [];
+						currencyData.stats = formattedStats;
+						currencyData.graphDomain = graphDomain;
+						newData[formattedMarketName] = currencyData;
+					}
+				}
+			}
+		}
+		newData = fromJS(newData);
+		store.dispatch({
+			type: 'UPDATE_MARKET_DATA',
+			marketData: newData
+		});
+	}
+}
+
+function getBittrexAPI(apiEndpoint, processFunction) {
+	https.get('https://bittrex.com/api/v1.1/' + apiEndpoint, (resp) => {
+		let data = '';
+		// A chunk of data has been recieved.
+		resp.on('data', (chunk) => {
+		data += chunk;
+		});
+		// The whole response has been received. Print out the result.
+		resp.on('end', () => {
+		 	const markets = JSON.parse(data).result;
+		 	return processFunction(markets);
+		});
+	}).on("error", (err) => {
+  		console.log("Error: " + err.message);
+  		return null;
 	});
 }
-/*
-	Keep getting a enetunreach error,I believe originating from the bittrex-wrapper api.
-	Temp fix here - gonna rework app to remove bittrex-wrapper and write http requests myself
- */
-process.on('unhandledRejection', (reason, p) => {
-    console.error(reason, 'Unhandled Rejection at Promise', p);
- }).on('uncaughtException', err => {
-    console.error(err, 'Uncaught Exception thrown');
-});
+
+
+function updateMarkets() {
+	getBittrexAPI('public/getmarkets', processMarkets)
+}
+
+function updateMarketData() {
+	getBittrexAPI('public/getmarketsummaries', processData);
+}
 
 function updateMarketGraph() {
 	store.dispatch({
