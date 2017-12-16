@@ -106,14 +106,18 @@ function processData(markets) {
 function getBittrexAPI(apiEndpoint, processFunction) {
 	https.get('https://bittrex.com/api/v1.1/' + apiEndpoint, (resp) => {
 		let data = '';
-		// A chunk of data has been recieved.
 		resp.on('data', (chunk) => {
-		data += chunk;
+			data += chunk;
 		});
-		// The whole response has been received. Print out the result.
 		resp.on('end', () => {
-		 	const markets = JSON.parse(data).result;
-		 	return processFunction(markets);
+			try {
+		 		const markets = JSON.parse(data).result;
+		 		return processFunction(markets);
+		 	} catch(e) {
+		 		console.log("Error: " + data);
+		 		console.log("Exception: " + markets);
+		 		return null;
+		 	}
 		});
 	}).on("error", (err) => {
   		console.log("Error: " + err.message);
