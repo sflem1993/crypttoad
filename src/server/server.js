@@ -115,7 +115,6 @@ function getBittrexAPI(apiEndpoint, processFunction) {
 		 		return processFunction(markets);
 		 	} catch(e) {
 		 		console.log("Error: " + data);
-		 		console.log("Exception: " + markets);
 		 		return null;
 		 	}
 		});
