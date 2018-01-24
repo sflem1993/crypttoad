@@ -9,8 +9,8 @@ import https from 'https';
 import path from 'path';
 import fs from 'fs';
 
-const privateKey = fs.readFileSync(__dirname + '/../ssl/server.key', 'utf8');
-const certificate = fs.readFileSync(__dirname + '/../ssl/server.cert', 'utf8');
+const privateKey = fs.readFileSync(__dirname + '/../../etc/letsencrypt/live/crypttoad.com/privkey.pem');
+const certificate = fs.readFileSync(__dirname + '/../../etc/letsencrypt/live/crypttoad.com/fullchain.pem');
 
 const credential = {key: privateKey, cert: certificate};
 
