@@ -28,6 +28,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "bittrex-wrapper": "^1.0.3",
     "express": "^4.16.2",
+    "fs": "0.0.1-security",
     "http": "0.0.0",
     "https": "^1.0.0",
     "immutable": "^3.8.1",

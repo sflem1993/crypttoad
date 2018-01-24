@@ -7,9 +7,16 @@ import schedule from 'node-schedule';
 import {updateMarketList, getMarketData} from './data';
 import https from 'https';
 import path from 'path';
+import fs from 'fs';
+
+const privateKey = fs.readFileSync(__dirname + '/../ssl/server.key', 'utf8');
+const certificate = fs.readFileSync(__dirname + '/../ssl/server.cert', 'utf8');
+
+const credential = {key: privateKey, cert: certificate};
+
 export const store = makeStore();
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(credential, app);
 const socketServer = io(server);
 
 server.listen(8090);
