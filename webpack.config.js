@@ -6,7 +6,7 @@ module.exports = {
 		'./src/client/index.jsx'
 	],
 	module: {
-		loaders: [{
+		rules: [{
     		test: /\.(js|jsx)$/,
     		exclude: /node_modules/,
       		loader: 'babel-loader',
