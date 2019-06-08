@@ -56,7 +56,7 @@ export const AutoSelect = class AutoSelect extends React.PureComponent {
 
 	onChange = (event, { newValue }) => {
     	this.setState({
-      	value: newValue
+      		value: newValue
     	});
   	};
 
