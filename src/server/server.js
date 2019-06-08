@@ -9,14 +9,14 @@ import https from 'https';
 import path from 'path';
 import fs from 'fs';
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/crypttoad.com/privkey.pem');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/crypttoad.com/fullchain.pem');
+//const privateKey = fs.readFileSync('/etc/letsencrypt/live/crypttoad.com/privkey.pem');
+//const certificate = fs.readFileSync('/etc/letsencrypt/live/crypttoad.com/fullchain.pem');
 
-const credential = {key: privateKey, cert: certificate};
+//const credential = {key: privateKey, cert: certificate};
 
 export const store = makeStore();
 const app = express();
-const server = https.createServer(credential, app);
+const server = http.createServer(app);
 const socketServer = io(server);
 
 server.listen(8090);
@@ -35,9 +35,9 @@ function validateDataPoint(stat, market, formattedStats) {
 	if (dataPoint && dataPoint > 0) {
 		formattedStats[stat] = dataPoint;
 	} else {
+		formattedStats.validData = false;
 		return formattedStats;
 	}
-	formattedStats.validData = true;
 	return formattedStats;
 }
 
@@ -45,7 +45,7 @@ const stats = List.of('Last', 'PrevDay', 'Bid', 'Ask', 'High', 'Low');
 
 function validateAndFormatData(market) {
 	let formattedStats = {};
-	formattedStats.validData = false;
+	formattedStats.validData = true;
 	if (market) {
 		stats.map(stat => validateDataPoint(stat, market, formattedStats));
 	}
@@ -150,10 +150,10 @@ updateMarkets();
 updateMarketData();
 var marketsJob = schedule.scheduleJob('30 */4 * * * ', updateMarkets);
 var marketStatsJob = schedule.scheduleJob('*/15 * * * * *', updateMarketData);
-var marketGraphJob = schedule.scheduleJob('10 */15 * * * *', updateMarketGraph);
+var marketGraphJob = schedule.scheduleJob('*/15 * * * * *', updateMarketGraph);
 
 socketServer.on('connection', (socket) => {
-	socket.emit('state', store.getState().toJS())
+	socket.emit('state', store.getState().toJS());
 });
 
 store.subscribe(

@@ -2,7 +2,7 @@ import {List, Map, fromJS} from 'immutable';
 import moment from 'moment';
 import 'moment-timezone';
 
-const MAX_DATA_POINTS= 97;
+const MAX_DATA_POINTS = 97;
 const BTC_BASE_CURRENCY_DECIMALS = 8;
 const USDT_BASE_CURRENCY_DECIMALS = 2;
 

@@ -26,7 +26,7 @@ function deleteSelectedMarket(state, selectedMarket) {
 export default function(state = Map(), action) {
 	switch(action.type) {
 		case 'SET_STATE':
-    		return setState(state, action.state);
+		return setState(state, action.state);
     	case 'SET_SELECTED_MARKETS':
 			return state.set('selectedMarkets', action.selectedMarkets);
 		case 'ADD_SELECTED_MARKET':
