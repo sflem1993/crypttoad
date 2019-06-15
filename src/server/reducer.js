@@ -23,13 +23,7 @@ function updateMarkets(state, marketData) {
 function updateMarketGraph(state) {
 	var newState = state;
 	var data = state.get('marketData');
-	let isDST = moment().tz('America/New_York').isDST();
-	let time = moment().tz("EST");
-	if (isDST) {
-		console.log("dst true");
-		time.add(1, 'hours');
-	}
-	let formattedTime =  time.format("MMM D YYYY, h:mm A") + '  EST';
+	let time =  moment().tz('America/New_York').format("MMM D YYYY, h:mm A") + '  EST';
 
 	data.mapEntries(([market, marketData]) => {
 		const size = marketData.get('PriceList').size;
@@ -46,10 +40,10 @@ function updateMarketGraph(state) {
 			data = data.setIn([market, 'graphDomain'], graphDomain);
 			if (size < MAX_DATA_POINTS) {
 				data = data.updateIn([market, 'PriceList'], oldMarketData =>
-					oldMarketData.push({name: formattedTime, Price: formattedDataPoint}));
+					oldMarketData.push({name: time, Price: formattedDataPoint}));
 			} else {
 				data = data.updateIn([market, 'PriceList'], oldMarketData =>
-					oldMarketData.shift().push({name: formattedTime, Price: formattedDataPoint}));
+					oldMarketData.shift().push({name: time, Price: formattedDataPoint}));
 			}
 		}
 	});
