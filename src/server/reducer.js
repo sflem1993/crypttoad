@@ -23,9 +23,16 @@ function updateMarkets(state, marketData) {
 function updateMarketGraph(state) {
 	var newState = state;
 	var data = state.get('marketData');
+	let isDST = moment().tz('America/New_York').isDST();
+	let time = moment().tz("EST");
+	if (isDST) {
+		console.log("dst true");
+		time.add(1, 'hours');
+	}
+	let formattedTime =  time.format("MMM D YYYY, h:mm A") + '  EST';
+
 	data.mapEntries(([market, marketData]) => {
 		const size = marketData.get('PriceList').size;
-		let time = moment().tz("EST").format("MMM D YYYY, h:mm A") + '  EST';
 		let decimals = BTC_BASE_CURRENCY_DECIMALS;
 		if (market === 'BTC') {
 			decimals = USDT_BASE_CURRENCY_DECIMALS;
@@ -38,9 +45,11 @@ function updateMarketGraph(state) {
 			let graphDomain = {Low: newGraphMin, High: newGraphMax};
 			data = data.setIn([market, 'graphDomain'], graphDomain);
 			if (size < MAX_DATA_POINTS) {
-				data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.push({name: time, Price: formattedDataPoint}));
+				data = data.updateIn([market, 'PriceList'], oldMarketData =>
+					oldMarketData.push({name: formattedTime, Price: formattedDataPoint}));
 			} else {
-				data = data.updateIn([market, 'PriceList'], oldMarketData => oldMarketData.shift().push({name: time, Price: formattedDataPoint}));
+				data = data.updateIn([market, 'PriceList'], oldMarketData =>
+					oldMarketData.shift().push({name: formattedTime, Price: formattedDataPoint}));
 			}
 		}
 	});
