@@ -14,9 +14,7 @@ html, body, #app, .crypttoad {
 }
 
 .footer {
-	flex: 1;
-	min-height: 30px;
-	max-height: 30px;
+	flex: 1 0 30px;
 }
 
 .main {
@@ -24,7 +22,7 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding: 0px 0px 30px 0px;
+	min-height: 0;
 }
 
 .leftSide {
@@ -53,7 +51,6 @@ html, body, #app, .crypttoad {
 	justify-content: space-between;
 	align-items: center;
 	min-height: 160px;
-	padding: 1%;
 }
 
 .selectedMarketName {
@@ -133,15 +130,17 @@ html, body, #app, .crypttoad {
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
+	min-width: 0;
+	min-height: 0;
 }
 
 .market {
 	flex: 1;
 	display: flex;
 	flex-flow: row nowrap;
-	padding: 1%;
 	min-height: 150px;
 	min-width: 780px;
+	padding: 0 0 2vw 0;
 }
 
 .marketGraph {
@@ -162,7 +161,7 @@ html, body, #app, .crypttoad {
 
 .marketStats {
 	flex: 1;
-	padding: 0px 0px 4px 0px;
+	padding: 0px 0px 5px 0px;
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
@@ -253,7 +252,7 @@ ul {
     list-style-type: none;
     -webkit-margin-before: 0px;
     -webkit-margin-after: 0px;
-    -webkit-margin-start: 0px;v
+    -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     -webkit-padding-start: 0px;
 }
