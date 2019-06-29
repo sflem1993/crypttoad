@@ -50,7 +50,8 @@ html, body, #app, .crypttoad {
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
-	min-height: 160px;
+	min-height: 150px;
+	padding: 0 0 2vw 0;
 }
 
 .selectedMarketName {
