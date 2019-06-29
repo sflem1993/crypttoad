@@ -14,9 +14,7 @@ html, body, #app, .crypttoad {
 }
 
 .footer {
-	flex: 1;
-	min-height: 30px;
-	max-height: 30px;
+	flex: 1 0 30px;
 }
 
 .main {
@@ -24,7 +22,7 @@ html, body, #app, .crypttoad {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding: 0px 0px 30px 0px;
+	min-height: 0;
 }
 
 .leftSide {
@@ -52,8 +50,8 @@ html, body, #app, .crypttoad {
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
-	min-height: 160px;
-	padding: 1%;
+	min-height: 150px;
+	padding: 0 0 2vw 0;
 }
 
 .selectedMarketName {
@@ -133,15 +131,17 @@ html, body, #app, .crypttoad {
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
+	min-width: 0;
+	min-height: 0;
 }
 
 .market {
 	flex: 1;
 	display: flex;
 	flex-flow: row nowrap;
-	padding: 1%;
 	min-height: 150px;
 	min-width: 780px;
+	padding: 0 0 2vw 0;
 }
 
 .marketGraph {
@@ -158,25 +158,27 @@ html, body, #app, .crypttoad {
 	align-items: center;
 	justify-content: flex-start;
 	min-width: 480px;
+	padding-bottom: 2vh;
 }
 
 .marketStats {
-	flex: 1;
-	padding: 0px 0px 4px 0px;
+	flex: 1 1 auto;
+	padding: 0 1vw 0 1vw;
 	width: 100%;
 	display: flex;
+	box-sizing: border-box;
 	flex-flow: column nowrap;
 }
 
 .marketStatsRow {
-	flex: 1;
+	flex: 1 1 auto;
 	display: flex;
 	flex-flow: row nowrap;
 	color: white;
 	font-size: 18px;
 	align-items: center;
 	justify-content: space-around;
-	min-width: 480px;
+	min-width: 450px;
 	min-height: 20px;
 	font-family: verdana;
 	font-weight: 900;
@@ -185,7 +187,7 @@ html, body, #app, .crypttoad {
 .marketStatsRowLabel {
 	flex: 2;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	flex-flow: row nowrap;
 	min-width: 140px;
@@ -196,11 +198,12 @@ html, body, #app, .crypttoad {
 .marketStatsRowValue {
 	flex: 4;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	min-height: 24px;
 	align-items: center;
 	flex-flow: row nowrap;
-	min-width: 340px;
+	padding-left: 15px;
+	min-width: 200px;
 }
 
 .xAxis .recharts-cartesian-axis-tick-value {

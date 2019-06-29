@@ -10,7 +10,7 @@ function addSelectedMarket(state, selectedMarket) {
 	const selectedMarkets = state.get('selectedMarkets');
 	const markets = state.get('marketData');
 	const indexOf = selectedMarkets.indexOf(selectedMarket);
-	if (indexOf == -1 && markets.has(selectedMarket.toUpperCase()) && selectedMarkets.size < MAX_SELECTED_MARKETS) {
+	if (indexOf == -1 && markets.has(selectedMarket.toUpperCase())) {
 		return state.set('selectedMarkets', selectedMarkets.push(selectedMarket));
 	 } else {
 	 	return state;
