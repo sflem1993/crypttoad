@@ -237,6 +237,10 @@ html, body, #app, .crypttoad {
 	font-size: 12px;
 }
 
+.recharts-text {
+	font-size: 12px;
+}
+
 .recharts-tooltip-label {
 	font-size: 22px;
 	font-family: helvetica;
