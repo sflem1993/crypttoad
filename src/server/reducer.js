@@ -12,9 +12,11 @@ function updateMarkets(state, marketData) {
 	}
 	var newState = state;
 	var data = state.get('marketData');
-	data.mapEntries(([finalMarket, finalMarketData]) => {
-		if (marketData.get(finalMarket)) {
+	marketData.mapEntries(([finalMarket, finalMarketData]) => {
+		if (data.get(finalMarket)) {
 			newState = newState.updateIn(['marketData', finalMarket, 'stats'], stats => marketData.get(finalMarket).get('stats'));
+		} else {
+			newState = newState.setIn(['marketData', finalMarket], fromJS(finalMarketData));
 		}
 	});
 	return newState;
