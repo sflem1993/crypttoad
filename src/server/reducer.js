@@ -22,9 +22,23 @@ function updateMarkets(state, marketData) {
 	return newState;
 }
 
+function updateMarketTickers(state, marketData) {
+    console.log("updating tickers")
+	if (!state.has('marketTickerData'))	{
+		return state.set("marketTickerData", fromJS(marketData));
+	}
+	var newState = state;
+	var data = state.get('marketTickerData');
+	marketData.mapEntries(([finalMarket, finalMarketData]) => {
+		newState = newState.setIn(['marketTickerData', finalMarket], fromJS(finalMarketData));
+	});
+	return newState;
+}
+
 function updateMarketGraph(state) {
 	var newState = state;
 	var data = state.get('marketData');
+	var tickerData = state.get('marketTickerData')
 	let time =  moment().tz('America/New_York').format("MMM D YYYY, h:mm A") + '  EST';
 
 	data.mapEntries(([market, marketData]) => {
@@ -33,11 +47,11 @@ function updateMarketGraph(state) {
 		if (market === 'BTC') {
 			decimals = USDT_BASE_CURRENCY_DECIMALS;
 		}
-		let newDataPoint = marketData.get('stats').get('Last');
-		let newGraphMin = marketData.get('stats').get('Low');
-		let newGraphMax = marketData.get('stats').get('High');
-		if (newDataPoint > 0 && newGraphMin > 0 && newGraphMax > 0) {
-			let formattedDataPoint = newDataPoint.toFixed(decimals);
+		let newDataPoint = parseFloat(tickerData.get(market).get('lastTradeRate'));
+		let newGraphMin = parseFloat(marketData.get('stats').get('low'));
+		let newGraphMax = parseFloat(marketData.get('stats').get('high'));
+		if (newDataPoint > 0.0 && newGraphMin >= 0.0 && newGraphMax > 0.0) {
+			let formattedDataPoint = parseFloat(newDataPoint).toFixed(decimals);
 			let graphDomain = {Low: newGraphMin, High: newGraphMax};
 			data = data.setIn([market, 'graphDomain'], graphDomain);
 			if (size < MAX_DATA_POINTS) {
@@ -60,6 +74,8 @@ export default function reducer(state = Map(), action) {
 			return state.set('markets', action.markets);
 		case 'UPDATE_MARKET_DATA':
 			return updateMarkets(state, action.marketData);
+		case 'UPDATE_MARKET_TICKER_DATA':
+        	return updateMarketTickers(state, action.marketData);
 		case 'UPDATE_MARKET_GRAPH':
 			return updateMarketGraph(state, action.marketData);
 		default:

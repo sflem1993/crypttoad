@@ -12,7 +12,7 @@ require('./style.css');
 
 const store = createStore(reducer);
 
-const socket = io(`https://${location.hostname}:8090`);
+const socket = io(`http://${location.hostname}:8090`);
 
 socket.on('state', state => {
 	store.dispatch(setState(state));

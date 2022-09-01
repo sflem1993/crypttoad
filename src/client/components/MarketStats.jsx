@@ -14,45 +14,52 @@ export const MarketStats = class MarketStats extends React.PureComponent {
 
 	getStat(statName){
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			var rawData = this.props.marketData.get(this.props.selectedMarket).get('stats').get(statName).toFixed(this.getDecimals());
-			var priceBTC = this.props.marketData.get('BTC').get('stats').get('Last');
-			var format = '';
-			if (this.props.selectedMarket !== 'BTC') {
-				format =  ' BTC';
-				var priceMarketInBTC = priceBTC * rawData;
-				format = format + ' ($' + priceMarketInBTC.toFixed(2) + ')';
-			} else {
-				return '$' + rawData;
+			var rawData = this.props.marketData.get(this.props.selectedMarket).get('stats').get(statName);
+			if (!rawData) {
+			    return 'N/A'
 			}
-			return rawData + format
+			return parseFloat(rawData).toFixed(this.getDecimals()) //+ format
 		}
 
-		return [];
+		return 'N/A';
 	}
 
-	getLast() {
-		return this.getStat('Last');
-	}
+	getTickerStat(statName){
+    		if (this.props.marketTickerData && this.props.marketTickerData.has(this.props.selectedMarket)) {
+    			var rawData = this.props.marketTickerData.get(this.props.selectedMarket).get(statName);
+    			if (!rawData) {
+    			    return 'N/A'
+    			}
+    			return parseFloat(rawData).toFixed(this.getDecimals()) //+ format
+    		}
 
-	getBid() {
-		return this.getStat('Bid');
-	}
+    		return 'N/A';
+    	}
 
-	getAsk() {
-		return this.getStat('Ask');
-	}
+    getLast() {
+        return this.getTickerStat('lastTradeRate');
+    }
+
+    getBid() {
+        return this.getTickerStat('bidRate');
+    }
+
+    getAsk() {
+        return this.getTickerStat('askRate');
+    }
 
 	getHigh() {
-		return this.getStat('High');
-	}
+        return this.getStat('high');
+    }
 
-	getLow() {
-		return this.getStat('Low');
-	}
+    getLow() {
+        return this.getStat('low');
+    }
 
-	getPrevDay() {
-		return this.getStat('PrevDay');
-	}
+    getPercentChange() {
+    	return this.getStat('percentChange');
+    }
+
 	render() {
 		return <div className="marketStatsContainer">
 			<div className="marketStats">
@@ -77,8 +84,8 @@ export const MarketStats = class MarketStats extends React.PureComponent {
 						<div className="marketStatsRowValue">{this.getLow()}</div>
 					</div>
 					<div className="marketStatsRow">
-						<div className="marketStatsRowLabel">24 HOURS AGO:</div>
-						<div className="marketStatsRowValue">{this.getPrevDay()}</div>
+						<div className="marketStatsRowLabel">LAST 24 HRS:</div>
+						<div className="marketStatsRowValue">{this.getPercentChange()}</div>
 					</div>
 			</div>
 		</div>
@@ -87,7 +94,8 @@ export const MarketStats = class MarketStats extends React.PureComponent {
 
 function mapStateToProps(state) {
   return {
-    marketData: state.get('marketData')
+    marketData: state.get('marketData'),
+    marketTickerData: state.get('marketTickerData')
   };
 }
 
