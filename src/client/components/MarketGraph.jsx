@@ -6,6 +6,18 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
 export const MarketGraph = class MarketGraph extends React.PureComponent {
+    getMinMax() {
+    	if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
+            var min = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('Low');
+            var max = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('High');
+            if (min === max) {
+                min = min*0.5;
+                max = max*1.5;
+            }
+            return [min, max];
+        }
+        return [0,1];
+    }
 	getData() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
 			return this.props.marketData.get(this.props.selectedMarket).get('PriceList').toJS();
@@ -13,19 +25,11 @@ export const MarketGraph = class MarketGraph extends React.PureComponent {
 		return [];
 	}
 	getDomain() {
-		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-			var min = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('Low');
-			var max = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('High');
-			return [min, max];
-		}
-		return [0, 1];
+		return this.getMinMax();
 	}
 	getTicks() {
 		if (this.props.marketData && this.props.marketData.has(this.props.selectedMarket)) {
-
-			var min = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('Low');
-			var max = this.props.marketData.get(this.props.selectedMarket).get('graphDomain').get('High');
-
+            let [min, max] = this.getMinMax();
 			var interval = (max - min) / 4;
 			var tick1 = (min + interval);
 			var tick2 = (min + (2*interval));
