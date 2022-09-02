@@ -8,7 +8,7 @@ import {toJS} from 'immutable';
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.marketCurrencyLong + ' (' + suggestion.marketCurrency + ')'}
+    {'(' + suggestion.marketCurrency + ')'}
   </div>
 );
 const getSuggestionValue = suggestion => suggestion.marketCurrency
